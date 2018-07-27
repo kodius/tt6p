@@ -10,7 +10,7 @@
         Target Body Fat: {{ plan.target_body_fat }}
       </div>
       <div v-else>
-        Loading... {{ loaded}}
+        Loading... 
       </div>
       <br />
     </div>
