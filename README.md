@@ -1,27 +1,14 @@
-# Rails + Webpack + Vue.js + Vuex Demo App
+# Time to six pack app
 
 ## Description
 
-Demo Single Page Application based on Ruby on Rails 5.2, using Vue.js + Vuex, compiled with Webpack.
-All the basic features you need to build a real world app with:
-
-- Front / Admin namespaces
-- I18n (server side + client side)
-- Forms (with progress and error handling)
-- Authentication (Devise)
-- Pagination (Kaminari)
-- Dynamic search filters (Ransack)
-- Websockets chat (ActionCable)
-
-All of this is designed with maintainability and readability in mind, slightly inspired by the Rails conventions.
-
-You can read more about the how and why I built this App here: http://www.guillaume-barillot.com/2017/12/02/how-to-organize-your-vue-files-in-a-rails-5-1-project-using-webpack/
+Get that ripped abs you always dreamed about.
 
 ## Installation
 
 ```
-git clone git@github.com:gbarillot/rails-vue-demo-app.git
-cd rails-vue-demo-app
+git clone git@github.com:kodius/tt6p.git
+cd tt6p
 bundle install
 yarn install
 bundle exec rails db:migrate
@@ -51,6 +38,10 @@ yarn test
 ## Contributions
 
 PR and feedbacks welcome!
+
+## Shoutout
+
+Template based on: http://www.guillaume-barillot.com/2017/12/02/how-to-organize-your-vue-files-in-a-rails-5-1-project-using-webpack/
 
 ## Licence
 
