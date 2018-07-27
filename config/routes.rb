@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     namespace :api, :defaults => { :format => 'json' } do
       resources :musicians, only: [:index, :show]
 
+      resources :plans
+
       namespace :admin do
         as :user do
           delete 'sign_out', to: '/devise/sessions#destroy'

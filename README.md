@@ -42,6 +42,7 @@ PR and feedbacks welcome!
 ## Shoutout
 
 Template based on: http://www.guillaume-barillot.com/2017/12/02/how-to-organize-your-vue-files-in-a-rails-5-1-project-using-webpack/
+Formula: https://www.youtube.com/watch?v=j4zOuCYYCcs
 
 ## Licence
 

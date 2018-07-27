@@ -12,3 +12,5 @@ Musician.create!(name: "Angus Young", band: "acdc")
 Musician.create!(name: "Malcom Young", band: "acdc")
 Musician.create!(name: "Bon Scott", band: "acdc")
 Musician.create!(name: "Phil Rudd", band: "acdc")
+
+Plan.create(user_id: 1, weight: 100, :body_fat => 25, target_body_fat: 13)
