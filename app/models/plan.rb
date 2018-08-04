@@ -12,4 +12,5 @@ class Plan < ApplicationRecord
     (target_lean_body_mass/(1 - target_body_fat/100.0)).round(2)
   end
 
+
 end

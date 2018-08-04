@@ -14,7 +14,7 @@ feature "Musicians" do
       get api_admin_musicians_path
 
       assert_equal 3, json_response['musicians'].length
-      assert_equal "baz", json_response['musicians'][0]['name']
+      assert_equal "foo", json_response['musicians'][0]['name']
     end
   end
 

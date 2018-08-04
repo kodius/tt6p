@@ -4,6 +4,7 @@ feature "Musicians" do
 
   describe "#index" do
     it "returns all musicians" do
+      sign_in users(:admin)
       get api_musicians_path
       out = {
         "musicians"=>[
@@ -14,12 +15,13 @@ feature "Musicians" do
       }
 
       assert_equal 3, json_response['musicians'].length
-      assert_equal "baz", json_response['musicians'][0]['name']
+      assert_equal "foo", json_response['musicians'][0]['name']
     end
   end
 
   describe "#show" do
     it "returns a musician" do
+      sign_in users(:admin)
       get api_musician_path(musicians(:one).id)
       out = {
         "musician"=> {

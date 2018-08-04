@@ -4,16 +4,8 @@ one:
   user_id: 1
   weight: 9.99
   body_fat: 9.99
-  lean_body_mass: 9.99
-  target_lean_body_mass: 9.99
-  target_weight: 9.99
-  average_wight_loss: 9.99
 
 two:
   user_id: 1
   weight: 9.99
   body_fat: 9.99
-  lean_body_mass: 9.99
-  target_lean_body_mass: 9.99
-  target_weight: 9.99
-  average_wight_loss: 9.99
