@@ -5,12 +5,14 @@
       <div v-if="loaded">
         Weight: {{ plan.weight }}
         <br/>
-        Body Fat: {{ plan.body_fat }}
+        Body Fat: {{ plan.bodyFat }}
         <br/>
-        Target Body Fat: {{ plan.target_body_fat }}
+        Target Body Fat: {{ plan.targetBodyFat }}
+        <br/>
+        Target Weight: {{ plan.targetWeight }}kg
       </div>
       <div v-else>
-        Loading... 
+        Loading...
       </div>
       <br />
     </div>
@@ -36,7 +38,8 @@ export default {
           url: `plans`,
           type: 'get',
           success: function(data) {
-            self.plan = data[0]
+            console.log(JSON.stringify(data))
+            self.plan = data.plans[0]
             self.loaded = true
           }
     })
