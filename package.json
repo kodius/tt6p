@@ -1,5 +1,5 @@
 {
-  "name": "boilerplate",
+  "name": "tt6p",
   "private": true,
   "dependencies": {
     "@rails/webpacker": "^3.0.2",

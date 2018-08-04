@@ -38,7 +38,6 @@ export default {
           url: `plans`,
           type: 'get',
           success: function(data) {
-            console.log(JSON.stringify(data))
             self.plan = data.plans[0]
             self.loaded = true
           }

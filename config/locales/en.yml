@@ -13,7 +13,7 @@ en:
         homepage: "Home"
         musicians: "Musicians"
         errors: "Error pages"
-        kurac: "Kurac"
+        dashboard: "Dashboard"
       home:
         title: "This is the Home page"
         content: "Lorem ipsum dolor sit amet, you know the song..."

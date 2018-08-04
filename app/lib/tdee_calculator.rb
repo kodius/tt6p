@@ -1,5 +1,3 @@
-
-
 # Women BMR = 655 + (9.6 X weight in kg) + (1.8 x height in cm) – (4.7 x age in yrs)
 # Men BMR = 66 + (13.7 X weight in kg) + (5 x height in cm) – (6.8 x age in yrs)
 
@@ -8,7 +6,7 @@ module Gender
   Woman = 'woman'
 end
 
-module ActivityLevel 
+module ActivityLevel
   Sedentary = 'sedentary' #Little or no Exercise/ desk job
   LightlyActive = 'lightly_active' #Light exercise/ sports 1 – 3 days/ week
   ModeratlyActive = 'moderatly_active' #Moderate Exercise, sports 3 – 5 days/ week

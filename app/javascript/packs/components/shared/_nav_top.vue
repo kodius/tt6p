@@ -17,8 +17,8 @@
         <li :class="activeOn(['errors_path', 'errors_path'])">
           <router-link :to="{ name: 'errors_path' }">{{ $t('nav.errors') }}</router-link>
         </li>
-        <li :class="activeOn(['kurac_path'])">
-          <router-link :to="{ name: 'kurac_path' }">{{ $t('nav.kurac') }}</router-link>
+        <li :class="activeOn(['dashboard_path'])">
+          <router-link :to="{ name: 'dashboard_path' }">{{ $t('nav.dashboard') }}</router-link>
         </li>
       </ul>
     </div>
