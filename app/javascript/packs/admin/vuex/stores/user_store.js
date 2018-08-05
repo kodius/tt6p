@@ -1,4 +1,5 @@
 import helpers from '../../helpers';
+import axios from 'axios';
 
 const UserStore = {
   namespaced: true,
@@ -31,84 +32,71 @@ const UserStore = {
   },
   actions: {
     index(context, query) {
-      $.ajax({
-        url: 'users',
-        type: 'get',
-        data: query,
-        success: function(data) {
-          context.commit('many', data)
-        }
-      })
+      axios
+        .get(`users`, {
+          params: query
+        })
+        .then(response => {
+          context.commit('many', response.data)
+        })
     },
     new(context, id) {
-      $.ajax({
-        url: `users/new`,
-        type: 'get',
-        success: function(data) {
-          context.commit('one', data)
-        }
-      })
+      axios
+        .get(`users/new`)
+        .then(response => {
+          context.commit('one', response.data)
+        })
     },
     create(context, form) {
       context.commit('progress', 'loading')
       return new Promise((resolve, reject) => {
-        $.ajax({
-          url: `users`,
-          type: 'post',
-          data: {
+        axios
+          .post(`users`, {
             user: form
-          },
-          success: function(data) {
+          })
+          .then(response => {
             context.commit('progress', 'success')
-            resolve(data);
-          },
-          error: function(data) {
+            resolve(response.data);
+          })
+          .catch(function (response) {
             context.commit('progress', 'failed')
-            context.commit('errors', data);
-          }
-        })
+            context.commit('errors', response.errors);
+          })
       })
     },
     edit(context, id) {
-      $.ajax({
-        url: `users/${id}/edit`,
-        type: 'get',
-        success: function(data) {
-          context.commit('one', data);
-        }
-      });
+      axios
+        .get(`users/${id}/edit`)
+        .then(response => {
+          context.commit('one', response.data)
+        })
     },
     update(context, user) {
       context.commit('progress', 'loading')
-      $.ajax({
-        url: `users/${user.id}`,
-        type: 'put',
-        data: {
+      axios
+        .put(`users/${user.id}`, {
           user: user
-        },
-        success: function(data) {
+        })
+        .then(response => {
           context.commit('progress', 'success')
-          resolve(data);
-        },
-        error: function(data) {
+          resolve(response.data);
+        })
+        .catch(function (response) {
           context.commit('progress', 'failed')
-          context.commit('errors', data);
+          context.commit('errors', response.errors);
           reject(data);
-        }
-      });
+        })
     },
     destroy(context, user_id) {
       return new Promise((resolve, reject) => {
-        $.ajax({
-          url: `users/${user_id}`,
-          type: 'delete',
-          success: function(data) {
-            resolve(data);
-          },
-          error: function(data) {
+        axios
+          .delete(`users/${user_id}`)
+          .then(response => {
+            resolve(response.data);
+          })
+          .catch(function (error) {
             reject(data);
-          }
-        });
+          })
       });
     }
   }

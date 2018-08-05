@@ -20,30 +20,28 @@
 </template>
 
 <script>
+import axios from 'axios';
 import Layout from '../shared/layout';
 
 export default {
   components: {
     Layout
   },
-  data: function () {
+  data () {
     return {
       loaded: false,
       plan: null
     }
   },
-  mounted: function () {
-    var self = this;
-    $.ajax({
-          url: `plans`,
-          type: 'get',
-          success: function(data) {
-            self.plan = data.plans[0]
-            self.loaded = true
-          }
-    })
+  mounted () {
+    self = this
+    axios
+      .get('plans')
+      .then(response => {
+        self.plan = response.data.plans[0]
+        self.loaded = true
+      })
   }
-
 }
 
 </script>

@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const MusicianStore = {
   namespaced: true,
   state: {
@@ -16,23 +18,20 @@ const MusicianStore = {
   },
   actions: {
     index(context, query) {
-      $.ajax({
-        url: `musicians`,
-        type: 'get',
-        data: query,
-        success: function(data) {
-          context.commit('many', data)
-        }
-      })
+      axios
+        .get(`musicians`, {
+          data: query
+        })
+        .then(response => {
+          context.commit('many', response.data)
+        })
     },
     show(context, id) {
-      $.ajax({
-        url: `musicians/${id}`,
-        type: 'get',
-        success: function(data) {
-          context.commit('one', data)
-        }
-      })
+      axios
+        .get(`musicians/${id}`)
+        .then(response => {
+          context.commit('one', response.data)
+        })
     },
   }
 };

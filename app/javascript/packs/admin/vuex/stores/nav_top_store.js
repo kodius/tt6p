@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const NavTopStore = {
   namespaced: true,
   state: {
@@ -7,12 +9,10 @@ const NavTopStore = {
   actions: {
     logout(context) {
       return new Promise((resolve, reject) => {
-        $.ajax({
-          url: `sign_out`,
-          type: 'delete',
-          success: function() {
-            resolve();
-          }
+        axios
+        .delete(`sign_out`)
+        .then(response => {
+          resolve();
         })
       });
     }

@@ -1,4 +1,5 @@
 import helpers from '../../helpers';
+import axios from 'axios';
 
 const MusicianStore = {
   namespaced: true,
@@ -33,83 +34,70 @@ const MusicianStore = {
   },
   actions: {
     index(context, query) {
-      $.ajax({
-        url: `musicians?${query}`,
-        type: 'get',
-        data: query,
-        success: function(data) {
-          context.commit('many', data)
-        }
-      })
+      axios
+        .get(`musicians?${query}`, {
+          params: query
+        })
+        .then(response => {
+          context.commit('many', response.data)
+        })
     },
     new(context, id) {
-      $.ajax({
-        url: `musicians/new`,
-        type: 'get',
-        success: function(data) {
-          context.commit('one', data)
-        }
-      })
+      axios
+        .get(`musicians/new`)
+        .then(response => {
+          context.commit('one', response.data)
+        })
     },
     create(context, form) {
       context.commit('progress', 'loading')
       return new Promise((resolve, reject) => {
-        $.ajax({
-          url: `musicians`,
-          type: 'post',
-          data: {
+        axios
+          .post(`musicians`, {
             musician: form
-          },
-          success: function(data) {
+          })
+          .then(response => {
             context.commit('progress', 'success')
-            resolve(data);
-          },
-          error: function(data) {
+            resolve(response.data);
+          })
+          .catch(function (response) {
             context.commit('progress', 'failed')
-            context.commit('errors', data)
-          }
-        })
+            context.commit('errors', response.errors)
+          })
       })
     },
     edit(context, id) {
-      $.ajax({
-        url: `musicians/${id}/edit`,
-        type: 'get',
-        success: function(data) {
-          context.commit('one', data);
-        }
-      });
+      axios
+        .get(`musicians/${id}/edit`)
+        .then(response => {
+          context.commit('one', response.data)
+        })
     },
     update(context, musician) {
       context.commit('progress', 'loading')
-      $.ajax({
-        url: `musicians/${musician.id}`,
-        type: 'put',
-        data: {
+      axios
+        .put(`musicians/${musician.id}`, {
           musician: musician
-        },
-        success: function(data) {
+        })
+        .then(response => {
           context.commit('progress', 'success')
-          context.commit('one', data);
-        },
-        error: function(data) {
+          context.commit('one', response.data)
+        })
+        .catch(function (response) {
           context.commit('progress', 'failed')
-          context.commit('errors', data);
-        }
-      })
+          context.commit('errors', response.errors)
+        })
     },
     destroy(context, musician_id) {
       return new Promise((resolve, reject) => {
-        $.ajax({
-          url: `musicians/${musician_id}`,
-          type: 'delete',
-          success: function(data) {
-            resolve(data);
-          },
-          error: function(data) {
-            reject(data);
-          }
-        });
+        axios
+          .delete(`musicians/${musician.id}`)
+          .then(response => {
+            resolve(response.data);
+          })
+          .catch(function (error) {
+            reject(response.data);
+          })
       });
     }
   }

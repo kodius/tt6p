@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const DashboardStore = {
   namespaced: true,
   state: {
@@ -11,14 +13,13 @@ const DashboardStore = {
   },
   actions: {
     index(context, query) {
-      $.ajax({
-        url: 'dashboard',
-        type: 'get',
-        data: query,
-        success: function(data) {
-          context.commit('one', data)
-        }
-      })
+      axios
+        .get(`dashboard`, {
+          data: query
+        })
+        .then(response => {
+          context.commit('one', response.data)
+        })
     }
   }
 };

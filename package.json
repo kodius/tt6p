@@ -4,8 +4,8 @@
   "dependencies": {
     "@rails/webpacker": "^3.0.2",
     "avoriaz": "^6.0.1",
+    "axios": "^0.18.0",
     "chai": "^4.1.2",
-    "jquery": "^3.2.1",
     "mocha": "^4.0.1",
     "mocha-webpack": "^1.0.1",
     "vue": "^2.5.9",

@@ -5,6 +5,7 @@ import router from './routes.js';
 import './filters/strings.js';
 import helpers from './helpers';
 import EventBus from './event_bus';
+import axios from 'axios';
 // Expose EventBus to window for JQuery access (ActionCable)
 window.EventBus = EventBus;
 
@@ -14,27 +15,30 @@ Vue.component('nav-top', NavTop);
 import SubmitTag from './components/shared/_submit_tag';
 Vue.component('submit-tag', SubmitTag);
 
-$.ajaxSetup({
-  beforeSend: function(xhr) {
-    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-  },
-  complete: function(xhr, status) {
-    if(xhr.status === 200 || xhr.status === 422) {
-      return true;
-    }
-    if(xhr.status === 401) {
-      return window.location.href = '/users/sign_in';
-    }
-    if(xhr.status === 404) {
-      return window.location.href = '/404';
-    }
+axios.defaults.baseURL = 'http://localhost:3000/api/admin/';
+axios.defaults.headers.common['X-CSRF-Token'] = document.querySelector("meta[name=csrf-token]").content
 
-    return window.location.href = '/500';
-  }
-})
-$.ajaxPrefilter(function( options ) {
-  options.url = `/${I18n.prefix}api/admin/${options.url}`;
-});
+// $.ajaxSetup({
+//   beforeSend: function(xhr) {
+//     xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+//   },
+//   complete: function(xhr, status) {
+//     if(xhr.status === 200 || xhr.status === 422) {
+//       return true;
+//     }
+//     if(xhr.status === 401) {
+//       return window.location.href = '/users/sign_in';
+//     }
+//     if(xhr.status === 404) {
+//       return window.location.href = '/404';
+//     }
+
+//     return window.location.href = '/500';
+//   }
+// })
+// $.ajaxPrefilter(function( options ) {
+//   options.url = `/${I18n.prefix}api/admin/${options.url}`;
+// });
 
 Vue.use(VueI18n);
 const i18n = new VueI18n({
