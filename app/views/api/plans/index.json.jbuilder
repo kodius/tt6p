@@ -7,4 +7,7 @@ json.plans @plans.each do |plan|
   json.targetWeight plan.target_weight
   json.targetLeanBodyMass plan.target_lean_body_mass
   json.leanBodyMass plan.lean_body_mass
+  json.gender plan.gender
+  json.activityLevel plan.activity_level
+  json.tdee plan.tdee
 end

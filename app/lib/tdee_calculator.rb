@@ -22,13 +22,13 @@ class TDEECalculator
     elsif gender == Gender::Woman
       (66 + (13.7 * weight) + (5 * height) - (6.8 * age)).ceil
     else
-      raise "Gender needs to be #{Gender::Man} or #{Gender::Woman}, sent: '#gender'"
+      raise "Gender needs to be #{Gender::Man} or #{Gender::Woman}, sent: '#{gender}'"
     end
   end
 
   def self.tdee(weight, height, age, gender, activity_level)
     bmr = self.bmr(weight, height, age, gender)
-    return bmr * get_activity_factor(activity_level)
+    return (bmr * get_activity_factor(activity_level)).ceil
   end
 
   def self.get_activity_factor(activity_level)

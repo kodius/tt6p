@@ -1,3 +1,7 @@
+User.delete_all
+Musician.delete_all
+Plan.delete_all
+
 User.create!(email: "admin@domain.com", password: "password", password_confirmation: "password")
 Musician.create!(name: "John Lennon", band: "beatles")
 Musician.create!(name: "Paul McCartney", band: "beatles")
@@ -13,4 +17,4 @@ Musician.create!(name: "Malcom Young", band: "acdc")
 Musician.create!(name: "Bon Scott", band: "acdc")
 Musician.create!(name: "Phil Rudd", band: "acdc")
 
-Plan.create(user_id: 1, weight: 100, :body_fat => 25, target_body_fat: 13)
+Plan.create(user_id: User.last.id, weight: 100, :body_fat => 25, target_body_fat: 13, height: 183, age: 41, gender: 'man', activity_level: 'moderatly_active' )

@@ -10,6 +10,12 @@
         Target Body Fat: {{ plan.targetBodyFat }}
         <br/>
         Target Weight: {{ plan.targetWeight }}kg
+        <br/>
+        Gender: {{ plan.gender }}
+        <br/>
+        Activity Level: {{ plan.activityLevel }}
+        <br/>
+        TDEE: {{ plan.tdee }} kcal
       </div>
       <div v-else>
         Loading...
