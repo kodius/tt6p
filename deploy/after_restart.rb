@@ -8,20 +8,20 @@ def self.list_environment
   result
 end
 
-# Chef::Log.info("Kill puma cable server")
-# execute "kill puma cable server" do
-#   cwd release_path
-#   command "pkill -f tcp://0.0.0.0:28080"
-#   environment(list_environment)
-#   ignore_failure true
-# end
-#
-# Chef::Log.info("Restart action cable server")
-# execute "run puma cable server" do
-#   cwd release_path
-#   command "bundle exec puma -p 28080 -d cable/config.ru"
-#   environment(list_environment)
-# end
+Chef::Log.info("Kill puma cable server")
+execute "kill puma cable server" do
+  cwd release_path
+  command "pkill -f tcp://0.0.0.0:28080"
+  environment(list_environment)
+  ignore_failure true
+end
+
+Chef::Log.info("Restart action cable server")
+execute "run puma cable server" do
+  cwd release_path
+  command "bundle exec puma -p 28080 -d cable/config.ru"
+  environment(list_environment)
+end
 
 # Chef::Log.info("Staging workers")
 # execute "start workers" do
