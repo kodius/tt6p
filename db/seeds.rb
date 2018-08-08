@@ -18,3 +18,5 @@ Musician.create!(name: "Bon Scott", band: "acdc")
 Musician.create!(name: "Phil Rudd", band: "acdc")
 
 Plan.create(user_id: User.last.id, weight: 100, :body_fat => 25, target_body_fat: 13, height: 183, age: 41, gender: 'man', activity_level: 'moderatly_active' )
+
+MyFitnessPal.import_measurements(User.last.id, File.expand_path('../../test/fixtures/measurements_test_data.csv', __FILE__) )
