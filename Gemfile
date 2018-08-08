@@ -20,6 +20,10 @@ gem 'ransack'
 gem 'devise'
 gem 'foreman'
 
+group :production do
+  gem 'unicorn'
+end
+
 # COMMENTED OUT: Turbolinks doesn't play well with SPA
 # gem 'turbolinks', '~> 5'
 
