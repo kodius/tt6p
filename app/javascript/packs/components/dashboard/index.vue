@@ -16,6 +16,7 @@
         Activity Level: {{ plan.activityLevel }}
         <br/>
         TDEE: {{ plan.tdee }} kcal
+        <commit-chart></commit-chart>
       </div>
       <div v-else>
         Loading...
@@ -28,6 +29,10 @@
 <script>
 import axios from 'axios';
 import Layout from '../shared/layout';
+import CommitChart from './commit_chart';
+import Vue from 'vue/dist/vue.esm';
+
+Vue.component('commit-chart', CommitChart);
 
 export default {
   components: {
