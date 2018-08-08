@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2018_08_08_165831) do
   create_table "measurements", force: :cascade do |t|
     t.integer "user_id"
     t.decimal "weight", precision: 15, scale: 2
-    t.datetime "date_of_measurement"
+    t.datetime "log_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2018_08_08_165831) do
 
   create_table "nutritions", force: :cascade do |t|
     t.integer "user_id"
-    t.datetime "date_of_log"
+    t.datetime "log_date"
     t.string "meal"
     t.decimal "calories", precision: 15, scale: 2
     t.decimal "fat", precision: 15, scale: 2

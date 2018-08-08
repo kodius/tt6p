@@ -2,7 +2,7 @@
 
 one:
   user_id: 1
-  date_of_log: 
+  log_date: 
   meal: MyString
   calories: 9.99
   fat: 9.99
@@ -12,7 +12,7 @@ one:
 
 two:
   user_id: 1
-  date_of_log: 
+  log_date: 
   meal: MyString
   calories: 9.99
   fat: 9.99

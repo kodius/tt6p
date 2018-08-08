@@ -2,7 +2,7 @@ class CreateNutritions < ActiveRecord::Migration[5.2]
   def change
     create_table :nutritions do |t|
       t.integer :user_id
-      t.datetime :date_of_log
+      t.datetime :log_date
       t.string :meal
       t.decimal :calories, :precision => 15, :scale => 2
       t.decimal :fat, :precision => 15, :scale => 2
