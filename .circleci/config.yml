@@ -1,0 +1,84 @@
+# Ruby CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-ruby/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/ruby:2.3.4-node-browsers
+        environment:
+          PGUSER: ubuntu
+          PGHOST: 127.0.0.1
+          RAILS_ENV: test
+          RACK_ENV: test
+          LENS_MOCKED: true
+          DATABASE_URL: "postgres://ubuntu@localhost:5432/tt6p_test"
+
+      - image: postgres:9.4
+        environment:
+          POSTGRES_USER: ubuntu
+          POSTGRES_DB: tt6p_test
+
+    working_directory: ~/repo
+    parallelism: 2
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - gem-dependencies-{{ checksum "Gemfile.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - gem-dependencies-
+
+      - run:
+          name: Install Dependencies
+          command: |
+            wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+            sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+            sudo apt-get update
+            sudo apt-get upgrade google-chrome-stable
+            sudo apt update
+            sudo apt install postgresql-client
+            sudo apt-get install awscli
+            bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run:
+          name: Database Setup
+          command: |
+            bundle exec rake db:schema:load --trace
+            bundle exec rake db:migrate
+
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: gem-dependencies-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: Run Tests
+          command: |
+            mkdir /tmp/test-results
+            bundle exec rake test
+
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+
+      - deploy:
+          name: Deployment
+          command: |
+            aws opsworks --region ap-southeast-1 create-deployment \
+                         --stack-id 01f444c7-ad16-4ed0-813e-9d02f7a1ccef \
+                         --app-id 6093a323-a328-4554-8228-6a24bb43b905 \
+                         --command "{\"Name\":\"deploy\", \"Args\":{\"migrate\":[\"true\"]}}" \
+                         --instance-ids 5f74ddd0c-da76-4fba-a10b-60bbebb38d81 d5044631af-4155-4fa1-bd68-7653aac41601
