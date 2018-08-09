@@ -77,8 +77,8 @@ jobs:
       - deploy:
           name: Deployment
           command: |
-            aws opsworks --region us-east-1create-deployment \
+            aws opsworks --region us-east-1 create-deployment \
                          --stack-id 0927213b-4511-47a0-a05f-47d3cb1b27d4 \
                          --app-id abcbefe9-b330-4a4d-8ca9-38c67089b856 \
                          --command "{\"Name\":\"deploy\", \"Args\":{\"migrate\":[\"true\"]}}" \
-                         --instance-ids 46b758ef-914d-4ae7-9dec-7a723948282d 
+                         --instance-ids 46b758ef-914d-4ae7-9dec-7a723948282d
