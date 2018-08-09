@@ -16,4 +16,12 @@ class Plan < ApplicationRecord
     TDEECalculator.tdee(weight, height, age, gender, activity_level)
   end
 
+  def total_calories
+    (tdee*0.8).ceil
+  end
+
+  def days_till_sixpack
+    ((weight - target_weight)*7000/(tdee - total_calories)).ceil
+  end
+
 end

@@ -10,4 +10,7 @@ json.plans @plans.each do |plan|
   json.gender plan.gender
   json.activityLevel plan.activity_level
   json.tdee plan.tdee
+  json.totalCalories plan.total_calories
+  json.lbm plan.lean_body_mass
+  json.daysTillSixpack plan.days_till_sixpack
 end
