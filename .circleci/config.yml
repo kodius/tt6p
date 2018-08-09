@@ -13,7 +13,7 @@ jobs:
           PGHOST: 127.0.0.1
           RAILS_ENV: test
           RACK_ENV: test
-          LENS_MOCKED: true
+          NODE_ENV: test
           DATABASE_URL: "postgres://ubuntu@localhost:5432/tt6p_test"
 
       - image: postgres:9.4
