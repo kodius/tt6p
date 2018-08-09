@@ -7,7 +7,7 @@ import axios from 'axios';
 import NavTop from './components/shared/_nav_top';
 Vue.component('nav-top', NavTop);
 
-axios.defaults.baseURL = 'http://localhost:3000/api/';
+axios.defaults.baseURL = process.env.API_BASE_URL
 axios.defaults.headers.common['X-CSRF-Token'] = document.querySelector("meta[name=csrf-token]").content
 
 // $.ajaxSetup({

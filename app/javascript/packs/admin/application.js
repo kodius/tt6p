@@ -15,7 +15,7 @@ Vue.component('nav-top', NavTop);
 import SubmitTag from './components/shared/_submit_tag';
 Vue.component('submit-tag', SubmitTag);
 
-axios.defaults.baseURL = 'http://localhost:3000/api/admin/';
+axios.defaults.baseURL = process.env.API_BASE_URL
 axios.defaults.headers.common['X-CSRF-Token'] = document.querySelector("meta[name=csrf-token]").content
 
 // $.ajaxSetup({
