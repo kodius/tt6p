@@ -8,15 +8,6 @@
       <h1>{{ $t('title') }}</h1>
 
       <ul class="nav nav-pills">
-        <li :class="activeOn(['root_path'])">
-          <router-link :to="{ name: 'root_path' }">{{ $t('nav.homepage') }}</router-link>
-        </li>
-        <li :class="activeOn(['musicians_path', 'musician_path'])">
-          <router-link :to="{ name: 'musicians_path' }">{{ $t('nav.musicians') }}</router-link>
-        </li>
-        <li :class="activeOn(['errors_path', 'errors_path'])">
-          <router-link :to="{ name: 'errors_path' }">{{ $t('nav.errors') }}</router-link>
-        </li>
         <li :class="activeOn(['dashboard_path'])">
           <router-link :to="{ name: 'dashboard_path' }">{{ $t('nav.dashboard') }}</router-link>
         </li>
