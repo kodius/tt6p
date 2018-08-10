@@ -75,18 +75,18 @@ const UserStore = {
       context.commit('progress', 'loading')
       return new Promise((resolve, reject) => {
         axios
-        .put(`users/${user.id}`, {
-          user: user
-        })
-        .then(response => {
-          context.commit('progress', 'success')
-          resolve(response.data);
-        })
-        .catch(function (response) {
-          context.commit('progress', 'failed')
-          context.commit('errors', response.errors);
-          reject(data);
-        })
+          .put(`users/${user.id}`, {
+            user: user
+          })
+          .then(response => {
+            context.commit('progress', 'success')
+            resolve(response.data);
+          })
+          .catch(function (response) {
+            context.commit('progress', 'failed')
+            context.commit('errors', response.errors);
+            reject(data);
+          })
       })
     },
     destroy(context, user_id) {
