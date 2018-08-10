@@ -21,7 +21,7 @@
         <h4>TDEE: {{ plan.tdee }} kcal</h4>
         <br/>
         <h4>Total Calories: {{ plan.totalCalories }} kcal (cutting 20%)</h4>
-        <h2 class="alert alert-success">Sixpack in: {{ plan.daysTillSixpack }} days</h2>
+        <h2 class="alert alert-success">Sixpack in: {{ plan.daysTillSixpack }} days - {{ plan.dayOfSixpack }}</h2>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Let's go</a></p>
       </div>
       <div v-else>
@@ -36,10 +36,19 @@
             <tr>
               <th>Date</th>
               <th>Weight</th>
+              <th>BF%</th>
             </tr>
             <tr v-for="measurement in measurements">
               <td>{{ measurement.logDate }} </td>
               <td>{{ measurement.weight }} kg</td>
+              <td>
+                <span v-if="measurement.bodyFat">
+                  {{ measurement.bodyFat }}%
+                </span>
+                <span v-else>
+                  -
+                </span>
+              </td>
             </tr>
           </table>
         </div>

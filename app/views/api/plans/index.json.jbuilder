@@ -13,4 +13,5 @@ json.plans @plans.each do |plan|
   json.totalCalories plan.total_calories
   json.lbm plan.lean_body_mass
   json.daysTillSixpack plan.days_till_sixpack
+  json.dayOfSixpack l(plan.day_of_sixpack.to_date, format: :long)
 end
