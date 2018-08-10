@@ -2,6 +2,9 @@ const helpers = {}
 
 helpers.showErrors = function(data){
   let errors = {};
+  if (data == undefined) {
+    return errors;
+  }
   const messages = data.responseJSON.errors;
 
   if(messages) {
