@@ -29,6 +29,22 @@
       </div>
       <br />
     </div>
+    <div v-if="loaded">
+      <div class="panel panel-default">
+        <div class="panel-heading">Weight Log</div>
+          <table class="table">
+            <tr>
+              <th>Date</th>
+              <th>Weight</th>
+            </tr>
+            <tr v-for="measurement in measurements">
+              <td>{{ measurement.logDate }} </td>
+              <td>{{ measurement.weight }} kg</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
   </layout>
 </template>
 
@@ -47,7 +63,8 @@ export default {
   data () {
     return {
       loaded: false,
-      plan: null
+      plan: null,
+      measurements: []
     }
   },
   mounted () {
@@ -56,7 +73,13 @@ export default {
       .get('plans')
       .then(response => {
         self.plan = response.data.plans[0]
-        self.loaded = true
+        axios
+          .get('measurements')
+          .then(response => {
+              console.log(response)
+              self.measurements = response.data.measurements
+              self.loaded = true
+        })
       })
   }
 }

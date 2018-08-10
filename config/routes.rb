@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :musicians, only: [:index, :show]
 
       resources :plans
+      resources :measurements
 
       namespace :admin do
         as :user do
