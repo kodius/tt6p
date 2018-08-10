@@ -73,7 +73,8 @@ const UserStore = {
     },
     update(context, user) {
       context.commit('progress', 'loading')
-      axios
+      return new Promise((resolve, reject) => {
+        axios
         .put(`users/${user.id}`, {
           user: user
         })
@@ -86,6 +87,7 @@ const UserStore = {
           context.commit('errors', response.errors);
           reject(data);
         })
+      })
     },
     destroy(context, user_id) {
       return new Promise((resolve, reject) => {
