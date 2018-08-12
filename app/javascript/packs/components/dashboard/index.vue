@@ -22,7 +22,7 @@
         <br/>
         <h4>Total Calories: {{ plan.totalCalories }} kcal (cutting 20%)</h4>
         <h2 class="alert alert-success">Sixpack in: {{ plan.daysTillSixpack }} days - {{ plan.dayOfSixpack }}</h2>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Let's go</a></p>
+        <p><a class="button is-large is-primary" href="#" role="button">Let's go</a></p>
       </div>
       <div v-else>
         Loading...
@@ -32,7 +32,7 @@
     <div v-if="loaded">
       <div class="panel panel-default">
         <div class="panel-heading">Weight Log</div>
-          <table class="table">
+          <table class="table is-bordered is-fullwidth">
             <tr>
               <th>Date</th>
               <th>Weight</th>
