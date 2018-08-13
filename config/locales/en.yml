@@ -14,6 +14,7 @@ en:
         musicians: "Musicians"
         errors: "Error pages"
         dashboard: "Dashboard"
+        log: "Log"
       home:
         title: "This is the Home page"
         content: "Lorem ipsum dolor sit amet, you know the song..."

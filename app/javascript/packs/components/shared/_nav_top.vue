@@ -11,6 +11,9 @@
         <li :class="activeOn(['dashboard_path'])">
           <router-link :to="{ name: 'dashboard_path' }">{{ $t('nav.dashboard') }}</router-link>
         </li>
+        <li :class="activeOn(['log_path'])">
+          <router-link :to="{ name: 'log_path' }">{{ $t('nav.log') }}</router-link>
+        </li>
       </ul>
     </div>
   </div>
