@@ -1,5 +1,7 @@
 import Vue from 'vue/dist/vue.esm';
 import VueI18n from 'vue-i18n';
+import Buefy from 'buefy'
+import 'buefy/lib/buefy.css'
 import store from './vuex';
 import router from './routes.js';
 import './filters/strings.js';
@@ -45,6 +47,8 @@ const i18n = new VueI18n({
   locale: 'current',
   messages: translations
 })
+
+Vue.use(Buefy)
 
 const app = new Vue({
   i18n,
