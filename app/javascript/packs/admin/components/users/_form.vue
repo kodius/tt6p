@@ -1,33 +1,27 @@
 <template>
   <section>
-    <b-field
-      type="is-danger"
-      message="This email is invalid">
-      <label for="">{{ $t('activerecord.models.user.email') }}</label>
-      <span class='error'>{{errors.email}}</span>
-      <b-input type="email"
-        v-model="user.email"
-        maxlength="30">
-      </b-input>
-    </b-field>
-    <b-field>
-      <label for="">{{ $t('activerecord.models.user.password') }}</label>
-      <span class='error'>{{errors.password}}</span>
-      <b-input type="password"
-        v-model="user.password" 
-        password-reveal>
-      </b-input>
-    </b-field>
-    <b-field>
-      <label for="">{{ $t('activerecord.models.user.password_confirmation') }}</label>
-      <span class='error'>{{errors.password_confirmation}}</span>
-      <b-input type="password"
-        v-model="user.password_confirmation" 
-        password-reveal>
-      </b-input>
-    </b-field>
-    <router-link :to="{ name: 'users_path' }" class="btn btn-default pull-left">{{ $t('cancel')}}</router-link>
-    <submit-tag :value="$t('save')" klass="btn btn-warning pull-right" :progress="progress"></submit-tag>
+    <div class="column is-half">
+      <b-field label="Email"
+              :type="errors.email ? 'is-danger' : ''"
+              :message="errors.email ? errors.email : ''">
+        <b-input v-model="user.email" type="email"></b-input>
+      </b-field>
+      <b-field label="Password"
+              :type="errors.password ? 'is-danger' : ''"
+              :message="errors.password ? errors.password : ''">
+        <b-input v-model="user.password" type="password"></b-input>
+      </b-field>
+      <b-field label="Confirm password"
+              :type="errors.password_confirmation ? 'is-danger' : ''"
+              :message="errors.password_confirmation ? errors.password_confirmation : ''">
+        <b-input v-model="user.password_confirmation" type="password"></b-input>
+      </b-field>
+      <!-- <submit-tag :value="$t('save')" klass="btn btn-warning pull-right" :progress="progress"></submit-tag> -->
+      <button class="button is-primary" :progress="progress">
+        {{ $t('save') }}
+      </button>
+      <router-link :to="{ name: 'users_path' }" class="button">{{ $t('cancel')}}</router-link>
+    </div>
   </section>
 </template>
 
