@@ -22,7 +22,7 @@
         <br/>
         <h4>Total Calories: {{ plan.totalCalories }} kcal (cutting 20%)</h4>
         <h2 class="alert alert-success">Sixpack in: {{ plan.daysTillSixpack }} days - {{ plan.dayOfSixpack }}</h2>
-        <p><a class="button is-large is-primary" href="#" role="button">Let's go</a></p>
+        <p><router-link :to="{ name: 'log_path' }" class="button is-large is-primary" @click="newEntry" role="button">Let's go</router-link></p>
       </div>
       <div v-else>
         Loading...
@@ -59,11 +59,13 @@
 
 <script>
 import axios from 'axios';
+import Buefy from 'buefy'
 import Layout from '../shared/layout';
 import CommitChart from './commit_chart';
 import Vue from 'vue/dist/vue.esm';
 
 Vue.component('commit-chart', CommitChart);
+Vue.use(Buefy)
 
 export default {
   components: {
@@ -82,6 +84,8 @@ export default {
       .get('plans')
       .then(response => {
         self.plan = response.data.plans[0]
+        console.warn('KURAC');
+        console.log(self.plan);
         axios
           .get('measurements')
           .then(response => {

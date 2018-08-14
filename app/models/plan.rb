@@ -32,4 +32,10 @@ class Plan < ApplicationRecord
     result > 0 ? result : 0
   end
 
+  def weight_change
+    measurement =  Measurement.where('user_id = ?', user_id).order('log_date desc').first
+    last_weigth = measurement&.weight || weight
+    weight - last_weigth
+  end
+
 end
