@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
       resources :plans
       resources :measurements
+      post 'entry', to: 'entry#show'
 
       namespace :admin do
         as :user do

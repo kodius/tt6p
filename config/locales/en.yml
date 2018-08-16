@@ -9,6 +9,8 @@ en:
   vue:
     front:
       title: "Time to sixpack"
+      save: "Save"
+      cancel: "Cancel"
       nav:
         homepage: "Home"
         musicians: "Musicians"
@@ -26,6 +28,7 @@ en:
         details: "Details about this musician:"
       errors:
         title: "Error pages"
+        required: "This field is required"
     admin:
       title: "Admin"
       save: "Save"
