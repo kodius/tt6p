@@ -2,7 +2,7 @@
   "name": "tt6p",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "^3.0.2",
+    "@rails/webpacker": "^3.5.5",
     "avoriaz": "^6.0.1",
     "axios": "^0.18.0",
     "buefy": "^0.6.6",
@@ -12,16 +12,18 @@
     "dotenv-webpack": "^1.5.7",
     "mocha": "^4.0.1",
     "mocha-webpack": "^1.0.1",
-    "vue": "^2.5.9",
+    "vue": "^2.5.17",
     "vue-chartjs": "^3.4.0",
     "vue-i18n": "^7.3.0",
-    "vue-loader": "^13.5.0",
+    "vue-loader": "14.2.2",
     "vue-router": "^2.7.0",
-    "vue-template-compiler": "^2.5.9",
+    "vue-template-compiler": "^2.5.17",
     "vuetify": "^1.1.10",
     "vuex": "^2.4.0"
   },
   "devDependencies": {
+    "postcss-loader": "^3.0.0",
+    "postcss-smart-import": "^0.7.6",
     "webpack-dev-server": "^2.9.5"
   },
   "scripts": {

@@ -10,25 +10,6 @@ Vue.component('nav-top', NavTop);
 axios.defaults.baseURL = process.env.API_BASE_URL
 axios.defaults.headers.common['X-CSRF-Token'] = document.querySelector("meta[name=csrf-token]").content
 
-// $.ajaxSetup({
-//   beforeSend: function(xhr) {
-//     xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-//   },
-//   complete: function(xhr, status) {
-//     if(xhr.status === 200 || xhr.status === 422) {
-//       return true;
-//     }
-//     if(xhr.status === 404) {
-//       return window.location.href = '/404';
-//     }
-
-//     return window.location.href = '/500';
-//   }
-// })
-// $.ajaxPrefilter(function( options ) {
-//   options.url = `/${I18n.prefix}api/${options.url}`;
-// });
-
 Vue.use(VueI18n);
 const i18n = new VueI18n({
   locale: 'current',

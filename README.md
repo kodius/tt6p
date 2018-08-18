@@ -21,6 +21,8 @@ bundle exec rails db:seed
 foreman start
 ```
 
+App is available on: http://localhost:3000/
+
 ## Running tests
 
 ### Rails side
