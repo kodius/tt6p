@@ -38,7 +38,8 @@
               <th>Weight</th>
               <th>BF%</th>
             </tr>
-            <tr v-for="measurement in measurements">
+            <tr v-for="measurement in measurements" 
+                v-bind:key="measurement.id">
               <td>{{ measurement.logDate }} </td>
               <td>{{ measurement.weight }} kg</td>
               <td>
@@ -53,7 +54,6 @@
           </table>
         </div>
       </div>
-    </div>
   </layout>
 </template>
 
@@ -84,8 +84,6 @@ export default {
       .get('plans')
       .then(response => {
         self.plan = response.data.plans[0]
-        console.warn('KURAC');
-        console.log(self.plan);
         axios
           .get('measurements')
           .then(response => {

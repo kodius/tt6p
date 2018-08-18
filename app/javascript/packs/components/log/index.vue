@@ -7,10 +7,9 @@
         <b-field
                 :type="errors.date ? 'is-danger' : ''">
             <b-datepicker
-                placeholder="Select a date"
-                v-model="date"
+                placeholder="Select date"
+                v-model="measurement.logDate"
                 @focus="errors.date = null"
-                @input="dateSelected()"
                 :events="events"
                 icon="calendar-today">
             </b-datepicker>
@@ -20,7 +19,7 @@
               :type="errors.weight ? 'is-danger' : ''">
           <b-input
               placeholder="Weight"
-              v-model="weight"
+              v-model="measurement.weight"
               @focus="errors.weight = null"
               expanded>
           </b-input>
@@ -28,13 +27,13 @@
             <span class="button is-static">KG</span>
           </p>
         </b-field>
-        <span v-if="errors.bodyfat" class="help is-danger">{{ errors.bodyfat }}</span>
+        <span v-if="errors.bodyFat" class="help is-danger">{{ errors.bodyFat }}</span>
         <b-field
-              :type="errors.bodyfat ? 'is-danger' : ''">
+              :type="errors.bodyFat ? 'is-danger' : ''">
             <b-input
                 placeholder="Body fat"
-                v-model="bodyfat"
-                @focus="errors.bodyfat = null"
+                v-model="measurement.bodyFat"
+                @focus="errors.bodyFat = null"
                 expanded>
             </b-input>
             <p class="control">
@@ -46,7 +45,7 @@
               :type="errors.calories ? 'is-danger' : ''">
           <b-input
               placeholder="Calories"
-              v-model="calories"
+              v-model="measurement.calories"
               @focus="errors.calories = null"
               expanded>
           </b-input>
@@ -78,14 +77,16 @@ export default {
   },
   data: function() {
     return {
-      date: null,
-      weight: null,
-      bodyfat: null,
-      calories: null,
+      measurement: {
+        logDate: new Date(),
+        weight: null,
+        bodyFat: null,
+        calories: null,
+      },
       errors: {
         date: null,
         weight: null,
-        bodyfat: null,
+        bodyFat: null,
         calories: null
       },
       events: [
@@ -96,36 +97,37 @@ export default {
       ]
     }
   },
+  mounted () {
+    self = this
+    axios
+      .get('measurements/new')
+      .then(response => {
+        self.measurement = response.data["measurement"]
+      })
+  },
   methods: {
     save() {
-      if (this.checkRequired() == false)
+      if (this.checkRequired() == false)  
       {
-        
+        axios.post('/measurements', {
+           measurement: this.measurement
+        }).then(function(response) {
+          console.log(response)
+        });
       }
     },
     checkRequired() {
       var hasError = false;
-      if (this.date == null)
+      if (this.measurement.logDate == null)
         { this.errors.date = this.$t('errors.required'); hasError = true; }
-      if (this.weight == null)
+      if (this.measurement.weight == null)
         { this.errors.weight = this.$t('errors.required'); hasError = true; }
-      if (this.bodyfat == null)
-        { this.errors.bodyfat = this.$t('errors.required'); hasError = true; }
-      if (this.calories == null)
+      if (this.measurement.bodyFat == null)
+        { this.errors.bodyFat = this.$t('errors.required'); hasError = true; }
+      if (this.measurement.calories == null)
         { this.errors.calories = this.$t('errors.required'); hasError = true; }
 
       return hasError;
-    },
-    dateSelected() {
-      console.log('Kurac');
-      // Testing
-      axios.post('/entry', {
-        params: {
-          date: this.date
-        }
-      }).then(function(response) {
-        console.log(response)
-      });
     }
   }
 }

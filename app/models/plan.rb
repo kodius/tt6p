@@ -25,7 +25,7 @@ class Plan < ApplicationRecord
   end
 
   def days_till_sixpack
-    #if we have measurments use latest, otherwise use the one from the plan
+    # if we have measurments use latest, otherwise use the one from the plan
     measurement =  Measurement.where('user_id = ?', user_id).order('log_date desc').first
     last_weigth = measurement&.weight || weight
     result = ((last_weigth - target_weight)*7000/(tdee - total_calories)).ceil
