@@ -113,6 +113,7 @@ export default {
            measurement: this.measurement
         }).then(function(response) {
           console.log(response)
+          self.$router.push({ name: 'dashboard_path' })
         });
       }
     },

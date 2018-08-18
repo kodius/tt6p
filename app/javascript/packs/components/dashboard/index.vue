@@ -1,33 +1,35 @@
 <template>
   <layout>
-    <div class="col-xs-12 jumbotron">
-      <h2>Plan</h2>
-      <div v-if="loaded">
-        <strong>Weight:</strong> {{ plan.weight }} kg
-        <br/>
-        <strong>Body Fat:</strong> {{ plan.bodyFat }}%
-        <br/>
-        <br/>
-        <strong>Activity Level:</strong> {{ plan.activityLevel }}
-        <br/>
-        <strong>Target Body Fat: </strong>{{ plan.targetBodyFat }}%
-        <br/>
-        <strong>Target Weight: </strong>{{ plan.targetWeight }}kg
-        <br/>
-        <strong>Gender: </strong>{{ plan.gender }}
-        <br/>
-        <br/>
-        <h4>LBM: {{ plan.lbm }} kg</h4>
-        <h4>TDEE: {{ plan.tdee }} kcal</h4>
-        <br/>
-        <h4>Total Calories: {{ plan.totalCalories }} kcal (cutting 20%)</h4>
-        <h2 class="alert alert-success">Sixpack in: {{ plan.daysTillSixpack }} days - {{ plan.dayOfSixpack }}</h2>
-        <p><router-link :to="{ name: 'log_path' }" class="button is-large is-primary" @click="newEntry" role="button">Let's go</router-link></p>
+
+    <div class="container">
+      <div class="notification">
+        <div v-if="loaded">
+          <strong>Weight:</strong> {{ plan.weight }} kg
+          <br/>
+          <strong>Body Fat:</strong> {{ plan.bodyFat }}%
+          <br/>
+          <br/>
+          <strong>Activity Level:</strong> {{ plan.activityLevel }}
+          <br/>
+          <strong>Target Body Fat: </strong>{{ plan.targetBodyFat }}%
+          <br/>
+          <strong>Target Weight: </strong>{{ plan.targetWeight }}kg
+          <br/>
+          <strong>Gender: </strong>{{ plan.gender }}
+          <br/>
+          <br/>
+          <h4>LBM: {{ plan.lbm }} kg</h4>
+          <h4>TDEE: {{ plan.tdee }} kcal</h4>
+          <br/>
+          <h4>Total Calories: {{ plan.totalCalories }} kcal (cutting 20%)</h4>
+          <h2 class="alert alert-success">Sixpack in: {{ plan.daysTillSixpack }} days - {{ plan.dayOfSixpack }}</h2>
+          <p><router-link :to="{ name: 'log_path' }" class="button is-large is-primary" @click="newEntry" role="button">Log data</router-link></p>
+        </div>
+        <div v-else>
+          Loading...
+        </div>
+        <br />
       </div>
-      <div v-else>
-        Loading...
-      </div>
-      <br />
     </div>
     <div v-if="loaded">
       <div class="panel panel-default">
@@ -36,15 +38,26 @@
             <tr>
               <th>Date</th>
               <th>Weight</th>
+              <th>Calories</th>
               <th>BF%</th>
+              <th>LBM</th>
             </tr>
             <tr v-for="measurement in measurements" 
                 v-bind:key="measurement.id">
               <td>{{ measurement.logDate }} </td>
               <td>{{ measurement.weight }} kg</td>
+              <td>{{ measurement.calories }} kcal</td>
               <td>
                 <span v-if="measurement.bodyFat">
                   {{ measurement.bodyFat }}%
+                </span>
+                <span v-else>
+                  -
+                </span>
+              </td>
+              <td>
+                <span v-if="measurement.lbm">
+                  {{ measurement.lbm }} kg
                 </span>
                 <span v-else>
                   -

@@ -6,6 +6,8 @@ class Api::MeasurementsController < Api::ApiController
 
   def create  
     @measurement = Measurement.new(measurement_params)
+    log_date = @measurement.log_date.to_date
+    @measurement.log_date = (@measurement.log_date + 2.hours).to_date
     @measurement.user = current_user
     @measurement.save!
   end
