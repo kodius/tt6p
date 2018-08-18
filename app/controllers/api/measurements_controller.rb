@@ -11,12 +11,14 @@ class Api::MeasurementsController < Api::ApiController
   end
 
   def new 
-    last_measurement = Measurement.where('user_id = ?', current_user.id).order("log_date desc").first
+    last_measurement = Measurement.where('user_id = ?', current_user.id).order("log_date desc").first 
     @measurement = Measurement.new
-    @measurement.weight = last_measurement.weight
-    @measurement.body_fat = last_measurement.body_fat
-    @measurement.log_date = DateTime.now.to_date
-    @measurement.calories = nil
+    if last_measurement
+      @measurement.weight = last_measurement.weight
+      @measurement.body_fat = last_measurement.body_fat
+      @measurement.log_date = DateTime.now.to_date
+      @measurement.calories = nil
+    end
   end
 
   def measurement_params
