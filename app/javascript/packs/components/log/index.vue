@@ -24,7 +24,7 @@
               expanded>
           </b-input>
           <p class="control">
-            <span class="button is-static">KG</span>
+            <span class="button is-static">kg</span>
           </p>
         </b-field>
         <span v-if="errors.bodyFat" class="help is-danger">{{ errors.bodyFat }}</span>
@@ -50,7 +50,7 @@
               expanded>
           </b-input>
           <p class="control">
-            <span class="button is-static">cal</span>
+            <span class="button is-static">kcal</span>
           </p>
         </b-field>
       </div><div class="column is-half">
@@ -61,7 +61,7 @@
       <hr>
     </div>
     <button class="button is-primary" @click="save">
-      {{ $t('save') }}
+      Log data
     </button>
     <router-link :to="{ name: 'dashboard_path' }" class="button">{{ $t('cancel')}}</router-link>
   </layout>

@@ -2,27 +2,58 @@
   <layout>
 
     <div class="container">
+
       <div class="notification">
         <div v-if="loaded">
-          <strong>Weight:</strong> {{ plan.weight }} kg
-          <br/>
-          <strong>Body Fat:</strong> {{ plan.bodyFat }}%
-          <br/>
-          <br/>
-          <strong>Activity Level:</strong> {{ plan.activityLevel }}
-          <br/>
-          <strong>Target Body Fat: </strong>{{ plan.targetBodyFat }}%
-          <br/>
-          <strong>Target Weight: </strong>{{ plan.targetWeight }}kg
-          <br/>
-          <strong>Gender: </strong>{{ plan.gender }}
-          <br/>
-          <br/>
-          <h4>LBM: {{ plan.lbm }} kg</h4>
-          <h4>TDEE: {{ plan.tdee }} kcal</h4>
-          <br/>
-          <h4>Total Calories: {{ plan.totalCalories }} kcal (cutting 20%)</h4>
-          <h2 class="alert alert-success">Sixpack in: {{ plan.daysTillSixpack }} days - {{ plan.dayOfSixpack }}</h2>
+          <div class="tile is-ancestor">
+            <div class="tile is-4 is-vertical is-parent">
+              <article class="tile is-child notification is-warning box">
+                <p class="title">Body Stats</p>
+                <strong>Weight:</strong> {{ plan.weight }} kg
+                <br/>
+                <strong>Body Fat:</strong> {{ plan.bodyFat }}%
+                <br/>
+                <strong>Gender: </strong>{{ plan.gender }}
+                <br/>
+                <strong>Activity Level:</strong> {{ plan.activityLevel }}
+              </article>
+              <article class="tile is-child notification is-info box">
+                <p class="title">Target Stats</p>
+                <strong>Target Body Fat: </strong>{{ plan.targetBodyFat }}%
+                <br/>
+                <strong>Target Weight: </strong>{{ plan.targetWeight }}kg
+              </article>
+            </div>
+            <div class="tile is-parent">
+              <div class="tile is-child box">
+                <p class="title">Lean Mass & Calories</p>
+                <div class="tile">
+                  <div class="tile is-child box is-6">
+                    <p class="title">LBM</p>
+                    <p class="subtitle">{{ plan.lbm }} kg</p>
+                  </div>
+                  <div class="tile is-child box is-6">
+                    <p class="title">TDEE</p>
+                    <p class="subtitle">{{ plan.tdee }} kcal</p>
+                  </div>
+                </div>
+                <div class="tile">
+                  <div class="tile is-child box is-6">
+                    <p class="title">Days Till Sixpack</p>
+                    <p class="subtitle">{{ plan.daysTillSixpack }} days</p>
+                  </div>
+                  <div class="tile is-child box is-6  notification is-success">
+                    <p class="title">Day of Sixpack</p>
+                    <p class="subtitle">{{ plan.dayOfSixpack }}</p>
+                  </div>
+                </div>
+                <div class="tile is-child box is-12 notification is-danger">
+                  <p class="title">Calories to Eat</p>
+                  <p class="subtitle">{{ plan.totalCalories }}  kcal (cutting 20%)</p>
+                </div>
+              </div>
+            </div>
+          </div>
           <p><router-link :to="{ name: 'log_path' }" class="button is-large is-primary" @click="newEntry" role="button">Log data</router-link></p>
         </div>
         <div v-else>
@@ -32,41 +63,49 @@
       </div>
     </div>
     <div v-if="loaded">
-      <div class="panel panel-default">
-        <div class="panel-heading">Weight Log</div>
-          <table class="table is-bordered is-fullwidth">
-            <tr>
-              <th>Date</th>
-              <th>Weight</th>
-              <th>Calories</th>
-              <th>BF%</th>
-              <th>LBM</th>
-            </tr>
-            <tr v-for="measurement in measurements" 
-                v-bind:key="measurement.id">
-              <td>{{ measurement.logDate }} </td>
-              <td>{{ measurement.weight }} kg</td>
-              <td>{{ measurement.calories }} kcal</td>
-              <td>
-                <span v-if="measurement.bodyFat">
-                  {{ measurement.bodyFat }}%
-                </span>
-                <span v-else>
-                  -
-                </span>
-              </td>
-              <td>
-                <span v-if="measurement.lbm">
-                  {{ measurement.lbm }} kg
-                </span>
-                <span v-else>
-                  -
-                </span>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
+      <table class="table is-bordered is-striped is-fullwidth">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Weight</th>
+            <th>Calories</th>
+            <th>BF%</th>
+            <th>LBM</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr v-for="measurement in measurements" 
+            v-bind:key="measurement.id">
+          <td>{{ measurement.logDate }} </td>
+          <td>{{ measurement.weight }} kg</td>
+          <td>
+            <span v-if="measurement.calories">
+              {{ measurement.calories }} kcal
+            </span>
+            <span v-else>
+              -
+            </span>
+          </td>
+          <td>
+            <span v-if="measurement.bodyFat">
+              {{ measurement.bodyFat }}%
+            </span>
+            <span v-else>
+              -
+            </span>
+          </td>
+          <td>
+            <span v-if="measurement.lbm">
+              {{ measurement.lbm }} kg
+            </span>
+            <span v-else>
+              -
+            </span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </layout>
 </template>
 

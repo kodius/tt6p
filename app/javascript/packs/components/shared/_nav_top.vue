@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <container>
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="https://tt6p.kodius.io">
@@ -23,11 +23,11 @@
         </a>
       </div>
     </nav>
-    <section class="hero">
+    <section class="hero is-info">
       <div class="hero-body">
         <div class="container">
           <h1 class="title">
-            Time to sixpack 
+            Time to Sixpack 
           </h1>
           <h2 class="subtitle">
             Get sixpack by keeping track
@@ -36,7 +36,7 @@
       </div>
     </section>
 
-  </div>
+  </container>
 
 </template>
 
