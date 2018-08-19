@@ -12,8 +12,8 @@
 
         <div id="navbarExampleTransparentExample" class="navbar-menu">
           <div class="navbar-start">
-            <router-link class="navbar-item" :to="{ name: 'dashboard_path'}">Dashboard</router-link>
-            <router-link class="navbar-item" :to="{ name: 'log_path'}">Log</router-link>
+            <router-link :class="activeOn(['dashboard_path'])" :to="{ name: 'dashboard_path'}">Dashboard</router-link>
+            <router-link :class="activeOn(['log_path'])" :to="{ name: 'log_path'}">Log</router-link>
           </div>
         </div>
 
@@ -83,9 +83,9 @@ export default {
   methods: {
     activeOn: function(paths) {
       if(paths.includes(this.$route.name)) {
-        return 'active';
+        return 'is-active navbar-item';
       } else {
-        return '';
+        return 'navbar-item';
       }
     }
   }
