@@ -154,7 +154,6 @@ export default {
         axios
           .get('measurements')
           .then(response => {
-              console.log(response)
               self.measurements = response.data.measurements
               self.loaded = true
         })

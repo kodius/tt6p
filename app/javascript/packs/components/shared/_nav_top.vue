@@ -1,5 +1,6 @@
 <template>
   <container>
+    <section class="hero is-info">
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="https://tt6p.kodius.io">
@@ -23,33 +24,62 @@
         </a>
       </div>
     </nav>
-    <section class="hero is-info">
       <div class="hero-body">
-        <div class="container">
-          <h1 class="title">
-            Time to Sixpack 
-          </h1>
-          <h2 class="subtitle">
-            Get sixpack by keeping track
-          </h2>
+        <div class="tile is-ancestor">
+          <div class="tile is-child is-6">
+            <h1 class="title">
+              Time to Sixpack 
+            </h1>
+            <h2 class="subtitle">
+              Get sixpack by keeping track
+            </h2> 
+          </div>
+          <div class="tile is-child is-3 notification is-info">
+            Fat Lost
+          </div>
+          <div class="tile is-child is-3 notification is-info">
+            Streak
+          </div>
+        </div>
+        <div class="tile is-ancestor">
+          <div class="tile is-child is-6">
+          </div>
+          <div class="tile is-child is-3">
+            <span v-if="loaded">
+              <a class="button is-danger is-large is-rounded">{{plan.fatLost}}kg</a>
+            </span>
+          </div>
+          <div class="tile is-child is-3">
+            <span v-if="loaded">
+              <a class="button is-success is-large is-rounded">{{plan.daysStreak}} days</a>
+            </span>
+          </div>
         </div>
       </div>
     </section>
-
   </container>
+
 
 </template>
 
 <script>
-export default {
+import axios from 'axios';
 
+export default {
   data: function() {
     return {
-      locale: window.I18n.locale,
-      availableLocales: window.I18n.availableLocales
+      plan: null,
+      loaded: false
     }
   },
-
+  mounted () {
+    axios
+      .get('plans')
+      .then(response => {
+        this.plan = response.data.plans[0]
+        this.loaded = true
+      })
+  },
   methods: {
     activeOn: function(paths) {
       if(paths.includes(this.$route.name)) {
@@ -57,17 +87,6 @@ export default {
       } else {
         return '';
       }
-    }
-  },
-
-  watch: {
-    locale: function(locale) {
-      let redirectTo = `/${locale}${this.$route.path}`;
-      if(locale == this.availableLocales[0]) {
-        redirectTo = `${this.$route.path}`
-      }
-
-      window.location.href = redirectTo;
     }
   }
 }

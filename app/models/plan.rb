@@ -37,6 +37,30 @@ class Plan < ApplicationRecord
     weight - last_weight
   end
 
+  def days_streak
+    current_day = DateTime.now.to_date - 1.day
+    if Measurement.where("user_id =? and success != false and log_date = ?", user_id, DateTime.now.to_date).exists?
+      count = 1
+    else
+      count = 0
+    end
+    Measurement.where("user_id = ? and success != false", user_id).order("log_date desc").each do |m|
+      if m.log_date == current_day + 1.day
+        next
+      elsif m.log_date == current_day
+        current_day = current_day - 1.day
+        count += 1
+      else 
+        break
+      end
+    end
+    count
+  end
+
+  def fat_lost
+    (weight*body_fat/100.0 - last_weight*last_body_fat/100.0).round(1)
+  end
+
   # if we have measurments use latest, otherwise use the one from the plan
   def last_weight
     measurement =  Measurement.where('user_id = ?', user_id).order('log_date desc').first

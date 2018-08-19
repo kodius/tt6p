@@ -18,4 +18,6 @@ json.plans @plans.each do |plan|
   json.daysTillSixpack plan.days_till_sixpack
   json.dayOfSixpack l(plan.day_of_sixpack.to_date, format: :long)
   json.weightChange plan.weight_change
+  json.fatLost plan.fat_lost
+  json.daysStreak plan.days_streak
 end
