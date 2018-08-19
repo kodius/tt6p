@@ -40,9 +40,7 @@
               <span class="button is-static">%</span>
             </p>
           </b-field>
-        <span v-if="errors.calories" class="help is-danger">{{ errors.calories }}</span>
-        <b-field
-              :type="errors.calories ? 'is-danger' : ''">
+        <b-field>
           <b-input
               placeholder="Calories"
               v-model="measurement.calories"
@@ -71,6 +69,7 @@
 import Layout from '../shared/layout';
 import axios from 'axios';
 
+
 export default {
   components: {
     Layout
@@ -78,7 +77,7 @@ export default {
   data: function() {
     return {
       measurement: {
-        logDate: new Date(),
+        logDate: null,
         weight: null,
         bodyFat: null,
         calories: null,
@@ -103,6 +102,7 @@ export default {
       .get('measurements/new')
       .then(response => {
         self.measurement = response.data["measurement"]
+        self.measurement.logDate = new Date(response.data["measurement"]["logDate"])
       })
   },
   methods: {
@@ -125,8 +125,6 @@ export default {
         { this.errors.weight = this.$t('errors.required'); hasError = true; }
       if (this.measurement.bodyFat == null)
         { this.errors.bodyFat = this.$t('errors.required'); hasError = true; }
-      if (this.measurement.calories == null)
-        { this.errors.calories = this.$t('errors.required'); hasError = true; }
 
       return hasError;
     }

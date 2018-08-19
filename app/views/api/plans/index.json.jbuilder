@@ -2,7 +2,9 @@ json.plans @plans.each do |plan|
   json.id plan.id
   json.createdAt l(plan.created_at, format: :default)
   json.weight plan.weight
+  json.lastWeight plan.last_weight
   json.bodyFat plan.body_fat
+  json.lastBodyFat plan.last_body_fat
   json.targetBodyFat plan.target_body_fat
   json.targetWeight plan.target_weight
   json.targetLeanBodyMass plan.target_lean_body_mass

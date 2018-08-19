@@ -18,9 +18,9 @@ class Api::MeasurementsController < Api::ApiController
     if last_measurement
       @measurement.weight = last_measurement.weight
       @measurement.body_fat = last_measurement.body_fat
-      @measurement.log_date = DateTime.now.to_date
       @measurement.calories = nil
     end
+    @measurement.log_date = DateTime.now
   end
 
   def measurement_params

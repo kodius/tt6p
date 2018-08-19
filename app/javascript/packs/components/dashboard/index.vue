@@ -9,13 +9,13 @@
             <div class="tile is-4 is-vertical is-parent">
               <article class="tile is-child notification is-warning box">
                 <p class="title">Body Stats</p>
-                <strong>Weight:</strong> {{ plan.weight }} kg
+                <strong>Weight:</strong> {{ plan.lastWeight }} kg
                 <br/>
-                <strong>Body Fat:</strong> {{ plan.bodyFat }}%
+                <strong>Body Fat:</strong> {{ plan.lastBodyFat }}%
                 <br/>
-                <strong>Gender: </strong>{{ plan.gender }}
+                <strong>Gender: </strong>{{ plan.gender | humanize }}
                 <br/>
-                <strong>Activity Level:</strong> {{ plan.activityLevel }}
+                <strong>Activity Level:</strong> {{ plan.activityLevel | humanize }}
               </article>
               <article class="tile is-child notification is-info box">
                 <p class="title">Target Stats</p>
@@ -71,6 +71,7 @@
             <th>Calories</th>
             <th>BF%</th>
             <th>LBM</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -102,6 +103,14 @@
               -
             </span>
           </td>
+          <td>
+            <span v-if="measurement.success" class="icon has-text-success">
+              <i class="fas fa-check-square"></i>
+            </span>
+            <span v-if="measurement.success == false" class="icon has-text-danger">
+              <i class="fas fa-minus-square"></i>
+            </span>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -115,6 +124,7 @@ import Buefy from 'buefy'
 import Layout from '../shared/layout';
 import CommitChart from './commit_chart';
 import Vue from 'vue/dist/vue.esm';
+import humanizeString from 'humanize-string';
 
 Vue.component('commit-chart', CommitChart);
 Vue.use(Buefy)
@@ -128,6 +138,11 @@ export default {
       loaded: false,
       plan: null,
       measurements: []
+    }
+  },
+  filters: {
+    humanize(text) {
+      return humanizeString(text);
     }
   },
   mounted () {

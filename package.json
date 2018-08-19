@@ -10,8 +10,11 @@
     "chart.js": "^2.7.2",
     "dotenv": "^6.0.0",
     "dotenv-webpack": "^1.5.7",
+    "humanize-string": "^1.0.2",
     "mocha": "^4.0.1",
     "mocha-webpack": "^1.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-smart-import": "^0.7.6",
     "vue": "^2.5.17",
     "vue-chartjs": "^3.4.0",
     "vue-i18n": "^7.3.0",
@@ -19,9 +22,7 @@
     "vue-router": "^2.7.0",
     "vue-template-compiler": "^2.5.17",
     "vuetify": "^1.1.10",
-    "vuex": "^2.4.0",
-    "postcss-loader": "^3.0.0",
-    "postcss-smart-import": "^0.7.6"
+    "vuex": "^2.4.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^2.9.5"

@@ -13,7 +13,7 @@ class Plan < ApplicationRecord
   end
 
   def tdee
-    TDEECalculator.tdee(weight, height, age, gender, activity_level)
+    TDEECalculator.tdee(last_weight, height, age, gender, activity_level)
   end
 
   def total_calories
@@ -25,17 +25,23 @@ class Plan < ApplicationRecord
   end
 
   def days_till_sixpack
-    # if we have measurments use latest, otherwise use the one from the plan
-    measurement =  Measurement.where('user_id = ?', user_id).order('log_date desc').first
-    last_weigth = measurement&.weight || weight
-    result = ((last_weigth - target_weight)*7000/(tdee - total_calories)).ceil
+    result = ((last_weight - target_weight)*7000/(tdee - total_calories)).ceil
     result > 0 ? result : 0
   end
 
   def weight_change
+    weight - last_weight
+  end
+
+  # if we have measurments use latest, otherwise use the one from the plan
+  def last_weight
     measurement =  Measurement.where('user_id = ?', user_id).order('log_date desc').first
-    last_weigth = measurement&.weight || weight
-    weight - last_weigth
+    measurement&.weight || weight
+  end
+
+  def last_body_fat
+    measurement =  Measurement.where('user_id = ?', user_id).order('log_date desc').first
+    measurement&.body_fat || body_fat
   end
 
 end
