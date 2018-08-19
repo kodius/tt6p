@@ -30,7 +30,7 @@
                 <div class="tile">
                   <div class="tile is-child box is-6">
                     <p class="title">LBM</p>
-                    <p class="subtitle">{{ plan.lbm }} kg</p>
+                    <p class="subtitle">{{ plan.lastLbm }} kg</p>
                   </div>
                   <div class="tile is-child box is-6">
                     <p class="title">TDEE</p>

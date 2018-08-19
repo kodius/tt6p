@@ -1,7 +1,11 @@
 class Plan < ApplicationRecord
 
   def lean_body_mass
-    weight*(1-body_fat/100.0).round(2)
+    (weight*(1-body_fat/100.0)).round(1)
+  end
+
+  def last_lean_body_mass
+    (last_weight*(1-last_body_fat/100.0)).round(1)
   end
 
   def target_lean_body_mass

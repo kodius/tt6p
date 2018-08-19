@@ -6,21 +6,25 @@ class Api::MeasurementsController < Api::ApiController
 
   def create  
     @measurement = Measurement.new(measurement_params)
-    log_date = @measurement.log_date.to_date
-    @measurement.log_date = (@measurement.log_date + 2.hours).to_date
+    log_date = (@measurement.log_date + 2.hours).to_date
+    @measurement.log_date = log_date
     @measurement.user = current_user
+    Measurement.where("user_id = ? and log_date = ?", @measurement.user_id, log_date).delete_all
     @measurement.save!
   end
 
   def new 
     last_measurement = Measurement.where('user_id = ?', current_user.id).order("log_date desc").first 
-    @measurement = Measurement.new
-    if last_measurement
-      @measurement.weight = last_measurement.weight
-      @measurement.body_fat = last_measurement.body_fat
-      @measurement.calories = nil
+    if last_measurement && last_measurement.log_date == DateTime.now.to_date
+      @measurement = last_measurement
+    else
+      @measurement = Measurement.new
+      if last_measurement
+        @measurement.weight = last_measurement.weight
+        @measurement.body_fat = last_measurement.body_fat
+      end
+      @measurement.log_date = DateTime.now.to_date
     end
-    @measurement.log_date = DateTime.now
   end
 
   def measurement_params
