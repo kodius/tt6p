@@ -1,3 +1,4 @@
+import 'bulma/css/bulma.css';
 import Vue from 'vue/dist/vue.esm';
 import VueI18n from 'vue-i18n';
 import store from './vuex';
