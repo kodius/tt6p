@@ -25,14 +25,13 @@
                         v-bind:key="plan.id">
                       <td>{{ plan.email }}</td>
                       <td>{{ plan.lastWeight }} kg</td>
-                      <td>{{ plan.lastBodyFat }} kg</td>
+                      <td>{{ plan.lastBodyFat }}%</td>
                       <td>{{ plan.lbm }} kg</td>
                       <td>{{ plan.fatLost }} kg</td>
-                      <td>{{ plan.daysStreak }} kg</td>
+                      <td>{{ plan.daysStreak }} days</td>
                       <td>{{ plan.dayOfSixpack }}</td>
                       <td>
-                        {{ plan.userId}}
-                        <i class="fas fa-check-square"></i>
+                        <a :href="'/profile/' + plan.userId"  class='button is-primary'>Profile</a>
                       </td>
                     </tr>
                     </tbody>
