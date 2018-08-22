@@ -26,12 +26,12 @@
                       <td>{{ plan.email }}</td>
                       <td>{{ plan.lastWeight }} kg</td>
                       <td>{{ plan.lastBodyFat }}%</td>
-                      <td>{{ plan.lbm }} kg</td>
+                      <td>{{ plan.lastLbm }} kg</td>
                       <td>{{ plan.fatLost }} kg</td>
                       <td>{{ plan.daysStreak }} days</td>
                       <td>{{ plan.dayOfSixpack }}</td>
                       <td>
-                        <a :href="'/profile/' + plan.userId"  class='button is-primary'>Profile</a>
+                        <!-- <a :href="'/profile/' + plan.userId"  class='button is-primary'>Profile</a> -->
                       </td>
                     </tr>
                     </tbody>
