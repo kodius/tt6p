@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :musicians, only: [:index, :show]
 
       resources :plans
+      get "my-plan", to: 'plans#my_plan'
       resources :measurements
       post 'entry', to: 'entry#show'
 

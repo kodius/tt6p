@@ -148,9 +148,10 @@ export default {
   mounted () {
     self = this
     axios
-      .get('plans')
+      .get('my-plan')
       .then(response => {
-        self.plan = response.data.plans[0]
+        console.log(response.data)
+        self.plan = response.data.plan
         axios
           .get('measurements')
           .then(response => {
