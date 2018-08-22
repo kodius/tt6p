@@ -74,9 +74,9 @@ export default {
   },
   mounted () {
     axios
-      .get('plans')
+      .get('my-plan')
       .then(response => {
-        this.plan = response.data.plans[0]
+        this.plan = response.data.plan
         this.loaded = true
       })
   },
