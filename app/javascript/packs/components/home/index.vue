@@ -7,7 +7,36 @@
             <p class="subtitle">Compare with your peers....</p>
             <p>
               <div v-if="loaded">
-                {{ plans }}
+                  <table class="table is-bordered is-striped is-fullwidth">
+                    <thead>
+                      <tr>
+                        <th>Email</th>
+                        <th>Weight</th>
+                        <th>BF%</th>
+                        <th>LBM</th>
+                        <th>Fat Lost</th>
+                        <th>Streak</th>
+                        <th>Day of Glory</th>
+                        <th>Profile</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="plan in plans" 
+                        v-bind:key="plan.id">
+                      <td>{{ plan.email }}</td>
+                      <td>{{ plan.lastWeight }} kg</td>
+                      <td>{{ plan.lastBodyFat }} kg</td>
+                      <td>{{ plan.lbm }} kg</td>
+                      <td>{{ plan.fatLost }} kg</td>
+                      <td>{{ plan.daysStreak }} kg</td>
+                      <td>{{ plan.dayOfSixpack }}</td>
+                      <td>
+                        {{ plan.userId}}
+                        <i class="fas fa-check-square"></i>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
               </div>
             </p>
           </article>

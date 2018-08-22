@@ -20,4 +20,6 @@ json.plans @plans.each do |plan|
   json.weightChange plan.weight_change
   json.fatLost plan.fat_lost
   json.daysStreak plan.days_streak
+  json.email plan.user.email
+  json.userId plan.user_id
 end
