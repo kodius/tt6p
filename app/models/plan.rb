@@ -39,19 +39,19 @@ class Plan < ApplicationRecord
   end
 
   def days_streak
-    measurment = Measurement.where("user_id =?", user_id).order("log_date desc").first
-    if measurment
+    measurement = Measurement.where("user_id =?", user_id).order("log_date desc").first
+    if measurement
       current_day = measurement.log_date
     else
       current_day = DateTime.now.to_date - 1.day
     end
-    if Measurement.where("user_id =? and success != false and log_date = ?", user_id, DateTime.now.to_date).exists?
+    if Measurement.where("user_id =? and (success is null or success is true) and log_date = ?", user_id, DateTime.now.to_date).exists?
       count = 1
     else
       count = 0
     end
     skip = 0
-    Measurement.where("user_id = ? and success != false", user_id).order("log_date desc").each do |m|
+    Measurement.where("user_id = ? and (success is null or success is true)", user_id).order("log_date desc").each do |m|
       if m.log_date == current_day + 1.day
         next
       elsif m.log_date == current_day
