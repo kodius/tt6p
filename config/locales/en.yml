@@ -8,7 +8,7 @@ en:
     acdc: "AC/DC"
   vue:
     front:
-      title: "Time to sixpack"
+      title: "Time to six pack"
       save: "Save"
       cancel: "Cancel"
       nav:

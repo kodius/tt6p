@@ -28,7 +28,7 @@
         <div class="tile is-ancestor">
           <div class="tile is-child is-6">
             <h1 class="title">
-              Time to Sixpack 
+              Time to Six Pack 
             </h1>
             <h2 class="subtitle">
               Get sixpack by keeping track
