@@ -31,7 +31,7 @@
               Time to Six Pack 
             </h1>
             <h2 class="subtitle">
-              Get sixpack by keeping track
+              Getting it for real
             </h2> 
           </div>
           <div class="tile is-child is-3 notification is-info">
