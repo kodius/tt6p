@@ -50,7 +50,6 @@ class Plan < ApplicationRecord
     else
       count = 0
     end
-    skip = 0
     Measurement.where("user_id = ? and (success is null or success is true)", user_id).order("log_date desc").each do |m|
       if m.log_date == current_day + 1.day
         next
@@ -58,8 +57,7 @@ class Plan < ApplicationRecord
         current_day = current_day - 1.day
         count += 1
       else 
-        skip += 1
-        break if skip > 1
+        break 
       end
     end
     count
