@@ -17,13 +17,18 @@
                         <th>Fat Lost</th>
                         <th>Streak</th>
                         <th>Day of Glory</th>
-                        <th>Profile</th>
+                        <th>Awards</th>
                       </tr>
                     </thead>
                     <tbody>
                     <tr v-for="plan in plans" 
                         v-bind:key="plan.id">
-                      <td>{{ plan.email }}</td>
+                      <td>
+                        <router-link :to="{ name: 'show_profile_path', params: { id: plan.id }}">
+                          {{ plan.email }}
+                        </router-link>
+
+                      </td>
                       <td>{{ plan.lastWeight }} kg</td>
                       <td>{{ plan.lastBodyFat }}%</td>
                       <td>{{ plan.lastLbm }} kg</td>

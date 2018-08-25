@@ -12,6 +12,8 @@ Rails.application.routes.draw do
       get "my-plan", to: 'plans#my_plan'
       resources :measurements
       post 'entry', to: 'entry#show'
+      get 'public-profile/:id', to: 'plans#public_profile'
+      get 'public-measurements/:id', to: 'measurements#public_measurements'
 
       namespace :admin do
         as :user do

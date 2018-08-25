@@ -4,6 +4,11 @@ class Api::MeasurementsController < Api::ApiController
     @measurements = Measurement.where("user_id = ?", current_user.id).order('log_date desc')
   end
 
+  def public_measurements
+    plan = Plan.find(params[:id])
+    @measurements = Measurement.where("user_id = ?", plan.user_id).order('log_date desc')
+  end
+
   def create  
     @measurement = Measurement.new(measurement_params)
     log_date = (@measurement.log_date + 2.hours).to_date
