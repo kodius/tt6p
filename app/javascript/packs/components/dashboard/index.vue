@@ -5,6 +5,14 @@
 
       <div class="notification">
         <div v-if="loaded">
+           <div class="tile is-ancestor">
+              <div class="tile is-parent">
+                  <div class="tile is-child box is-12 notification">
+                      <p class="title">{{ plan.email }} </p>
+                      <p class="subtitle">{{ plan.awards }}</p>
+                  </div>
+              </div>
+          </div>
           <div class="tile is-ancestor">
             <div class="tile is-4 is-vertical is-parent">
               <article class="tile is-child notification is-warning box">

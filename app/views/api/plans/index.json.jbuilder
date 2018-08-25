@@ -22,4 +22,5 @@ json.plans @plans.each do |plan|
   json.daysStreak plan.days_streak
   json.email plan.user.email
   json.userId plan.user_id
+  json.awards plan.awards.join(', ')
 end

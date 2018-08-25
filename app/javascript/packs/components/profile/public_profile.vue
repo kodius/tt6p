@@ -9,7 +9,7 @@
               <div class="tile is-parent">
                   <div class="tile is-child box is-12 notification">
                       <p class="title">{{ plan.email }} </p>
-                      <p class="subtitle">AWARDS</p>
+                      <p class="subtitle">{{ plan.awards }}</p>
                   </div>
               </div>
           </div>

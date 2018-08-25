@@ -20,4 +20,7 @@ json.plan do
   json.weightChange @plan.weight_change
   json.fatLost @plan.fat_lost
   json.daysStreak @plan.days_streak
+  json.awards @plan.awards.join(', ')
+  json.email @plan.user.email
+  json.userId @plan.user_id
 end

@@ -38,6 +38,10 @@ class Plan < ApplicationRecord
     weight - last_weight
   end
 
+  def awards
+    Awards.get_all[self.id]
+  end
+
   def days_streak
     measurement = Measurement.where("user_id =?", user_id).order("log_date desc").first
     if measurement

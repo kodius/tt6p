@@ -35,9 +35,7 @@
                       <td>{{ plan.fatLost }} kg</td>
                       <td>{{ plan.daysStreak }} days</td>
                       <td>{{ plan.dayOfSixpack }}</td>
-                      <td>
-                        <!-- <a :href="'/profile/' + plan.userId"  class='button is-primary'>Profile</a> -->
-                      </td>
+                      <td>{{ plan.awards }}</td>
                     </tr>
                     </tbody>
                   </table>
