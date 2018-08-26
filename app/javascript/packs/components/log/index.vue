@@ -95,12 +95,12 @@ export default {
     }
   },
   mounted () {
-    self = this
+    var that = this
     axios
       .get('measurements/new')
       .then(response => {
-        self.measurement = response.data["measurement"]
-        self.measurement.logDate = new Date(response.data["measurement"]["logDate"])
+        that.measurement = response.data["measurement"]
+        that.measurement.logDate = new Date(response.data["measurement"]["logDate"])
       })
   },
   methods: {
@@ -110,7 +110,6 @@ export default {
         axios.post('/measurements', {
            measurement: this.measurement
         }).then(function(response) {
-          console.log(response)
           self.$router.push({ name: 'dashboard_path' })
         });
       }

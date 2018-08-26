@@ -3,8 +3,6 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 import HomeIndex from './components/home/index.vue';
-import MusicianIndex from './components/musicians/index.vue';
-import MusicianShow from './components/musicians/show.vue';
 import ErrorsIndex from './components/errors/index.vue';
 import DashboardIndex from './components/dashboard/index.vue';
 import ProfileShow from './components/profile/public_profile.vue';
@@ -17,8 +15,6 @@ const router = new VueRouter({
   base: `${I18n.prefix}`,
   routes: [
     { path: '/', component: HomeIndex, name: 'root_path' },
-    { path: '/musicians', component: MusicianIndex, name: 'musicians_path' },
-    { path: '/musicians/:id', component: MusicianShow, name: 'musician_path' },
     { path: '/errors', component: ErrorsIndex, name: 'errors_path' },
     { path: '/dashboard', component: DashboardIndex, name: 'dashboard_path' },
     { path: '/profile/:id', component: ProfileShow, name: 'show_profile_path' },

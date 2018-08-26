@@ -62,12 +62,12 @@ export default {
     }
   },
   mounted () {
-    self = this
+    var that = this
     axios
       .get('plans')
       .then(response => {
-        self.plans = response.data.plans
-        self.loaded = true
+        that.plans = response.data.plans
+        that.loaded = true
     })
   }
 }

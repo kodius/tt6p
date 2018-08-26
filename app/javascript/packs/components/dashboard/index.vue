@@ -62,7 +62,7 @@
               </div>
             </div>
           </div>
-          <p><router-link :to="{ name: 'log_path' }" class="button is-large is-primary" @click="newEntry" role="button">Log data</router-link></p>
+          <p><router-link :to="{ name: 'log_path' }" class="button is-large is-primary" role="button">Log data</router-link></p>
         </div>
         <div v-else>
           Loading...
@@ -154,17 +154,16 @@ export default {
     }
   },
   mounted () {
-    self = this
+    var that = this
     axios
       .get('my-plan')
       .then(response => {
-        console.log(response.data)
-        self.plan = response.data.plan
+        that.plan = response.data.plan
         axios
           .get('measurements')
           .then(response => {
-              self.measurements = response.data.measurements
-              self.loaded = true
+              that.measurements = response.data.measurements
+              that.loaded = true
         })
       })
   }
