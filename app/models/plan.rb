@@ -49,11 +49,7 @@ class Plan < ApplicationRecord
     else
       current_day = DateTime.now.to_date - 1.day
     end
-    if Measurement.where("user_id =? and (success is null or success is true) and log_date = ?", user_id, DateTime.now.to_date).exists?
-      count = 1
-    else
-      count = 0
-    end
+    count = 0
     Measurement.where("user_id = ? and (success is null or success is true)", user_id).order("log_date desc").each do |m|
       if m.log_date == current_day + 1.day
         next
