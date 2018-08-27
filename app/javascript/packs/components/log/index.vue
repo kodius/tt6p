@@ -107,10 +107,16 @@ export default {
     save() {
       if (this.checkRequired() == false)  
       {
+        var that = this;
         axios.post('/measurements', {
            measurement: this.measurement
         }).then(function(response) {
-          self.$router.push({ name: 'dashboard_path' })
+          that.$toast.open({
+                    message: 'Log saved successfuly',
+                    position: 'is-bottom',
+                    type: 'is-success'
+                });
+          that.$router.push({ name: 'dashboard_path' })
         });
       }
     },
