@@ -67,6 +67,10 @@ class Plan < ApplicationRecord
     (weight*body_fat/100.0 - last_weight*last_body_fat/100.0).round(1)
   end
 
+  def lbm_diff
+  lean_body_mass - last_lean_body_mass
+  end
+
   # if we have measurments use latest, otherwise use the one from the plan
   def last_weight
     measurement =  Measurement.where('user_id = ?', user_id).order('log_date desc').first

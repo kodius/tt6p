@@ -34,22 +34,33 @@
               Getting it for real
             </h2> 
           </div>
-          <div class="tile is-child is-3 notification is-info">
+          <div class="tile is-child is-one-third notification is-info">
             Fat Lost
           </div>
-          <div class="tile is-child is-3 notification is-info">
+          <div class="tile is-child is-one-third notification is-info">
+            LBM
+          </div>
+          <div class="tile is-child is-one-third notification is-info">
             Streak
           </div>
         </div>
         <div class="tile is-ancestor">
           <div class="tile is-child is-6">
           </div>
-          <div class="tile is-child is-3">
+          <div class="tile is-child is-one-third">
             <span v-if="loaded">
               <a class="button is-danger is-large is-rounded">{{plan.fatLost}}kg</a>
             </span>
           </div>
-          <div class="tile is-child is-3">
+          <div class="tile is-child is-one-third">
+            <span v-if="loaded">
+              <a class="button is-large is-rounded" 
+                :class="{'is-danger': (plan.lbmDiff < 0), 'is-success': (plan.lbmDiff >= 0)}">
+                  {{plan.lbmDiff > 0 ? '+' : ''}}{{plan.lbmDiff}}
+              </a>
+            </span>
+          </div>
+          <div class="tile is-child is-one-third">
             <span v-if="loaded">
               <a class="button is-success is-large is-rounded">{{plan.daysStreak}} days</a>
             </span>
