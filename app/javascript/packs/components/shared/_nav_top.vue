@@ -49,7 +49,8 @@
           </div>
           <div class="tile is-child is-one-third">
             <span v-if="loaded">
-              <a class="button is-danger is-large is-rounded">{{plan.fatLost}}kg</a>
+              <a class="button is-large is-rounded" 
+              :class="{'is-danger': (plan.fatLost < 0), 'is-success': (plan.fatLost >= 0)}">{{plan.fatLost}}kg</a>
             </span>
           </div>
           <div class="tile is-child is-one-third">
