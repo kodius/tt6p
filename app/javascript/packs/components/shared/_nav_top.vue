@@ -35,7 +35,7 @@
             </h2> 
           </div>
           <div class="tile is-child is-one-third notification is-info">
-            Fat Lost
+            Fat
           </div>
           <div class="tile is-child is-one-third notification is-info">
             LBM
@@ -50,7 +50,7 @@
           <div class="tile is-child is-one-third">
             <span v-if="loaded">
               <a class="button is-large is-rounded" 
-              :class="{'is-danger': (plan.fatLost < 0), 'is-success': (plan.fatLost >= 0)}">{{plan.fatLost}}kg</a>
+              :class="{'is-danger': (plan.fatLost < 0), 'is-success': (plan.fatLost >= 0)}">{{plan.fatLost > 0 ? `-${plan.fatLost}` : `+${plan.fatLost * (-1)}`}}kg</a>
             </span>
           </div>
           <div class="tile is-child is-one-third">
