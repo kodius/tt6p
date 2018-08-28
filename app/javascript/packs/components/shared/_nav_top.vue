@@ -57,7 +57,7 @@
             <span v-if="loaded">
               <a class="button is-large is-rounded" 
                 :class="{'is-danger': (plan.lbmDiff < 0), 'is-success': (plan.lbmDiff >= 0)}">
-                  {{plan.lbmDiff > 0 ? '+' : ''}}{{plan.lbmDiff}}
+                  {{plan.lbmDiff > 0 ? '+' : ''}}{{plan.lbmDiff}}kg
               </a>
             </span>
           </div>
