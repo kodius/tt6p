@@ -19,6 +19,7 @@ json.plan do
   json.dayOfSixpack l(@plan.day_of_sixpack.to_date, format: :long)
   json.weightChange @plan.weight_change
   json.fatLost @plan.fat_lost
+  json.fatMass @plan.fat_mass
   json.lbmDiff @plan.lbm_diff
   json.daysStreak @plan.days_streak
   json.awards @plan.awards.join(', ')

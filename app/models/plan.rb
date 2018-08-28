@@ -67,8 +67,12 @@ class Plan < ApplicationRecord
     (weight*body_fat/100.0 - last_weight*last_body_fat/100.0).round(1)
   end
 
+  def fat_mass
+    (last_weight*last_body_fat/100.0).round(1)
+  end
+
   def lbm_diff
-  lean_body_mass - last_lean_body_mass
+    (weight*(1 - body_fat/100.0) - last_weight* (1 - last_body_fat/100.0)).round(1)
   end
 
   # if we have measurments use latest, otherwise use the one from the plan

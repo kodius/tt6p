@@ -24,6 +24,8 @@
                 <strong>Gender: </strong>{{ plan.gender | humanize }}
                 <br/>
                 <strong>Activity Level:</strong> {{ plan.activityLevel | humanize }}
+                <br/>
+                <strong>LBM Difference:</strong> {{ plan.lbmDiff }}
               </article>
               <article class="tile is-child notification is-info box">
                 <p class="title">Target Stats</p>

@@ -15,10 +15,12 @@ json.plans @plans.each do |plan|
   json.totalCalories plan.total_calories
   json.lbm plan.lean_body_mass
   json.lastLbm plan.last_lean_body_mass
+  json.lbmDiff plan.lbm_diff
   json.daysTillSixpack plan.days_till_sixpack
   json.dayOfSixpack l(plan.day_of_sixpack.to_date, format: :long)
   json.weightChange plan.weight_change
   json.fatLost plan.fat_lost
+  json.fatMass plan.fat_mass
   json.daysStreak plan.days_streak
   json.email plan.user.email
   json.userId plan.user_id

@@ -12,9 +12,8 @@
                       <tr>
                         <th>Email</th>
                         <th>Weight</th>
-                        <th>BF%</th>
+                        <th>Fat</th>
                         <th>LBM</th>
-                        <th>Fat Lost</th>
                         <th>Streak</th>
                         <th>Day of Glory</th>
                         <th>Awards</th>
@@ -30,9 +29,11 @@
 
                       </td>
                       <td>{{ plan.lastWeight }} kg</td>
-                      <td>{{ plan.lastBodyFat }}%</td>
-                      <td>{{ plan.lastLbm }} kg</td>
-                      <td>{{ plan.fatLost }} kg</td>
+                      <td>
+                          {{ plan.lastBodyFat }}% </br>
+                          {{ plan.fatMass }}kg ({{ plan.fatLost }}kg)
+                      </td>
+                      <td>{{ plan.lastLbm }}kg ({{ plan.lbmDiff }}kg)</td>
                       <td>{{ plan.daysStreak }} days</td>
                       <td>{{ plan.dayOfSixpack }}</td>
                       <td>{{ plan.awards }}</td>
