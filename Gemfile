@@ -19,6 +19,7 @@ gem 'kaminari'
 gem 'ransack'
 gem 'devise'
 gem 'foreman'
+gem 'carrierwave', '~> 1.0'
 
 group :production do
   gem 'unicorn'

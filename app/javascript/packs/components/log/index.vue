@@ -1,6 +1,6 @@
 <template>
   <layout>
-    <div class="notification">
+    <div class="notification" v-if="step == 0">
       <div class="columns">
         <div class="column is-half">
           <span v-if="errors.date" class="help is-danger">{{ errors.date }}</span>
@@ -10,7 +10,6 @@
                   placeholder="Select date"
                   v-model="measurement.logDate"
                   @focus="errors.date = null"
-                  :events="events"
                   icon="calendar-today">
               </b-datepicker>
           </b-field>
@@ -60,6 +59,31 @@
       </button>
       <router-link :to="{ name: 'dashboard_path' }" class="button">{{ $t('cancel')}}</router-link>
      </div>
+     <div class="notification" v-if="step == 1">
+      <div class="columns">
+        <div class="column is-half">
+          <b-field>
+            <b-upload v-model="dropFiles"
+              drag-drop
+              @input="imageSelected">
+              <section class="section">
+                <div class="content has-text-centered">
+                  <p>
+                    <b-icon
+                      icon="upload"
+                      size="is-large">
+                    </b-icon>
+                  </p>
+                  <p>Drop your files here or click to upload</p>
+                </div>
+              </section>
+            </b-upload>
+          </b-field>
+          <span>Upload your current image or go </span><router-link :to="{ name: 'dashboard_path' }" class="">back to dashboard</router-link>
+        </div>
+      </div>
+     </div>
+     <b-loading :is-full-page="true" :active.sync="isLoading" :can-cancel="false"></b-loading>
    </layout>
 </template>
 
@@ -86,12 +110,9 @@ export default {
         bodyFat: null,
         calories: null
       },
-      events: [
-        {
-          date: new Date(2018, new Date().getMonth(), 1),
-          type: 'is-success'
-        }
-      ]
+      step: 0,
+      dropFiles: [],
+      isLoading: false
     }
   },
   mounted () {
@@ -108,6 +129,7 @@ export default {
       if (this.checkRequired() == false)  
       {
         var that = this;
+        this.isLoading = true;
         axios.post('/measurements', {
            measurement: this.measurement
         }).then(function(response) {
@@ -116,7 +138,9 @@ export default {
                     position: 'is-bottom',
                     type: 'is-success'
                 });
-          that.$router.push({ name: 'dashboard_path' })
+          // that.$router.push({ name: 'dashboard_path' })
+          that.step = 1;
+          that.isLoading = false;
         });
       }
     },
@@ -130,6 +154,9 @@ export default {
         { this.errors.bodyFat = this.$t('errors.required'); hasError = true; }
 
       return hasError;
+    },
+    imageSelected() {
+      console.log(this.dropFiles);
     }
   }
 }
