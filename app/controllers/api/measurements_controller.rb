@@ -3,7 +3,7 @@ class Api::MeasurementsController < Api::ApiController
   def index
     @measurements = Measurement.where("user_id = ?", current_user.id)
     @count = @measurements.count()
-    @measurements = @measurements.order('log_date desc').offset(params[:page].to_i * 20).limit(20)
+    @measurements = @measurements.order('log_date desc').offset((params[:page].to_i - 1) * 20).limit(20)
   end
 
   def public_measurements
