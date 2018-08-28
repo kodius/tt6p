@@ -120,10 +120,10 @@
             </span>
           </td>
           <td class="level">
-            <span v-if="measurement.success" class="icon has-text-success level-left">
+            <span v-if="measurement.success != false" class="icon has-text-success level-left">
               <i class="fas fa-check-square"></i>
             </span>
-            <span v-if="!measurement.success" class="icon has-text-danger level-left">
+            <span v-if="measurement.success == false" class="icon has-text-danger level-left">
               <i class="fas fa-minus-square"></i>
             </span>
             <a class="level-right has-text-danger" @click="confirmDelete(measurement)" href="javascript:void();">Delete</a>
