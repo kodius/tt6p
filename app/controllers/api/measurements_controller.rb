@@ -1,7 +1,9 @@
 class Api::MeasurementsController < Api::ApiController
 
   def index
-    @measurements = Measurement.where("user_id = ?", current_user.id).order('log_date desc')
+    @measurements = Measurement.where("user_id = ?", current_user.id)
+    @count = @measurements.count()
+    @measurements = @measurements.order('log_date desc').offset(params[:page].to_i * 20).limit(20)
   end
 
   def public_measurements
@@ -20,8 +22,6 @@ class Api::MeasurementsController < Api::ApiController
 
   def destroy
     Measurement.delete(params[:id])
-
-    @measurements = Measurement.where("user_id = ?", current_user.id).order('log_date desc')
   end
 
   def new 

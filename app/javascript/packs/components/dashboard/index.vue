@@ -4,7 +4,7 @@
     <div class="container">
 
       <div class="notification">
-        <div v-if="loaded">
+        <div v-if="!isLoading">
            <div class="tile is-ancestor">
               <div class="tile is-parent">
                   <div class="tile is-child box is-12 notification">
@@ -70,7 +70,15 @@
         <br />
       </div>
     </div>
-    <div v-if="loaded">
+    <div v-if="!isLoading">
+      <b-pagination
+        :total="total"
+        :current.sync="page"
+        :per-page="20"
+        order="is-centered"
+        @change="loadMeasurements">
+      </b-pagination>
+      <br>
       <table class="table is-bordered is-striped is-fullwidth">
         <thead>
           <tr>
@@ -123,7 +131,15 @@
         </tr>
         </tbody>
       </table>
+      <b-pagination
+        :total="total"
+        :current.sync="page"
+        :per-page="20"
+        order="is-centered"
+        @change="loadMeasurements">
+      </b-pagination>
     </div>
+    <b-loading :is-full-page="true" :active.sync="isLoading" :can-cancel="false"></b-loading>
   </layout>
 </template>
 
@@ -144,9 +160,11 @@ export default {
   },
   data () {
     return {
-      loaded: false,
+      isLoading: true,
       plan: null,
-      measurements: []
+      measurements: [],
+      page: 1,
+      total: 0
     }
   },
   filters: {
@@ -161,14 +179,27 @@ export default {
       .then(response => {
         that.plan = response.data.plan
         axios
-          .get('measurements')
+          .get('measurements?page=' + this.page)
           .then(response => {
               that.measurements = response.data.measurements
-              that.loaded = true
+              that.total = response.data.count-20
+              that.isLoading = false
         })
       })
   },
   methods: {
+    loadMeasurements() {
+      var that = this;
+      this.isLoading;
+      setTimeout(() => axios
+        .get('measurements?page=' + this.page)
+        .then(response => {
+            that.measurements = response.data.measurements
+            that.total = response.data.count-20
+            console.log(that.total)
+            that.isLoading = false
+      }), 50);
+    },
     confirmDelete(measurement) {
       this.$dialog.confirm({
         title: 'Confirm',
@@ -184,8 +215,7 @@ export default {
       axios
         .delete('measurements/' + id)
         .then(response => {
-            that.measurements = response.data.measurements
-            console.log(response)
+            this.loadMeasurements();
             that.$toast.open({
               message: 'Log successfuly deleted',
               duration: 5000

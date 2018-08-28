@@ -9,3 +9,4 @@ json.measurements @measurements.each do |measurement|
   json.success measurement.success
   json.logDate l(measurement.log_date.to_date, format: :default)
 end
+json.count @count
