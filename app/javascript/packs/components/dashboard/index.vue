@@ -111,13 +111,14 @@
               -
             </span>
           </td>
-          <td>
-            <span v-if="measurement.success" class="icon has-text-success">
+          <td class="level">
+            <span v-if="measurement.success" class="icon has-text-success level-left">
               <i class="fas fa-check-square"></i>
             </span>
-            <span v-if="measurement.success == false" class="icon has-text-danger">
+            <span v-if="!measurement.success" class="icon has-text-danger level-left">
               <i class="fas fa-minus-square"></i>
             </span>
+            <a class="level-right has-text-danger" @click="confirmDelete(measurement)" href="javascript:void();">Delete</a>
           </td>
         </tr>
         </tbody>
@@ -166,6 +167,31 @@ export default {
               that.loaded = true
         })
       })
+  },
+  methods: {
+    confirmDelete(measurement) {
+      this.$dialog.confirm({
+        title: 'Confirm',
+        message: `Are you sure you want to <strong>delete</strong> ${measurement.logDate} log? This action can't be undone!`,
+        confirmText: `Delete`,
+        type: 'is-danger',
+        hasIcon: true,
+        onConfirm: () => this.performDelete(measurement.id)
+      })
+    },
+    performDelete(id) {
+      var that = this;
+      axios
+        .delete('measurements/' + id)
+        .then(response => {
+            that.measurements = response.data.measurements
+            console.log(response)
+            that.$toast.open({
+              message: 'Log successfuly deleted',
+              duration: 5000
+            })
+      })
+    }
   }
 }
 

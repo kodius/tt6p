@@ -18,6 +18,12 @@ class Api::MeasurementsController < Api::ApiController
     @measurement.save!
   end
 
+  def destroy
+    Measurement.delete(params[:id])
+
+    @measurements = Measurement.where("user_id = ?", current_user.id).order('log_date desc')
+  end
+
   def new 
     last_measurement = Measurement.where('user_id = ?', current_user.id).order("log_date desc").first 
     if last_measurement && last_measurement.log_date == DateTime.now.to_date

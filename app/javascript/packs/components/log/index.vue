@@ -112,6 +112,7 @@ export default {
       },
       step: 0,
       dropFiles: [],
+      imageSrc: null,
       isLoading: false
     }
   },
@@ -155,9 +156,21 @@ export default {
 
       return hasError;
     },
-    imageSelected() {
-      console.log(this.dropFiles);
-    }
+    imageSelected(){
+      var file    = this.dropFiles[0] //sames as here
+      var reader  = new FileReader();
+
+      reader.onloadend = function () {
+        this.imageSrc = reader.result;
+        console.log(this.imageSrc);
+      }
+
+      if (file) {
+        reader.readAsDataURL(file); //reads the data as a URL
+      } else {
+        this.imageSrc = null;
+      }
+  }
   }
 }
 </script>
