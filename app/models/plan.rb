@@ -72,7 +72,7 @@ class Plan < ApplicationRecord
   end
 
   def lbm_diff
-    (last_weight* (1 - last_body_fat/100.0) - weight*(1 - body_fat/100.0)).round(1)
+    (last_weight*(1 - last_body_fat/100.0) - weight*(1 - body_fat/100.0)).round(1)
   end
 
   # if we have measurments use latest, otherwise use the one from the plan
