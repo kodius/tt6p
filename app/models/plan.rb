@@ -14,7 +14,7 @@ class Plan < ApplicationRecord
   end
 
   def target_weight
-    (target_lean_body_mass*(1 + target_body_fat/100.0)).floor
+    (100*(target_lean_body_mass/(100 - target_body_fat))).floor
   end
 
   def tdee
