@@ -14,6 +14,11 @@ Rails.application.routes.draw do
       post 'entry', to: 'entry#show'
       get 'public-profile/:id', to: 'plans#public_profile'
       get 'public-measurements/:id', to: 'measurements#public_measurements'
+      namespace :scale do
+        post 'auth', to: 'scale#auth'
+        post 'new', to: 'scale#new'
+        post 'get', to: 'scale#get'
+      end
 
       namespace :admin do
         as :user do
