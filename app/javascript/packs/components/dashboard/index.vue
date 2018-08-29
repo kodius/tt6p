@@ -29,7 +29,7 @@
                 <p class="title">Target Stats</p>
                 <strong>Target Body Fat: </strong>{{ plan.targetBodyFat }}%
                 <br/>
-                <strong>Target Weight: </strong>{{ plan.targetWeight }}kg
+                <strong>Target Weight: </strong>{{ plan.targetWeight }} kg
               </article>
             </div>
             <div class="tile is-parent">

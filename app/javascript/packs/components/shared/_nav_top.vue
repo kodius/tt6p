@@ -50,14 +50,14 @@
           <div class="tile is-child is-one-third">
             <span v-if="loaded">
               <a class="button is-large is-rounded" 
-              :class="{'is-danger': (plan.fatLost < 0), 'is-success': (plan.fatLost >= 0)}">{{plan.fatLost > 0 ? `-${plan.fatLost}` : `+${plan.fatLost * (-1)}`}}kg</a>
+              :class="{'is-danger': (plan.fatLost < 0), 'is-success': (plan.fatLost >= 0)}">{{plan.fatLost > 0 ? `-${plan.fatLost}` : `+${plan.fatLost * (-1)}`}} kg</a>
             </span>
           </div>
           <div class="tile is-child is-one-third">
             <span v-if="loaded">
               <a class="button is-large is-rounded" 
                 :class="{'is-danger': (plan.lbmDiff < 0), 'is-success': (plan.lbmDiff >= 0)}">
-                  {{plan.lbmDiff > 0 ? '+' : ''}}{{plan.lbmDiff}}kg
+                  {{plan.lbmDiff > 0 ? '+' : ''}}{{plan.lbmDiff}} kg
               </a>
             </span>
           </div>

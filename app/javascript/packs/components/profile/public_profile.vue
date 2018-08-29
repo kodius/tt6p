@@ -25,13 +25,13 @@
                 <br/>
                 <strong>Activity Level:</strong> {{ plan.activityLevel | humanize }}
                 <br/>
-                <strong>LBM Difference:</strong> {{ plan.lbmDiff }}
+                <strong>LBM Difference:</strong> {{ plan.lbmDiff }} kg
               </article>
               <article class="tile is-child notification is-info box">
                 <p class="title">Target Stats</p>
                 <strong>Target Body Fat: </strong>{{ plan.targetBodyFat }}%
                 <br/>
-                <strong>Target Weight: </strong>{{ plan.targetWeight }}kg
+                <strong>Target Weight: </strong>{{ plan.targetWeight }} kg
               </article>
             </div> 
             <div class="tile is-parent">
