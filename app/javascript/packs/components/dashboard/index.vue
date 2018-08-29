@@ -88,6 +88,7 @@
             <th>BF%</th>
             <th>LBM</th>
             <th>Status</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -119,14 +120,17 @@
               -
             </span>
           </td>
-          <td class="level">
-            <span v-if="measurement.success != false" class="icon has-text-success level-left">
+          <td>
+            <span v-if="measurement.success != false" class="icon has-text-success">
               <i class="fas fa-check-square"></i>
             </span>
-            <span v-if="measurement.success == false" class="icon has-text-danger level-left">
+            <span v-if="measurement.success == false" class="icon has-text-danger">
               <i class="fas fa-minus-square"></i>
             </span>
-            <a class="level-right has-text-danger" @click="confirmDelete(measurement)" href="javascript:void();">Delete</a>
+          </td>
+          <td class="has-text-right">
+            <a class="has-text-black" @click="openEditModal(measurement)" href="javascript:void();">Edit</a>
+            <a class="has-text-danger" @click="confirmDelete(measurement)" href="javascript:void();">Delete</a>
           </td>
         </tr>
         </tbody>
@@ -150,6 +154,7 @@ import Layout from '../shared/layout';
 import CommitChart from './commit_chart';
 import Vue from 'vue/dist/vue.esm';
 import humanizeString from 'humanize-string';
+import editLogModal from '../modals/edit_log_modal';
 
 Vue.component('commit-chart', CommitChart);
 Vue.use(Buefy)
@@ -199,6 +204,16 @@ export default {
             console.log(that.total)
             that.isLoading = false
       }), 50);
+    },
+    openEditModal (measurement) {
+      this.$modal.open({
+        parent: this,
+        component: editLogModal,
+        hasModalCard: true,
+        props: {
+          originalMeasurement: measurement
+        }
+      })
     },
     confirmDelete(measurement) {
       this.$dialog.confirm({
