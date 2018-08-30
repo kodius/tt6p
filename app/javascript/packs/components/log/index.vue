@@ -90,6 +90,7 @@
 <script>
 import Layout from '../shared/layout';
 import axios from 'axios';
+import editImageModal from '../modals/edit_image_modal'
 
 
 export default {
@@ -159,10 +160,19 @@ export default {
     imageSelected(){
       var file    = this.dropFiles[0] //sames as here
       var reader  = new FileReader();
+      var that = this;
 
       reader.onloadend = function () {
-        this.imageSrc = reader.result;
-        console.log(this.imageSrc);
+        that.imageSrc = reader.result;
+        that.$modal.open({
+          parent: that,
+          component: editImageModal,
+          hasModalCard: true,
+          props: {
+            originalImage: that.imageSrc,
+            measurement: this.measurement
+          }
+        });
       }
 
       if (file) {

@@ -24,6 +24,10 @@ class Api::MeasurementsController < Api::ApiController
     Measurement.delete(params[:id])
   end
 
+  def image_upload
+    
+  end
+
   def new 
     last_measurement = Measurement.where('user_id = ?', current_user.id).order("log_date desc").first 
     if last_measurement && last_measurement.log_date == DateTime.now.to_date
