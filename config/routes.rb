@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       post 'entry', to: 'entry#show'
       get 'public-profile/:id', to: 'plans#public_profile'
       get 'public-measurements/:id', to: 'measurements#public_measurements'
-      post 'uplaod-image', to: 'measurements#image_upload'
+      post 'upload-image', to: 'measurements#image_upload'
 
       namespace :admin do
         as :user do

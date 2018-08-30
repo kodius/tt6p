@@ -25,7 +25,10 @@ class Api::MeasurementsController < Api::ApiController
   end
 
   def image_upload
-    
+    @measurement = Measurement.where("log_date = ?", params[:log_date].to_date).first
+
+    @measurement.image = params[:image]
+    @measurement.save!
   end
 
   def new 

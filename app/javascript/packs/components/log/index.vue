@@ -140,7 +140,6 @@ export default {
                     position: 'is-bottom',
                     type: 'is-success'
                 });
-          // that.$router.push({ name: 'dashboard_path' })
           that.step = 1;
           that.isLoading = false;
         });
@@ -170,7 +169,8 @@ export default {
           hasModalCard: true,
           props: {
             originalImage: that.imageSrc,
-            measurement: this.measurement
+            measurement: that.measurement,
+            file: file
           }
         });
       }
