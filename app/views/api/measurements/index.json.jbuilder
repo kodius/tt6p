@@ -7,6 +7,7 @@ json.measurements @measurements.each do |measurement|
   json.lbm measurement.lbm
   json.userId measurement.user_id
   json.success measurement.success
+  json.image measurement.image.url
   json.logDate l(measurement.log_date.to_date, format: :default)
 end
 json.count @count
