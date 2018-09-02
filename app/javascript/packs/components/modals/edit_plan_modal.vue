@@ -141,7 +141,6 @@
       updatePlan() {
         var that = this;
         this.isLoading = true;
-        console.warn('KURCINAAAA');
         
         axios
           .post('update-plan', {
@@ -149,6 +148,12 @@
           }).then(response => {
             that.$parent.close();
             that.isLoading = false;
+            that.$toast.open({
+              message: 'Plan successfuly updated',
+              duration: 5000,
+              position: 'is-bottom',
+              type: 'is-success'
+            })
           });
       }
     }

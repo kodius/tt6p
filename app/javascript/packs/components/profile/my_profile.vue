@@ -25,7 +25,8 @@
     data: function () {
       return {
         user: null,
-        toLoad: 2
+        toLoad: 2,
+        plan: null
       }
     },
     computed: {
@@ -53,8 +54,6 @@
     },
     methods: {
       openEditPlanModal() {
-        console.warn(this.plan);
-        
         this.$modal.open({
             parent: this,
             component: editPlanModal,
