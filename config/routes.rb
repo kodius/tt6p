@@ -10,15 +10,16 @@ Rails.application.routes.draw do
 
       resources :plans
       get "my-plan", to: 'plans#my_plan'
+      post "update-plan", to: 'plans#update_plan'
       resources :measurements
-      post 'entry', to: 'entry#show'
       get 'public-profile/:id', to: 'plans#public_profile'
+      get 'my-profile', to: 'profile#my_profile'
       get 'public-measurements/:id', to: 'measurements#public_measurements'
       post 'upload-image', to: 'measurements#image_upload'
 
       namespace :admin do
         as :user do
-          delete 'sign_out', to: '/devise/sessions#destroy'
+          get 'sign_out', to: '/devise/sessions#destroy'
         end
         resources :dashboard, only: :index
         resources :users, except: :show

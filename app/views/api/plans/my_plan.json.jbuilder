@@ -4,6 +4,8 @@ json.plan do
   json.weight @plan.weight
   json.lastWeight @plan.last_weight
   json.bodyFat @plan.body_fat
+  json.height @plan.height
+  json.age @plan.age
   json.lastBodyFat @plan.last_body_fat
   json.targetBodyFat @plan.target_body_fat
   json.targetWeight @plan.target_weight
@@ -25,4 +27,6 @@ json.plan do
   json.awards @plan.awards.join(', ')
   json.email @plan.user.email
   json.userId @plan.user_id
-end
+end if @plan
+json.noplan false if @plan
+json.noplan true unless @plan

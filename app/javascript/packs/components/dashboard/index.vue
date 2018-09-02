@@ -183,14 +183,18 @@ export default {
     axios
       .get('my-plan')
       .then(response => {
-        that.plan = response.data.plan
-        axios
-          .get('measurements?page=' + this.page)
-          .then(response => {
-              that.measurements = response.data.measurements
-              that.total = response.data.count
-              that.isLoading = false
-        })
+        if (response.data.noplan) {
+          that.$router.push({ name: 'my_profile_path' })
+        } else {
+          that.plan = response.data.plan
+          axios
+            .get('measurements?page=' + this.page)
+            .then(response => {
+                that.measurements = response.data.measurements
+                that.total = response.data.count
+                that.isLoading = false
+          })
+        }
       })
   },
   methods: {

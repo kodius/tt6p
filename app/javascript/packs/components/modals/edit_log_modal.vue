@@ -46,6 +46,9 @@
       <button class="button is-primary" @click="updateLog">
         Update log
       </button>
+      <button class="button" @click="$parent.close()">
+        Cancel
+      </button>
     </footer>
     <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="false"></b-loading>
   </div>

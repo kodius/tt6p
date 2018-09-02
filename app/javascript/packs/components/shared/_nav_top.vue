@@ -34,37 +34,25 @@
               Getting it for real
             </h2> 
           </div>
-          <div class="tile is-child is-one-third notification is-info">
-            Fat
-          </div>
-          <div class="tile is-child is-one-third notification is-info">
-            LBM
-          </div>
-          <div class="tile is-child is-one-third notification is-info">
-            Streak
-          </div>
-        </div>
-        <div class="tile is-ancestor">
-          <div class="tile is-child is-6">
-          </div>
-          <div class="tile is-child is-one-third">
-            <span v-if="loaded">
-              <a class="button is-large is-rounded" 
-              :class="{'is-danger': (plan.fatLost < 0), 'is-success': (plan.fatLost >= 0)}">{{plan.fatLost > 0 ? `-${plan.fatLost}` : `+${plan.fatLost * (-1)}`}} kg</a>
-            </span>
-          </div>
-          <div class="tile is-child is-one-third">
-            <span v-if="loaded">
+          <div v-if="hasPlan" class="has-text-centered columns">
+            <div class="is-one-third column">
+              <p>Fat</p>
+              <div class="button is-large is-rounded" 
+                :class="{'is-danger': (plan.fatLost < 0), 'is-success': (plan.fatLost >= 0)}">
+                  {{plan.fatLost > 0 ? `-${plan.fatLost}` : `+${plan.fatLost * (-1)}`}} kg
+            </div>
+            </div>
+            <div class="is-one-third column">
+              <p>LBM</p>
               <a class="button is-large is-rounded" 
                 :class="{'is-danger': (plan.lbmDiff < 0), 'is-success': (plan.lbmDiff >= 0)}">
                   {{plan.lbmDiff > 0 ? '+' : ''}}{{plan.lbmDiff}} kg
               </a>
-            </span>
-          </div>
-          <div class="tile is-child is-one-third">
-            <span v-if="loaded">
+            </div>
+            <div class="is-one-third column">
+              <p>Streak</p>
               <a class="button is-success is-large is-rounded">{{plan.daysStreak}} days</a>
-            </span>
+            </div>
           </div>
         </div>
       </div>
@@ -78,6 +66,7 @@ import axios from 'axios';
 export default {
   data: function() {
     return {
+      hasPlan: false,
       plan: null,
       loaded: false
     }
@@ -87,6 +76,7 @@ export default {
       .get('my-plan')
       .then(response => {
         this.plan = response.data.plan
+        this.hasPlan = !response.data.noplan
         this.loaded = true
       })
   },
