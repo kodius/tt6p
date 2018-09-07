@@ -20,6 +20,9 @@ gem 'ransack'
 gem 'devise'
 gem 'foreman'
 gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
+gem 'fog'
+gem 'aws-sdk'
 
 group :production do
   gem 'unicorn'
