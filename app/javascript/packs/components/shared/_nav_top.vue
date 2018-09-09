@@ -8,6 +8,7 @@
                width="168" height="54"
                style="background:#343434">
        </router-link>
+      </div>
 
         <div id="navbarExampleTransparentExample" class="navbar-menu">
           <div class="navbar-start">
@@ -17,12 +18,37 @@
           </div>
         </div>
 
+        <div class="navbar-menu">
+            <div class="navbar-end">
+              <b-dropdown position="is-bottom-left">
+                <a class="navbar-item" slot="trigger">
+                  <span>{{plan.email}}</span>
+                  <b-icon icon="menu-down"></b-icon>
+                </a>
+
+                <b-dropdown-item disabled>
+                  <p>Profile</p>
+                </b-dropdown-item>
+                <b-dropdown-item disabled>
+                  <p>Settings</p>
+                </b-dropdown-item>
+                <b-dropdown-item>
+                  <p @click="openEditPlan()">Change plan</p>
+                </b-dropdown-item>
+                <hr>
+                <b-dropdown-item disabled>
+                  <p>Logout</p>
+                </b-dropdown-item>
+              </b-dropdown>
+            </div>
+          </div>
+        </div>
+
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
-      </div>
     </nav>
       <div class="hero-body">
         <div class="tile is-ancestor">
@@ -62,6 +88,7 @@
 
 <script>
 import axios from 'axios';
+import editPlanModal from '../modals/edit_plan_modal'
 
 export default {
   data: function() {
@@ -81,12 +108,23 @@ export default {
       })
   },
   methods: {
-    activeOn: function(paths) {
+    activeOn(paths) {
       if(paths.includes(this.$route.name)) {
         return 'is-active navbar-item';
       } else {
         return 'navbar-item';
       }
+    },
+
+    openEditPlan() {
+      this.$modal.open({
+            parent: this,
+            component: editPlanModal,
+            hasModalCard: true,
+            props: {
+              originalPlan: this.plan ? this.plan : null
+            }
+          });
     }
   }
 }
