@@ -62,6 +62,7 @@
     data: function() {
       return {
         measurement: {
+          id: this.originalMeasurement.id,
           logDate: this.originalMeasurement.logDate,
           weight: this.originalMeasurement.weight,
           bodyFat: this.originalMeasurement.bodyFat,

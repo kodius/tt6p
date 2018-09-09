@@ -11,13 +11,19 @@ class Api::MeasurementsController < Api::ApiController
     @measurements = Measurement.where("user_id = ?", plan.user_id).order('log_date desc')
   end
 
-  def create  
-    @measurement = Measurement.new(measurement_params)
-    log_date = (@measurement.log_date + 2.hours).to_date
-    @measurement.log_date = log_date
-    @measurement.user = current_user
-    Measurement.where("user_id = ? and log_date = ?", @measurement.user_id, log_date).delete_all
-    @measurement.save!
+  def create
+    begin
+      @measurement = Measurement.find(measurement_params['id'])
+      @measurement.update(measurement_params)
+      @measurement.save!
+    rescue ActiveRecord::RecordNotFound
+      @measurement = Measurement.new(measurement_params)
+      log_date = (@measurement.log_date + 2.hours).to_date
+      @measurement.log_date = log_date
+      @measurement.user = current_user
+      Measurement.where("user_id = ? and log_date = ?", @measurement.user_id, log_date).delete_all
+      @measurement.save!
+    end
   end
 
   def destroy
@@ -46,7 +52,7 @@ class Api::MeasurementsController < Api::ApiController
   end
 
   def measurement_params
-    params.require('measurement').permit(:body_fat, :weight, :log_date, :calories)
+    params.require('measurement').permit(:id, :body_fat, :weight, :log_date, :calories)
   end
 
 end
