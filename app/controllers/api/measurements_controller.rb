@@ -15,6 +15,7 @@ class Api::MeasurementsController < Api::ApiController
     begin
       @measurement = Measurement.find(measurement_params['id'])
       @measurement.update(measurement_params)
+      log_date = (@measurement.log_date + 2.hours).to_date
       @measurement.log_date = log_date
       @measurement.user = current_user
       @measurement.save!
