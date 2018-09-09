@@ -15,6 +15,8 @@ class Api::MeasurementsController < Api::ApiController
     begin
       @measurement = Measurement.find(measurement_params['id'])
       @measurement.update(measurement_params)
+      @measurement.log_date = log_date
+      @measurement.user = current_user
       @measurement.save!
     rescue ActiveRecord::RecordNotFound
       @measurement = Measurement.new(measurement_params)
