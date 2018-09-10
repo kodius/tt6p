@@ -22,7 +22,7 @@
             <div class="navbar-end">
               <b-dropdown position="is-bottom-left">
                 <a class="navbar-item" slot="trigger">
-                  <span>{{plan.email}}</span>
+                  <span v-if="hasPlan">{{plan.email}}</span>
                   <b-icon icon="menu-down"></b-icon>
                 </a>
 
@@ -104,7 +104,7 @@ export default {
       .then(response => {
         this.plan = response.data.plan
         this.hasPlan = !response.data.noplan
-        this.loaded = true
+        this.loaded = this.hasPlan
       })
   },
   methods: {

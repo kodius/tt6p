@@ -39,7 +39,7 @@ class Plan < ApplicationRecord
   end
 
   def awards
-    Awards.get_all[self.id]
+    Awards.get_all[self.id] || []
   end
 
   def days_streak
