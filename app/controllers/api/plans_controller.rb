@@ -13,11 +13,17 @@ class Api::PlansController < Api::ApiController
   end
 
   def update_plan
-    pp plan_params
     Plan.where("user_id = ?", current_user).delete_all
     @plan = Plan.create(plan_params)
     @plan.user_id = current_user.id
     @plan.save!
+  end
+
+  def active_plans
+    # tko misli da je ovo elegantnije od raw SQL-a???
+    # sere mi se  :)
+    active_user_ids = Measurement.select("user_id").group(:user_id).having("MAX(log_date) >= ?", DateTime.now - 1.week).pluck(:user_id)
+    @plans = Plan.where("user_id in (?)", active_user_ids)
   end
 
   private

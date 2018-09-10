@@ -65,7 +65,7 @@ export default {
   mounted () {
     var that = this
     axios
-      .get('plans')
+      .get('active-plans')
       .then(response => {
         that.plans = response.data.plans
         that.loaded = true
