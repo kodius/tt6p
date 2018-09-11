@@ -26,8 +26,8 @@
                   <b-icon icon="menu-down"></b-icon>
                 </a>
 
-                <b-dropdown-item disabled>
-                  <p>Profile</p>
+                <b-dropdown-item>
+                  <router-link :to="{name: 'my_profile_path'}">Profile</router-link>
                 </b-dropdown-item>
                 <b-dropdown-item disabled>
                   <p>Settings</p>

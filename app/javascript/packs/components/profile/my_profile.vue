@@ -1,14 +1,26 @@
 <template>
   <layout>
-    <div class="has-text-centered" style="margin-top: 18px">
-      <img id="profile-image" v-if="user" :src="user.avatar.url"
-            style="border-radius: 50%"/>
-      <br/>
+    <div class="container">
+      <div class="tile is-ancestor" v-if="plan">
+        <div class="tile is-12 is-vertical is-parent">
+          <article class="tile is-child notification is-transparent box">
+            <div class="columns">
+              <div class="column is-1"></div>
+              <div class="column is-2 is-1by1 sui-avatar">
+                <img id="profile-image" v-if="user" :src="user.avatar.url"/>
+              </div>
+              <div class="column">
+                <p class="title">{{ plan.email }}</p>
+                <b-field>
+                  <p class="control"><button class="button small" @click="openChangeProfileModal()">Change profile image</button></p>
+                  <p class="control"><button class="button small" @click="openEditPlanModal()">Change your plan</button></p>
+                </b-field>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
     </div>
-    <b-field style="float: right;">
-      <p class="control"><button class="button small">Change profile image</button></p>
-      <p class="control"><button class="button small" @click="openEditPlanModal()">Change your plan</button></p>
-    </b-field>
     <b-loading :is-full-page="true" :active.sync="isLoading" :can-cancel="false"></b-loading>
   </layout>
 </template>
@@ -16,6 +28,7 @@
 <script>
   import Layout from '../shared/layout';
   import editPlanModal from '../modals/edit_plan_modal'
+  import changeAvatarModal from '../modals/change_avatar_modal'
   import axios from 'axios'
 
   export default {
@@ -57,6 +70,16 @@
         this.$modal.open({
             parent: this,
             component: editPlanModal,
+            hasModalCard: true,
+            props: {
+              originalPlan: this.plan ? this.plan : null
+            }
+          });
+      },
+      openChangeProfileModal() {
+        this.$modal.open({
+            parent: this,
+            component: changeAvatarModal,
             hasModalCard: true,
             props: {
               originalPlan: this.plan ? this.plan : null

@@ -34,7 +34,6 @@
       uplaodImage() {
         let form_data = new FormData();
         var that = this;
-        console.log(this.file);
         form_data.append('image', this.file, this.file.name);
         form_data.append('log_date', this.measurement.logDate);
         this.isLoading = true;

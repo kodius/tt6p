@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       get 'my-profile', to: 'profile#my_profile'
       get 'public-measurements/:id', to: 'measurements#public_measurements'
       post 'upload-image', to: 'measurements#image_upload'
+      post 'change-avatar', to: 'profile#change_avatar'
       get 'active-plans', to: 'plans#active_plans'
 
       namespace :admin do
