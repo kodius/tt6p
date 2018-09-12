@@ -18,13 +18,13 @@
                         <div class="is-one-fifth column">
                           <p>Weight</p>
                           <div class="button is-large is-rounded is-success">
-                            {{ plan.weight }} kg
+                            {{ plan.lastWeight }} kg
                           </div>
                         </div>
                         <div class="is-one-fifth column">
                           <p>BF%</p>
                           <div class="button is-large is-rounded is-success">
-                            {{ plan.bodyFat }} %
+                            {{ plan.lastBodyFat }} %
                           </div>
                         </div>
                         <div class="is-one-fifth column">
