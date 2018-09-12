@@ -6,7 +6,7 @@
             <p class="title">Leader Board...</p>
             <p class="subtitle">Compare with your peers....</p>
                 <b-message v-for="plan in plans">
-                  <div class="columns">
+                  <div class="columns" @click="$router.push({ name: 'show_profile_path', params: { id: plan.id }})">
                     <div class="column is-1">
                       <img :src="plan.avatar" alt="avatar" style="border-radius: 50%">
                     </div>
