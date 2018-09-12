@@ -5,8 +5,8 @@
           <article class="tile is-child notification is-warning box">
             <p class="title">Leader Board...</p>
             <p class="subtitle">Compare with your peers....</p>
-                <b-message v-for="plan in plans">
-                  <div class="columns" @click="$router.push({ name: 'show_profile_path', params: { id: plan.id }})">
+                <b-message v-for="plan in plans" v-bind:key="plan.id">
+                  <div class="columns is-size-6 has-text-weight-semibold level" @click="$router.push({ name: 'show_profile_path', params: { id: plan.id }})">
                     <div class="column is-1">
                       <img :src="plan.avatar" alt="avatar" style="border-radius: 50%">
                     </div>
@@ -43,7 +43,7 @@
                         </div>
                         <div class="is-one-fifth column">
                           <p>Streak</p>
-                          <a class="button is-success is-rounded">{{plan.daysStreak}} days</a>
+                          <a class="button is-success is-rounded">{{plan.daysStreak}} {{plan.daysStreak | pluralize('day')}}</a>
                         </div>
                       </div>
                     </div>

@@ -64,7 +64,7 @@
                   </div>
                   <div class="tile is-child box is-6  notification is-success">
                     <p class="title">Streak</p>
-                    <p class="subtitle">{{ plan.daysStreak }} days</p>
+                    <p class="subtitle">{{plan.daysStreak}} {{plan.daysStreak | pluralize('day')}}</p>
                   </div>
                 </div>
               </div>

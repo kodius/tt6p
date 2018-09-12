@@ -9,7 +9,7 @@
       </div>
 
         <div id="navbarExampleTransparentExample" class="navbar-menu">
-          <div class="navbar-start">
+          <div class="navbar-start has-text-weight-semibold is-size-6">
             <router-link :class="activeOn(['dashboard_path'])" :to="{ name: 'dashboard_path'}">Dashboard</router-link>
             <router-link :class="activeOn(['log_path'])" :to="{ name: 'log_path'}">Log</router-link>
             <router-link :class="activeOn(['root_path'])" :to="{ name: 'root_path'}">Leaderboard</router-link>
@@ -52,7 +52,7 @@
       <div class="hero-body">
         <div class="tile is-ancestor">
           <div class="tile is-child is-6">
-            <h1 class="title">
+            <h1 class="title is-size-4 has-text-weight-semibold">
               Time to Six Pack 
             </h1>
             <h2 class="subtitle">
@@ -76,7 +76,7 @@
             </div>
             <div class="is-one-third column">
               <p>Streak</p>
-              <a class="button is-success is-large is-rounded">{{plan.daysStreak}} days</a>
+              <a class="button is-success is-large is-rounded">{{plan.daysStreak}} {{plan.daysStreak | pluralize('day')}}</a>
             </div>
           </div>
         </div>
