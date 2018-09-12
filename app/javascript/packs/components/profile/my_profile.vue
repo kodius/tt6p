@@ -12,7 +12,7 @@
               <div class="column">
                 <p class="title">{{ plan.email }}</p>
                 <b-field>
-                  <p class="control"><button class="button small" @click="openChangeProfileModal()">Change profile image</button></p>
+                  <p class="control"><button class="button small" @click="openChangeAvatarModal()">Change profile image</button></p>
                   <p class="control"><button class="button small" @click="openEditPlanModal()">Change your plan</button></p>
                 </b-field>
               </div>
@@ -53,7 +53,6 @@
       axios.get('my-profile').then(response => {
         that.user = response.data.user;
         that.toLoad--;
-        console.warn(response);
       });
       axios.get('my-plan').then(response => {
         that.toLoad--;
@@ -76,13 +75,13 @@
             }
           });
       },
-      openChangeProfileModal() {
+      openChangeAvatarModal() {
         this.$modal.open({
             parent: this,
             component: changeAvatarModal,
             hasModalCard: true,
             props: {
-              originalPlan: this.plan ? this.plan : null
+              father: this
             }
           });
       }

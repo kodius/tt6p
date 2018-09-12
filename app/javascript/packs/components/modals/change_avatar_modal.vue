@@ -39,6 +39,7 @@
   import axios from 'axios';
 
   export default {
+    props: ['father'],
     data: function() {
       return {
         dropFiles: [],
@@ -84,9 +85,8 @@
                       position: 'is-bottom',
                       type: 'is-success'
                   });
-                  console.warn(that.$parent);
                   
-          that.$parent._data.user.avatar.url = response.newAvatar;
+          this.father.user.avatar.url = response.data.new_avatar;
         });
       }
     }
