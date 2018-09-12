@@ -24,8 +24,7 @@
         </b-field>
       </div>
       <div v-if="step === 1">
-        <img id="" :src="imageSrc" alt="New profile image"
-          style="border-radius: 50%">
+        <img id="" :src="imageSrc" alt="New profile image">
       </div>
       <b-loading :is-full-page="false" :active.sync="isLoading" :can-cancel="false"></b-loading>
     </section>
@@ -85,6 +84,9 @@
                       position: 'is-bottom',
                       type: 'is-success'
                   });
+                  console.warn(that.$parent);
+                  
+          that.$parent._data.user.avatar.url = response.newAvatar;
         });
       }
     }

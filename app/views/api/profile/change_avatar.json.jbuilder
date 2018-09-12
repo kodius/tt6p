@@ -1,0 +1,1 @@
+json.new_avatar @new_avatar

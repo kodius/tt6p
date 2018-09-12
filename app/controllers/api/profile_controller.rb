@@ -6,5 +6,6 @@ class Api::ProfileController < Api::ApiController
   def change_avatar
     current_user.avatar = params[:image]
     current_user.save!
+    @new_avatar = current_user.avatar.url
   end
 end
