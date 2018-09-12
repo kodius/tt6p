@@ -3,10 +3,8 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <router-link class="navbar-item" :to="{ name: 'root_path'}">
-          <img src="https://diu1mzq1btmsf.cloudfront.net/assets/kodius-logo-bijeli-ace02e27001a70c4f25b3cdf82c4d757441ac92894a35a0c61054c71511ab1ac.png" 
-               alt="Kodius" 
-               width="168" height="54"
-               style="background:#343434">
+          <img src="/logo.png" 
+               alt="Kodius">
        </router-link>
       </div>
 
