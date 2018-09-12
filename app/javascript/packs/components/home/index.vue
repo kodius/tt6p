@@ -15,35 +15,35 @@
                     </div>
                     <div class="column is-7">
                       <div class="has-text-centered columns">
-                        <div class="is-one-fifth column">
+                        <div class="is-one-fifth column is-success">
                           <p>Weight</p>
-                          <div class="button is-large is-rounded is-success">
+                          <div class="button is-rounded is-success">
                             {{ plan.lastWeight }} kg
                           </div>
                         </div>
                         <div class="is-one-fifth column">
                           <p>BF%</p>
-                          <div class="button is-large is-rounded is-success">
+                          <div class="button is-rounded is-success">
                             {{ plan.lastBodyFat }} %
                           </div>
                         </div>
                         <div class="is-one-fifth column">
                           <p>Fat</p>
-                          <div class="button is-large is-rounded" 
+                          <div class="button is-rounded" 
                             :class="{'is-danger': (plan.fatLost < 0), 'is-success': (plan.fatLost >= 0)}">
                               {{plan.fatLost > 0 ? `-${plan.fatLost}` : `+${plan.fatLost * (-1)}`}} kg
                         </div>
                         </div>
                         <div class="is-one-fifth column">
                           <p>LBM</p>
-                          <a class="button is-large is-rounded" 
+                          <a class="button is-rounded" 
                             :class="{'is-danger': (plan.lbmDiff < 0), 'is-success': (plan.lbmDiff >= 0)}">
                               {{plan.lbmDiff > 0 ? '+' : ''}}{{plan.lbmDiff}} kg
                           </a>
                         </div>
                         <div class="is-one-fifth column">
                           <p>Streak</p>
-                          <a class="button is-success is-large is-rounded">{{plan.daysStreak}} days</a>
+                          <a class="button is-success is-rounded">{{plan.daysStreak}} days</a>
                         </div>
                       </div>
                     </div>
