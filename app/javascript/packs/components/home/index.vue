@@ -5,9 +5,54 @@
           <article class="tile is-child notification is-warning box">
             <p class="title">Leader Board...</p>
             <p class="subtitle">Compare with your peers....</p>
-            <p>
-              <div v-if="loaded">
-                  <table class="table is-bordered is-striped is-fullwidth">
+                <b-message v-for="plan in plans">
+                  <div class="columns">
+                    <div class="column is-1">
+                      <img :src="plan.avatar" alt="avatar" style="border-radius: 50%">
+                    </div>
+                    <div class="column is-2" style="line-height: 100%; vertical-align: middle;">
+                      {{ plan.email }}
+                    </div>
+                    <div class="column is-7">
+                      <div class="has-text-centered columns">
+                        <div class="is-one-fifth column">
+                          <p>Weight</p>
+                          <div class="button is-large is-rounded is-success">
+                            {{ plan.weight }} kg
+                          </div>
+                        </div>
+                        <div class="is-one-fifth column">
+                          <p>BF%</p>
+                          <div class="button is-large is-rounded is-success">
+                            {{ plan.bodyFat }} %
+                          </div>
+                        </div>
+                        <div class="is-one-fifth column">
+                          <p>Fat</p>
+                          <div class="button is-large is-rounded" 
+                            :class="{'is-danger': (plan.fatLost < 0), 'is-success': (plan.fatLost >= 0)}">
+                              {{plan.fatLost > 0 ? `-${plan.fatLost}` : `+${plan.fatLost * (-1)}`}} kg
+                        </div>
+                        </div>
+                        <div class="is-one-fifth column">
+                          <p>LBM</p>
+                          <a class="button is-large is-rounded" 
+                            :class="{'is-danger': (plan.lbmDiff < 0), 'is-success': (plan.lbmDiff >= 0)}">
+                              {{plan.lbmDiff > 0 ? '+' : ''}}{{plan.lbmDiff}} kg
+                          </a>
+                        </div>
+                        <div class="is-one-fifth column">
+                          <p>Streak</p>
+                          <a class="button is-success is-large is-rounded">{{plan.daysStreak}} days</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="column is-2">
+                      {{ plan.awards }}
+                    </div>
+                  </div>
+                </b-message>
+                  <!-- <table class="table is-bordered is-striped is-fullwidth">
                     <thead>
                       <tr>
                         <th>Email</th>
@@ -39,9 +84,7 @@
                       <td>{{ plan.awards }}</td>
                     </tr>
                     </tbody>
-                  </table>
-              </div>
-            </p>
+                  </table> -->
           </article>
         </div>
       </div>
@@ -67,8 +110,9 @@ export default {
     axios
       .get('active-plans')
       .then(response => {
-        that.plans = response.data.plans
-        that.loaded = true
+        that.plans = response.data.plans;
+        that.loaded = true;
+        console.warn(that.plans);
     })
   }
 }
