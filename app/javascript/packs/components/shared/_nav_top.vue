@@ -19,8 +19,9 @@
         <div class="navbar-menu">
             <div class="navbar-end">
               <b-dropdown position="is-bottom-left">
-                <a class="navbar-item" slot="trigger">
-                  <span v-if="hasPlan">{{plan.email}}</span>
+                <a class="navbar-item" slot="trigger" v-if="hasPlan">
+                  <span style="line-height: 36px; vertical-align: middle; margin-right: 12px">{{ plan.email }}</span>
+                  <img :src="plan.avatar" alt="avatar" style="border-radius: 50%; margin-right: 6px">
                   <b-icon icon="menu-down"></b-icon>
                 </a>
 

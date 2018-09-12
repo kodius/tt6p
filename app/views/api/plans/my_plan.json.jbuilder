@@ -27,6 +27,7 @@ json.plan do
   json.awards @plan.awards.join(', ')
   json.email @plan.user.email
   json.userId @plan.user_id
+  json.avatar @plan.user.avatar.url
 end if @plan
 json.noplan false if @plan
 json.noplan true unless @plan
