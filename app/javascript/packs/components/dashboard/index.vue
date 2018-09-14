@@ -129,8 +129,8 @@
             </span>
           </td>
           <td class="has-text-right">
-            <a class="has-text-black" @click="imageModal(measurement.image)" v-if="measurement.image" href="javascript:void();"><i class="far fa-image"></i></a>
-            <a class="has-text-black" @click="openEditModal(measurement)" href="javascript:void();">Edit</a>
+            <a class="has-text-white" @click="imageModal(measurement.image)" v-if="measurement.image" href="javascript:void();"><i class="far fa-image"></i></a>
+            <a class="has-text-white" @click="openEditModal(measurement)" href="javascript:void();">Edit</a>
             <a class="has-text-danger" @click="confirmDelete(measurement)" href="javascript:void();">Delete</a>
           </td>
         </tr>
