@@ -10,8 +10,6 @@ class Api::MeasurementsController < Api::ApiController
     plan = Plan.find(params[:id])
     @measurements = Measurement.where("user_id = ?", plan.user_id).order('log_date desc')
     @count = @measurements.count()
-    pp 'kurac'
-    pp params
     @measurements = @measurements.order('log_date desc').offset((params[:page].to_i - 1) * 20).limit(20)
   end
 
