@@ -205,8 +205,7 @@ export default {
         .get('measurements?page=' + this.page)
         .then(response => {
             that.measurements = response.data.measurements
-            that.total = response.data.count-20
-            console.log(that.total)
+            that.total = response.data.count
             that.isLoading = false
       }), 50);
     },

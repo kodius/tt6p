@@ -78,6 +78,13 @@
       </div>
     </div>
     <div v-if="loaded">
+      <b-pagination
+        :total="total"
+        :current.sync="page"
+        :per-page="20"
+        order="is-centered"
+        @change="loadMeasurements">
+      </b-pagination>
       <table class="table is-bordered is-striped is-fullwidth">
         <thead>
           <tr>
@@ -129,6 +136,13 @@
         </tr>
         </tbody>
       </table>
+      <b-pagination
+        :total="total"
+        :current.sync="page"
+        :per-page="20"
+        order="is-centered"
+        @change="loadMeasurements">
+      </b-pagination>
     </div>
   </layout>
 </template>
@@ -146,7 +160,9 @@ export default {
     return {
       loaded: false,
       plan: null,
-      measurements: []
+      measurements: [],
+      page: 1,
+      total: 0
     }
   },
   filters: {
@@ -161,12 +177,24 @@ export default {
       .then(response => {
         self.plan = response.data.plan
         axios
-          .get('public-measurements/' + this.$route.params.id)
+          .get(`public-measurements/${this.$route.params.id}/1`)
           .then(response => {
-              self.measurements = response.data.measurements
+              self.measurements = response.data.measurements;
+              self.total = response.data.count;
               self.loaded = true
         })
       })
+  },
+  methods: {
+    loadMeasurements() {
+      var that = this;
+      setTimeout(() => axios
+        .get(`public-measurements/${this.$route.params.id}/${this.page}`)
+        .then(response => {
+            that.measurements = response.data.measurements
+            that.total = response.data.count
+      }), 50);
+    }
   }
 }
 
