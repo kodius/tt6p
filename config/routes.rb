@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
     psot 'auth', to: 'auths#create'
 
+      post 'auth', to: 'auths#create'
     namespace :admin do
       # as :user do
       #   get 'sign_out', to: '/devise/sessions#destroy'

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 import HomeIndex from './components/home/index.vue';
+import Login from './components/login/index.vue'
 import ErrorsIndex from './components/errors/index.vue';
 import DashboardIndex from './components/dashboard/index.vue';
 import ProfileShow from './components/profile/public_profile.vue';
@@ -16,6 +17,7 @@ const router = new VueRouter({
   base: `${I18n.prefix}`,
   routes: [
     { path: '/', component: HomeIndex, name: 'root_path' },
+    { path: '/login', component: Login, name: 'login_path' },
     { path: '/errors', component: ErrorsIndex, name: 'errors_path' },
     { path: '/dashboard', component: DashboardIndex, name: 'dashboard_path' },
     { path: '/profile/my', component: MyProfile, name: 'my_profile_path' },

@@ -25,17 +25,19 @@
                   <b-icon icon="menu-down"></b-icon>
                 </a>
 
-                <b-dropdown-item>
-                  <router-link :to="{name: 'my_profile_path'}">Profile</router-link>
-                </b-dropdown-item>
+                <router-link :to="{name: 'my_profile_path'}">
+                  <b-dropdown-item>
+                    <p>Profile</p>
+                  </b-dropdown-item>
+                </router-link>
                 <b-dropdown-item disabled>
                   <p>Settings</p>
                 </b-dropdown-item>
-                <b-dropdown-item>
-                  <p @click="openEditPlan()">Change plan</p>
+                <b-dropdown-item @click="openEditPlan()">
+                  <p>Change plan</p>
                 </b-dropdown-item>
                 <b-dropdown-option separator />
-                <b-dropdown-item disabled>
+                <b-dropdown-item @click="logOut()">
                   <p>Logout</p>
                 </b-dropdown-item>
               </b-dropdown>
@@ -124,6 +126,11 @@ export default {
               originalPlan: this.plan ? this.plan : null
             }
           });
+    },
+
+    logOut() {
+      delete localStorage.auth_key_secret;
+      this.$router.push({ name: 'login_path' });
     }
   }
 }
