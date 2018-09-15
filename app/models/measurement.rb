@@ -23,7 +23,11 @@ class Measurement < ApplicationRecord
         #check last week if we are still below calorie wise 
         #make it success
         measurement_date = self.log_date
-        last_week = Measurement.where("user_id = ? and log_date < ?", user_id, measurement_date).order("log_date desc").limit(7).pluck(:calories) || []
+        last_week = Measurement.where("user_id = ? and log_date < ?", user_id, measurement_date).
+          where.not(calories: nil).
+          order("log_date desc").
+          limit(7).
+          pluck(:calories) || []
         last_week = last_week << calories
         if last_week.count > 0
           average = last_week.reduce(:+)/last_week.count.to_f
