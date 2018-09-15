@@ -36,7 +36,7 @@
                 <b-dropdown-item @click="openEditPlan()">
                   <p>Change plan</p>
                 </b-dropdown-item>
-                <b-dropdown-option separator />
+                <b-dropdown-item separator />
                 <b-dropdown-item @click="logOut()">
                   <p>Logout</p>
                 </b-dropdown-item>

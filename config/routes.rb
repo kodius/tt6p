@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     post 'change-avatar', to: 'profile#change_avatar'
     get 'active-plans', to: 'plans#active_plans'
 
-    psot 'auth', to: 'auths#create'
+    post 'auth', to: 'auths#create'
 
       post 'auth', to: 'auths#create'
     namespace :admin do
