@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_01_102033) do
+ActiveRecord::Schema.define(version: 2018_09_16_225429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 2018_09_01_102033) do
     t.decimal "calories", precision: 15, scale: 2
     t.boolean "success"
     t.string "image"
+    t.integer "week_num"
+    t.integer "month_num"
+    t.integer "year_num"
+    t.index ["user_id", "month_num"], name: "index_measurements_on_user_id_and_month_num"
+    t.index ["user_id", "week_num"], name: "index_measurements_on_user_id_and_week_num"
+    t.index ["user_id", "year_num"], name: "index_measurements_on_user_id_and_year_num"
   end
 
   create_table "nutritions", force: :cascade do |t|

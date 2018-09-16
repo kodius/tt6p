@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable
   mount_uploader :avatar, AvatarUploader
+  has_many :measurements
 
   validates_presence_of :email
 end

@@ -13,6 +13,14 @@ class Api::MeasurementsController < Api::ApiController
     @measurements = @measurements.order('log_date desc').offset((params[:page].to_i - 1) * 20).limit(20)
   end
 
+  # def chart_data
+  #   plan = Plan.find(params[:id])
+  #   @measurements = plan.user.measurements.order('log_date desc').
+  #     limit(7) && return unless params[:filters]
+
+  #   # @filter = params[:filters]
+  # end
+
   def create
     begin
       @measurement = Measurement.find(measurement_params['id'])

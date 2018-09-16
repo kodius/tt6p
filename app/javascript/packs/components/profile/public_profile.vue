@@ -14,7 +14,7 @@
               </div>
           </div>
           <div v-if="measurements">
-            <measurement-chart :measurements="measurements"></measurement-chart>
+            <measurement-chart :height="300" :measurements="measurements"></measurement-chart>
           </div>
           <div class="tile is-ancestor">
             <div class="tile is-4 is-vertical is-parent">
