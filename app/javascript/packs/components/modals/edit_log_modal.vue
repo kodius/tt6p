@@ -11,6 +11,7 @@
             placeholder="Weight"
             v-model="measurement.weight"
             @focus="errors.weight = null"
+            @keyup.native.enter="updateLog"
             expanded>
         </b-input>
         <p class="control">
@@ -24,6 +25,7 @@
               placeholder="Body fat"
               v-model="measurement.bodyFat"
               @focus="errors.bodyFat = null"
+              @keyup.native.enter="updateLog"
               expanded>
           </b-input>
           <p class="control">
@@ -35,6 +37,7 @@
             placeholder="Calories"
             v-model="measurement.calories"
             @focus="errors.calories = null"
+            @keyup.native.enter="updateLog"
             expanded>
         </b-input>
         <p class="control">

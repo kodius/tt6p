@@ -11,6 +11,7 @@
               placeholder="Weight"
               v-model="plan.weight"
               @focus="errors.weight = null"
+              @keyup.native.enter="updatePlan"
               expanded>
           </b-input>
           <p class="control">
@@ -24,6 +25,7 @@
               placeholder="Body fat"
               v-model="plan.body_fat"
               @focus="errors.body_fat = null"
+              @keyup.native.enter="updatePlan"
               expanded>
           </b-input>
           <p class="control">
@@ -37,6 +39,7 @@
               placeholder="Target body fat"
               v-model="plan.target_body_fat"
               @focus="errors.target_fat = null"
+              @keyup.native.enter="updatePlan"
               expanded>
           </b-input>
           <p class="control">
@@ -50,6 +53,7 @@
               placeholder="Height"
               v-model="plan.height"
               @focus="errors.height = null"
+              @keyup.native.enter="updatePlan"
               expanded>
           </b-input>
           <p class="control">
@@ -63,6 +67,7 @@
             placeholder="Age"
             v-model="plan.age"
             @focus="errors.age = null"
+            @keyup.native.enter="updatePlan"
             expanded>
           </b-input>
           <p class="control">
