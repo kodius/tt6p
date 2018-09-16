@@ -13,6 +13,7 @@
                   </div>
               </div>
           </div>
+          <measurement-chart></measurement-chart>
           <div class="tile is-ancestor">
             <div class="tile is-4 is-vertical is-parent">
               <article class="tile is-child notification is-warning box">
@@ -152,17 +153,18 @@
 import axios from 'axios';
 import Buefy from 'buefy'
 import Layout from '../shared/layout';
-import CommitChart from './commit_chart';
+import MeasurementChart from '../charts/measurement_chart';
 import Vue from 'vue/dist/vue.esm';
 import humanizeString from 'humanize-string';
 import editLogModal from '../modals/edit_log_modal';
 
-Vue.component('commit-chart', CommitChart);
+Vue.component('measurement-chart', MeasurementChart);
 Vue.use(Buefy)
 
 export default {
   components: {
-    Layout
+    Layout,
+    MeasurementChart
   },
   data () {
     return {
