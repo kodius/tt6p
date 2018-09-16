@@ -20,7 +20,7 @@ export default {
         datasets: [{
           label: 'Calories blabla',
           backgroundColor: '#f87979',
-          data: [this.chartData.datasets]
+          data: this.chartData.datasets
         }],
         },
       {
