@@ -13,7 +13,6 @@
                   </div>
               </div>
           </div>
-          <measurement-chart></measurement-chart>
           <div class="tile is-ancestor">
             <div class="tile is-4 is-vertical is-parent">
               <article class="tile is-child notification is-warning box">

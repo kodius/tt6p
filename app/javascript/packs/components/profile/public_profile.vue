@@ -13,7 +13,9 @@
                   </div>
               </div>
           </div>
-          <measurement-chart></measurement-chart>
+          <div v-if="measurements">
+            <measurement-chart :measurements="measurements"></measurement-chart>
+          </div>
           <div class="tile is-ancestor">
             <div class="tile is-4 is-vertical is-parent">
               <article class="tile is-child notification is-warning box">
@@ -167,12 +169,6 @@ export default {
       loaded: false,
       plan: null,
       measurements: [],
-      chartData: {
-        labels: [],
-        datasets: {
-          data: []
-        }
-      },
       page: 1,
       total: 0
     }
@@ -192,9 +188,6 @@ export default {
           .get(`public-measurements/${this.$route.params.id}/1`)
           .then(response => {
               self.measurements = response.data.measurements;
-              self.chartData.labels = self.measurements.map(measurement => measurement.logDate);
-              self.chartData.datasets.data = self.measurements.map(measurement => measurement.calories);
-              debugger
               self.total = response.data.count;
               self.loaded = true
         })
@@ -207,8 +200,6 @@ export default {
         .get(`public-measurements/${this.$route.params.id}/${this.page}`)
         .then(response => {
             that.measurements = response.data.measurements
-            that.chartData.labels = response.data.measurements.map(measurement => measurement.logDate);
-            that.chartData.datasets.data = response.data.measurements.map(measurement => measurement.calories)
             that.total = response.data.count
       }), 50);
     }
