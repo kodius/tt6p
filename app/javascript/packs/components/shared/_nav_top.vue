@@ -25,11 +25,11 @@
                   <b-icon icon="menu-down"></b-icon>
                 </a>
 
-                <router-link :to="{name: 'my_profile_path'}">
-                  <b-dropdown-item>
+                <b-dropdown-item>
+                  <router-link :to="{name: 'my_profile_path'}">
                     <p>Profile</p>
-                  </b-dropdown-item>
-                </router-link>
+                  </router-link>
+                </b-dropdown-item>
                 <b-dropdown-item disabled>
                   <p>Settings</p>
                 </b-dropdown-item>
