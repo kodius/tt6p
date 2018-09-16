@@ -8,12 +8,14 @@
     </h2>
     <b-field label="E-mail">
       <b-input v-model="email"
-            type="email"></b-input>
+            type="email"
+            @keyup.native.enter="logIn"></b-input>
     </b-field>
     <b-field label="Password">
       <b-input v-model="password"
               type="password"
-              password-reveal></b-input>
+              password-reveal
+              @keyup.native.enter="logIn"></b-input>
     </b-field>
     <b-field>
       <b-checkbox v-model="rememberMe">Remember me</b-checkbox>
