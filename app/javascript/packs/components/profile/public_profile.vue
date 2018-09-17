@@ -14,7 +14,7 @@
               </div>
           </div>
           <div v-if="measurements">
-            <measurement-chart :height="300" :measurements="measurements"></measurement-chart>
+            <measurement-chart :height="300" :labels="labels" :datasets="datasets"></measurement-chart>
           </div>
           <div class="tile is-ancestor">
             <div class="tile is-4 is-vertical is-parent">
@@ -169,6 +169,8 @@ export default {
       loaded: false,
       plan: null,
       measurements: [],
+      labels: [],
+      datasets: [],
       page: 1,
       total: 0
     }
@@ -191,6 +193,15 @@ export default {
               self.total = response.data.count;
               self.loaded = true
         })
+      })
+    axios
+      .post('by-week') // will accept range, user, or nothing
+      .then(response => {
+        for (var idx in response.data) {
+          // WIP
+          this.labels.push(idx) // week/month/year
+          this.datasets.push(response.data[idx]) // calories
+        }
       })
   },
   methods: {

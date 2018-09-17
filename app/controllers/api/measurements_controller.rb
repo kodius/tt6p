@@ -13,13 +13,23 @@ class Api::MeasurementsController < Api::ApiController
     @measurements = @measurements.order('log_date desc').offset((params[:page].to_i - 1) * 20).limit(20)
   end
 
-  # def chart_data
-  #   plan = Plan.find(params[:id])
-  #   @measurements = plan.user.measurements.order('log_date desc').
-  #     limit(7) && return unless params[:filters]
+  def by_week
+    user = User.find_by_id(params[:id]) || current_user
+    from = params[:from] || 15.weeks.ago.strftime("%W")
+    to = params[:to] || Time.now.strftime("%W")
 
-  #   # @filter = params[:filters]
-  # end
+    @data = Measurement.chart_data(filter: 'week_num', user_id: user.id, from: from, to: to)
+    render json: @data
+  end
+
+  def by_month
+    user = User.find_by_id(params[:id]) || current_user
+    from = params[:from] || 15.months.ago.strftime("%m")
+    to = params[:to] || Time.now.strftime("%m")
+
+    @data = Measurement.chart_data(filter: 'month_num', user_id: user.id, from: from, to: to)
+    render json: @data
+  end
 
   def create
     begin

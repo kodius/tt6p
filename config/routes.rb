@@ -17,7 +17,9 @@ Rails.application.routes.draw do
     post 'upload-image', to: 'measurements#image_upload'
     post 'change-avatar', to: 'profile#change_avatar'
     get 'active-plans', to: 'plans#active_plans'
-    post 'chart-data', to: 'measurements#chart_data'
+
+    post 'by-month', to: 'measurements#by_month'
+    post 'by-week',  to: 'measurements#by_week'
 
     post 'auth', to: 'auths#create'
 

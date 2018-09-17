@@ -6,15 +6,10 @@ class Measurement < ApplicationRecord
 
   before_save :set_success
 
-  def self.by_week
-    base_query({filter: "week_num", from: 30, to: 40, user_id: 9})
+  def self.chart_data(args={})
+    set_query_filters(args)
+    base_query
   end
-
-  def self.by_month user_id=nil
-    base_query({filter: "month_num", from: 1, to: 12, user_id: 9})
-  end
-
-  def self.by_year; end
 
   def lbm
     if body_fat.present? && weight.present?
@@ -55,12 +50,10 @@ class Measurement < ApplicationRecord
 
   private
 
-  def self.base_query opts={}
-    return nil if opts.values_at(:filter, :from, :to).any?(&:blank?)
-    return nil unless self.column_names.include?(opts[:filter])
-    set_query_filters(opts)
+  def self.base_query
+    return nil if @filter.blank?
 
-    current_user ||= User.find_by_id(opts[:user_id])
+    current_user ||= User.find_by_id(@user_id)
     current_user.measurements.
       where(@filter.to_sym => @from..@to).
       group(@filter.to_sym).

@@ -4,26 +4,26 @@ import { Bar, mixins } from 'vue-chartjs'
 export default {
   extends: Bar,
   mixins: [mixins.reactiveProp],
-  props: ['measurements', 'loaded'],
+  props: ['labels', 'datasets', 'loaded', 'chartData'],
   computed: {
-    'chartData': function () {
+    chartData: function () {
       return {
-        labels: this.measurements.slice(-7).map(measurement => measurement.logDate),
-        datasets: this.measurements.slice(-7).map(measurement => Math.trunc(measurement.calories))
+        labels: this.labels,
+        datasets: this.datasets
       }
     }
   },
   mounted () {
+
     if (this.chartData) {
       this.renderChart({
-        labels: this.chartData.labels,
+        labels: this.labels,
         datasets: [{
           label: 'Calories blabla',
           backgroundColor: '#f87979',
-          data: this.chartData.datasets
+          data: this.datasets
         }],
-        },
-      {
+      }, {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
@@ -33,7 +33,7 @@ export default {
             },
           ticks: {
            min: 0,
-           max: 500 * Math.ceil(Math.max.apply(null, this.chartData.datasets) / 500)
+           max: 500 * Math.ceil(Math.max.apply(null, this.datasets) / 500)
           }
         }]
       }})
