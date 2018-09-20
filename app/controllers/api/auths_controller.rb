@@ -9,14 +9,14 @@ class Api::AuthsController < Api::ApiController
 
       render json: { token: token_command.result, user: user }, status: 200
     else
-      render json: { error: token_command.errors }, status: 422
+      render json: { error: token_command.errors }, status: 401
     end
   end
 
   def verify_token
-    user = DecodeAuthenticationCommand.call(request.headers).result
+    user = DecodeAuthenticationCommand.call(request.headers).result rescue nil
 
     render json: {user: user}, status: 200 if user
-    render json: {}, status: 422 unless user
+    render json: {}, status: 401 unless user
   end
 end

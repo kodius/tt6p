@@ -32,8 +32,24 @@ const app = new Vue({
   i18n,
   router,
   store,
+  data: {
+    pageLoaded: false
+  },
   mounted() {
-    this.checkLogin();
+    var that = this;
+
+    if (localStorage.auth_key_secret == null) { // It is important that it is == so ta it allows undefined and empty string
+      this.$router.push({name: 'login_path'});
+      this.pageLoaded = true;
+    } else {
+      axios.post('/verify-token').then(function (request) {
+        that.pageLoaded = true;
+      }, function (request) {
+        delete localStorage.auth_key_secret;
+        that.$router.push({ name: 'login_path' });
+        that.pageLoaded = true;
+      });
+    }
   },
   methods: {
     checkLogin() {
@@ -48,3 +64,5 @@ const app = new Vue({
     }
   }
 }).$mount('#app')
+
+window.kurac = app;

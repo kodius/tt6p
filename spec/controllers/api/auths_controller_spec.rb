@@ -21,7 +21,7 @@ RSpec.describe Api::AuthsController do
         post :create, :params => { email: user.email, password: 'WrongPassword', remember_me: true }
       end
 
-      it { expect(response.status).to eq 422 }
+      it { expect(response.status).to eq 401 }
       it { expect(subject['token']).not_to be_present }
     end
   end
@@ -48,6 +48,18 @@ RSpec.describe Api::AuthsController do
 
       it { expect(response.status).to eq 200 }
       it { expect(subject['user']['email']).to eq user.email }
+    end
+    context 'When token is incorrect' do
+      let(:token) { 'WrongToken' }
+
+      before do
+        headers = {'Authorization': "Bearer #{token}"}
+        request.headers.merge! headers
+
+        post :verify_token
+      end
+
+      it { expect(response.status).to eq 401 }
     end
   end
 end
