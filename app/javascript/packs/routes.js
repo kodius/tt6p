@@ -24,7 +24,7 @@ const router = new VueRouter({
     { path: '/profile/my', component: MyProfile, name: 'my_profile_path' },
     { path: '/profile/:id', component: ProfileShow, name: 'show_profile_path' },
     { path: '/user/:id', component: ProfileShow, name: 'profile_path' },
-    { path: '/log', component: Profile, name: 'user_profile_path' },
+    { path: '/log', component: LogIndex, name: 'log_path' },
     { path: '/500', component: Error500 },
     { path: '/404', component: Error404 },
     { path: '*', redirect: '/404' }

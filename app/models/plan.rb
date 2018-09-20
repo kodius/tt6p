@@ -1,5 +1,6 @@
 class Plan < ApplicationRecord
   belongs_to :user
+  has_many :measurements, through: :user
 
   def lean_body_mass
     (weight*(1-body_fat/100.0)).round(1)

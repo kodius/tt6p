@@ -5,17 +5,16 @@ class Api::PlansController < Api::ApiController
   end
 
   def my_plan
-    @plan = Plan.where('user_id = ?', current_user.id).first
+    @plan = current_user.plan
   end
   
   def public_profile
-    @plan = Plan.find(params[:id])
+    @plan = Plan.find_by_id(params[:id])
   end
 
   def update_plan
-    Plan.where("user_id = ?", current_user).delete_all
-    @plan = Plan.create(plan_params)
-    @plan.user_id = current_user.id
+    @plan = current_user.plan
+    @plan.update_attributes(plan_params)
     @plan.save!
   end
 
