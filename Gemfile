@@ -50,6 +50,12 @@ group :development, :test do
   gem 'chromedriver-helper'
 end
 
+group :test do
+  gem 'rspec-rails', '~> 3.8'
+  gem "factory_bot_rails", "~> 4.0"
+  gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+end
+
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'

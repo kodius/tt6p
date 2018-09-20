@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/stympy/faker.git
+  revision: e220758871e64b85e799efc6143617b1cb722761
+  branch: master
+  specs:
+    faker (1.9.1)
+      i18n (>= 0.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -681,12 +689,18 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+    diff-lcs (1.3)
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
     dry-inflector (0.1.2)
     erubi (1.7.1)
     excon (0.62.0)
     execjs (2.7.0)
+    factory_bot (4.11.1)
+      activesupport (>= 3.0.0)
+    factory_bot_rails (4.11.1)
+      factory_bot (~> 4.11.1)
+      railties (>= 3.0.0)
     ffi (1.9.23)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
@@ -988,6 +1002,23 @@ GEM
     route_translator (5.6.2)
       actionpack (>= 5.0.0.1, < 6)
       activesupport (>= 5.0.0.1, < 6)
+    rspec-core (3.8.0)
+      rspec-support (~> 3.8.0)
+    rspec-expectations (3.8.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.8.0)
+    rspec-mocks (3.8.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.8.0)
+    rspec-rails (3.8.0)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.8.0)
+      rspec-expectations (~> 3.8.0)
+      rspec-mocks (~> 3.8.0)
+      rspec-support (~> 3.8.0)
+    rspec-support (3.8.0)
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
     sass (3.5.6)
@@ -1060,6 +1091,8 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   devise
+  factory_bot_rails (~> 4.0)
+  faker!
   fog
   foreman
   jbuilder (~> 2.5)
@@ -1080,6 +1113,7 @@ DEPENDENCIES
   rails (~> 5.2.0)
   ransack
   route_translator
+  rspec-rails (~> 3.8)
   sass-rails (~> 5.0)
   selenium-webdriver
   spring

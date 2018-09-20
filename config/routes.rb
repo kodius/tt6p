@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     post 'by-week',  to: 'measurements#by_week'
 
     post 'auth', to: 'auths#create'
+    post 'verify-token', to: 'auths#verify_token'
 
     post 'auth', to: 'auths#create'
     namespace :admin do

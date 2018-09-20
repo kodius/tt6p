@@ -1,6 +1,6 @@
-require "test_helper"
+require "rails_helper"
 
-describe TDEECalculator do
+RSpec.describe TDEECalculator do
   it "calculates tdee for man" do
     result = TDEECalculator.bmr(100, 183, 41, 'man')
     assert_equal(1762, result)
