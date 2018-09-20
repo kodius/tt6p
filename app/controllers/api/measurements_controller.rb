@@ -14,7 +14,7 @@ class Api::MeasurementsController < Api::ApiController
   end
 
   def by_week
-    user = User.find_by_id(params[:id]) || current_user
+    user = Plan.find_by_id(params[:id]).try(:user) || current_user
     from = params[:from] || 15.weeks.ago.strftime("%W")
     to = params[:to] || Time.now.strftime("%W")
 
@@ -23,7 +23,7 @@ class Api::MeasurementsController < Api::ApiController
   end
 
   def by_month
-    user = User.find_by_id(params[:id]) || current_user
+    user = Plan.find_by_id(params[:id]).try(:user) || current_user
     from = params[:from] || 15.months.ago.strftime("%m")
     to = params[:to] || Time.now.strftime("%m")
 

@@ -195,7 +195,9 @@ export default {
         })
       })
     axios
-      .post('by-week') // will accept range, user, or nothing
+      .post('by-week', {
+        id: this.$route.params.id
+      })
       .then(response => {
         for (var idx in response.data) {
           // WIP

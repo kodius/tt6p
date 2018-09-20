@@ -53,8 +53,8 @@ class Measurement < ApplicationRecord
   def self.base_query
     return nil if @filter.blank?
 
-    current_user ||= User.find_by_id(@user_id)
-    current_user.measurements.
+    user = User.find_by_id(@user_id) || current_user
+    user.measurements.
       where(@filter.to_sym => @from..@to).
       group(@filter.to_sym).
       order(@filter.to_sym).
