@@ -66,7 +66,7 @@ class Measurement < ApplicationRecord
       order(@filter.to_sym).
       average(:calories)
     result.each_pair do |key, value|
-      result[key] = value.floor
+      result[key] = value&.floor || 0
     end
 
   end

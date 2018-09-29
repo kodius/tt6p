@@ -161,6 +161,7 @@ export default {
   },
   data () {
     return {
+      currentDimension: 'week',
       loaded: false,
       plan: null,
       measurements: [],
@@ -190,7 +191,8 @@ export default {
         })
       })
     axios
-      .post('by-week', {
+      .post('chart-data', {
+        dimension: this.currentDimension,
         id: this.$route.params.id
       })
       .then(response => {

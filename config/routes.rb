@@ -18,8 +18,7 @@ Rails.application.routes.draw do
     post 'change-avatar', to: 'profile#change_avatar'
     get 'active-plans', to: 'plans#active_plans'
 
-    post 'by-month', to: 'measurements#by_month'
-    post 'by-week',  to: 'measurements#by_week'
+    post 'chart-data', to: 'measurements#chart_data'
 
     post 'auth', to: 'auths#create'
     post 'verify-token', to: 'auths#verify_token'

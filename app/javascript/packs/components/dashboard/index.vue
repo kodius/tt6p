@@ -170,6 +170,7 @@ export default {
     return {
       isLoading: true,
       plan: null,
+      currentDimension: 'week',
       measurements: [],
       labels: [],
       datasets: [],
@@ -197,13 +198,14 @@ export default {
                 that.measurements = response.data.measurements
                 that.total = response.data.count
                 //ucitaj graf
-                axios.post('by-week', {
+                axios.post('chart-data', {
+                  dimension: this.currentDimension,
                   id: this.$route.params.id
                 })
                 .then(response => {
                   for (var idx in response.data) {
                     // WIP
-                    this.labels.push("week " + idx) // week/month/year
+                    this.labels.push(this.currentDimension + ' ' + idx) // week/month/year
                     this.datasets.push(response.data[idx]) // calories
                   }
                   that.isLoading = false
