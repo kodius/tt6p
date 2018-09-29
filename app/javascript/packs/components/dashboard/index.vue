@@ -203,7 +203,7 @@ export default {
                 .then(response => {
                   for (var idx in response.data) {
                     // WIP
-                    this.labels.push(idx) // week/month/year
+                    this.labels.push("week " + idx) // week/month/year
                     this.datasets.push(response.data[idx]) // calories
                   }
                   that.isLoading = false
