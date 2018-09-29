@@ -71,13 +71,6 @@
       </div>
     </div>
     <div v-if="!isLoading">
-      <b-pagination
-        :total="total"
-        :current.sync="page"
-        :per-page="20"
-        order="is-centered"
-        @change="loadMeasurements">
-      </b-pagination>
       <br>
       <table class="table is-bordered is-striped is-fullwidth">
         <thead>
@@ -136,15 +129,20 @@
         </tr>
         </tbody>
       </table>
-      <b-pagination
-        :total="total"
-        :current.sync="page"
-        :per-page="20"
-        order="is-centered"
-        @change="loadMeasurements">
-      </b-pagination>
+      <div v-if="total > 20"> 
+        <b-pagination
+          :total="total"
+          :current.sync="page"
+          :per-page="20"
+          order="is-centered"
+          @change="loadMeasurements">
+        </b-pagination>
+      </div>
     </div>
     <b-loading :is-full-page="true" :active.sync="isLoading" :can-cancel="false"></b-loading>
+    <section class="section">
+       Powered by Kodius 
+    </section>
   </layout>
 </template>
 
