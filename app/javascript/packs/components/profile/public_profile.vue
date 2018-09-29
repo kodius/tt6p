@@ -81,13 +81,6 @@
       </div>
     </div>
     <div v-if="loaded">
-      <b-pagination
-        :total="total"
-        :current.sync="page"
-        :per-page="20"
-        order="is-centered"
-        @change="loadMeasurements">
-      </b-pagination>
       <table class="table is-bordered is-striped is-fullwidth">
         <thead>
           <tr>
@@ -139,13 +132,15 @@
         </tr>
         </tbody>
       </table>
-      <b-pagination
-        :total="total"
-        :current.sync="page"
-        :per-page="20"
-        order="is-centered"
-        @change="loadMeasurements">
-      </b-pagination>
+      <div v-if="total > 20"> 
+        <b-pagination
+          :total="total"
+          :current.sync="page"
+          :per-page="20"
+          order="is-centered"
+          @change="loadMeasurements">
+        </b-pagination>
+      </div>
     </div>
   </layout>
 </template>
