@@ -71,6 +71,9 @@
       </div>
     </div>
     <div v-if="!isLoading">
+      <div v-if="measurements">
+        <measurement-chart :height="300" :labels="labels" :datasets="datasets"></measurement-chart>
+      </div>
       <br>
       <table class="table is-bordered is-striped is-fullwidth">
         <thead>
@@ -168,6 +171,8 @@ export default {
       isLoading: true,
       plan: null,
       measurements: [],
+      labels: [],
+      datasets: [],
       page: 1,
       total: 0
     }
@@ -191,8 +196,20 @@ export default {
             .then(response => {
                 that.measurements = response.data.measurements
                 that.total = response.data.count
-                that.isLoading = false
+                //ucitaj graf
+                axios.post('by-week', {
+                  id: this.$route.params.id
+                })
+                .then(response => {
+                  for (var idx in response.data) {
+                    // WIP
+                    this.labels.push(idx) // week/month/year
+                    this.datasets.push(response.data[idx]) // calories
+                  }
+                  that.isLoading = false
+                })
           })
+       
         }
       })
   },

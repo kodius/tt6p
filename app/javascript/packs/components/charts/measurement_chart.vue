@@ -19,7 +19,7 @@ export default {
       this.renderChart({
         labels: this.labels,
         datasets: [{
-          label: 'Calories blabla',
+          label: 'Calories',
           backgroundColor: '#f87979',
           data: this.datasets
         }],

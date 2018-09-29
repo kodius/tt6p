@@ -4,7 +4,7 @@ class Measurement < ApplicationRecord
   validates_presence_of :user_id
   mount_uploader :image, ImageUploader
 
-  before_save :set_success
+  before_save :set_success, :set_chart_data
 
   def self.chart_data(args={})
     set_query_filters(args)
@@ -48,17 +48,27 @@ class Measurement < ApplicationRecord
     end
   end
 
+  def set_chart_data
+    if log_date.present?
+      self.week_num, self.month_num, self.year_num = log_date.strftime('%W %m %Y').split(' ')
+    end
+  end
+
   private
 
   def self.base_query
     return nil if @filter.blank?
 
     user = User.find_by_id(@user_id) || current_user
-    user.measurements.
+    result = user.measurements.
       where(@filter.to_sym => @from..@to).
       group(@filter.to_sym).
       order(@filter.to_sym).
       average(:calories)
+    result.each_pair do |key, value|
+      result[key] = value.floor
+    end
+
   end
 
   def self.set_query_filters opts
