@@ -13,7 +13,8 @@ class Api::PlansController < Api::ApiController
   end
 
   def update_plan
-    @plan = current_user.plan
+    @plan = current_user.plan || Plan.new
+    @plan.user_id = current_user.id
     @plan.update_attributes(plan_params)
     @plan.save!
   end
