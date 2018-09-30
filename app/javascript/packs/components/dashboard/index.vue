@@ -198,9 +198,9 @@ export default {
                 that.measurements = response.data.measurements
                 that.total = response.data.count
                 that.isLoading = false
+                this.loadChartData()
           })
         }
-       this.loadChartData()
       })
   },
   methods: {
