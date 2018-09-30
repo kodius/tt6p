@@ -197,13 +197,10 @@ export default {
             .then(response => {
                 that.measurements = response.data.measurements
                 that.total = response.data.count
-                //ucitaj graf
-                that.loadChartData().then(
-                  that.isLoading = false
-                )
+                that.isLoading = false
           })
-       
         }
+       this.loadChartData()
       })
   },
   methods: {
