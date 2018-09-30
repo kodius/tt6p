@@ -151,22 +151,21 @@ import Layout from '../shared/layout';
 import Vue from 'vue/dist/vue.esm';
 import humanizeString from 'humanize-string';
 import MeasurementChart from '../charts/measurement_chart';
+import chartMixin from '../../mixins/chart_mixin';
 
 Vue.component('measurement-chart', MeasurementChart);
 
 export default {
+  mixins: [chartMixin],
   components: {
     Layout,
     MeasurementChart
   },
   data () {
     return {
-      currentDimension: 'week',
       loaded: false,
       plan: null,
       measurements: [],
-      labels: [],
-      datasets: [],
       page: 1,
       total: 0
     }
@@ -190,18 +189,7 @@ export default {
               self.loaded = true
         })
       })
-    axios
-      .post('chart-data', {
-        dimension: this.currentDimension,
-        id: this.$route.params.id
-      })
-      .then(response => {
-        for (var idx in response.data) {
-          // WIP
-          this.labels.push(idx) // week/month/year
-          this.datasets.push(response.data[idx]) // calories
-        }
-      })
+    this.loadChartData()
   },
   methods: {
     loadMeasurements() {

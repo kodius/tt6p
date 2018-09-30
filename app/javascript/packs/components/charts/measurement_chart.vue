@@ -4,18 +4,9 @@ import { Bar, mixins } from 'vue-chartjs'
 export default {
   extends: Bar,
   mixins: [mixins.reactiveProp],
-  props: ['labels', 'datasets', 'loaded', 'chartData'],
-  computed: {
-    chartData: function () {
-      return {
-        labels: this.labels,
-        datasets: this.datasets
-      }
-    }
-  },
+  props: ['labels', 'datasets', 'loaded'],
   mounted () {
-
-    if (this.chartData) {
+    if (this.labels && this.datasets) {
       this.renderChart({
         labels: this.labels,
         datasets: [{

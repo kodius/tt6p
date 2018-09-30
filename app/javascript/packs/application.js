@@ -5,8 +5,8 @@ import router from './routes.js';
 import './filters/strings.js';
 import axios from 'axios';
 import NavTop from './components/shared/_nav_top';
-import Buefy from 'buefy'
-import Vue2Filters from 'vue2-filters'
+import Buefy from 'buefy';
+import Vue2Filters from 'vue2-filters';
  
 Vue.component('nav-top', NavTop);
 

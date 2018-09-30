@@ -157,11 +157,13 @@ import MeasurementChart from '../charts/measurement_chart';
 import Vue from 'vue/dist/vue.esm';
 import humanizeString from 'humanize-string';
 import editLogModal from '../modals/edit_log_modal';
+import chartMixin from '../../mixins/chart_mixin';
 
 Vue.component('measurement-chart', MeasurementChart);
 Vue.use(Buefy)
 
 export default {
+  mixins: [chartMixin],
   components: {
     Layout,
     MeasurementChart
@@ -172,8 +174,6 @@ export default {
       plan: null,
       currentDimension: 'week',
       measurements: [],
-      labels: [],
-      datasets: [],
       page: 1,
       total: 0
     }
@@ -198,18 +198,9 @@ export default {
                 that.measurements = response.data.measurements
                 that.total = response.data.count
                 //ucitaj graf
-                axios.post('chart-data', {
-                  dimension: this.currentDimension,
-                  id: this.$route.params.id
-                })
-                .then(response => {
-                  for (var idx in response.data) {
-                    // WIP
-                    this.labels.push(this.currentDimension + ' ' + idx) // week/month/year
-                    this.datasets.push(response.data[idx]) // calories
-                  }
+                that.loadChartData().then(
                   that.isLoading = false
-                })
+                )
           })
        
         }
