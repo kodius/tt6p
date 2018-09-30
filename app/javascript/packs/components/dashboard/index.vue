@@ -70,10 +70,10 @@
         <br />
       </div>
     </div>
+    <div v-if="measurements && datasets.length > 0">
+      <measurement-chart :height="300" :labels="labels" :datasets="datasets"></measurement-chart>
+    </div>
     <div v-if="!isLoading">
-      <div v-if="measurements">
-        <measurement-chart :height="300" :labels="labels" :datasets="datasets"></measurement-chart>
-      </div>
       <br>
       <table class="table is-bordered is-striped is-fullwidth">
         <thead>
