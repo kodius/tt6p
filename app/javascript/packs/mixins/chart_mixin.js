@@ -14,7 +14,8 @@ var chartMixin = {
       axios
       .post('chart-data', {
         dimension: that.currentDimension,
-        id: that.$route.params.id
+        id: that.$route.params.id,
+        average_on: 'calories'
       })
       .then(response => {
         for (var idx in response.data) {

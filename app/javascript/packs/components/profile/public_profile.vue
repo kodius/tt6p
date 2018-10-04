@@ -14,7 +14,7 @@
               </div>
           </div>
           <div v-if="measurements">
-            <measurement-chart :height="300" :labels="labels" :datasets="datasets"></measurement-chart>
+            <measurement-chart :height="300" :labels="labels" :datasets="datasets" label="Calories(kcal)" backgroundColor="#f87979"></measurement-chart>
           </div>
           <div class="tile is-ancestor">
             <div class="tile is-4 is-vertical is-parent">

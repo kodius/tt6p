@@ -4,14 +4,14 @@ import { Bar, mixins } from 'vue-chartjs'
 export default {
   extends: Bar,
   mixins: [mixins.reactiveProp],
-  props: ['labels', 'datasets', 'loaded'],
+  props: ['labels', 'datasets', 'loaded', 'label', 'backgroundColor'],
   mounted () {
     if (this.labels && this.datasets) {
       this.renderChart({
         labels: this.labels,
         datasets: [{
-          label: 'Calories',
-          backgroundColor: '#f87979',
+          label: this.label,
+          backgroundColor: this.backgroundColor,
           data: this.datasets
         }],
       }, {

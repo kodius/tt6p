@@ -6,9 +6,9 @@ class Measurement < ApplicationRecord
 
   before_save :set_success, :set_chart_data
 
-  def self.chart_data(args={})
+  def self.chart_data(average_item, args={})
     set_query_filters(args)
-    base_query
+    base_query(average_item)
   end
 
   def lbm
@@ -56,7 +56,7 @@ class Measurement < ApplicationRecord
 
   private
 
-  def self.base_query
+  def self.base_query(average_item)
     return nil if @filter.blank?
 
     user = User.find_by_id(@user_id) || current_user
@@ -64,9 +64,9 @@ class Measurement < ApplicationRecord
       where(@filter.to_sym => @from..@to).
       group(@filter.to_sym).
       order(@filter.to_sym).
-      average(:calories)
+      average(average_item)
     result.each_pair do |key, value|
-      result[key] = value&.floor || 0
+      result[key] = value&.round(1) || 0
     end
 
   end

@@ -21,7 +21,7 @@ class Api::MeasurementsController < Api::ApiController
     to = params[:to] || Time.now.strftime("%W")
     dimension = params[:dimension] + "_num"
 
-    @data = Measurement.chart_data(filter: dimension, user_id: user.id, from: from, to: to)
+    @data = Measurement.chart_data(params[:average_on], filter: dimension, user_id: user.id, from: from, to: to)
     render json: @data
   end
 
