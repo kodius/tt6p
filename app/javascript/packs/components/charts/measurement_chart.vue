@@ -4,7 +4,7 @@ import { Bar, mixins } from 'vue-chartjs'
 export default {
   extends: Bar,
   mixins: [mixins.reactiveProp],
-  props: ['labels', 'datasets', 'loaded', 'label', 'backgroundColor'],
+  props: ['labels', 'datasets', 'loaded', 'label', 'backgroundColor', 'ticksAmount'],
   mounted () {
     if (this.labels && this.datasets) {
       this.renderChart({
@@ -24,7 +24,7 @@ export default {
             },
           ticks: {
            min: 0,
-           max: 500 * Math.ceil(Math.max.apply(null, this.datasets) / 500)
+           max: this.ticksAmount * Math.ceil(Math.max.apply(null, this.datasets) / this.ticksAmount)
           }
         }]
       }})

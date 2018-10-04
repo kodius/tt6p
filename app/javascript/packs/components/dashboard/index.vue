@@ -71,10 +71,10 @@
       </div>
     </div>
     <div v-if="measurements && datasets.length > 0">
-      <measurement-chart :height="300" :labels="labels" :datasets="datasets" label="Calories(kcal)" backgroundColor="#f87979"></measurement-chart>
+      <measurement-chart :height="300" :labels="labels" :datasets="datasets" label="Calories(kcal)" backgroundColor="#f87979" ticksAmount=500></measurement-chart>
     </div>
-    <div v-if="measurements && bodyMassDatasets.length > 0">
-      <measurement-chart :height="300" :labels="labels" :datasets="bodyMassDatasets" label="Weight(kg)" backgroundColor="#F6FF00"></measurement-chart>
+    <div v-if="measurements && bodyMassDatasets.length > 0 && loadedBodyMass">
+      <measurement-chart :height="300" :labels="labels" :datasets="bodyMassDatasets" label="Weight(kg)" backgroundColor="#F6FF00" ticksAmount=100></measurement-chart>
     </div>
     <div v-if="!isLoading">
       <br>
@@ -179,7 +179,8 @@ export default {
       measurements: [],
       bodyMassDatasets: [],
       page: 1,
-      total: 0
+      total: 0,
+      loadedBodyMass: false
     }
   },
   filters: {
@@ -231,8 +232,9 @@ export default {
       .then(response => {
         for (var idx in response.data) {
           //that.labels.push(that.currentDimension + ' ' + idx) // week/month/year
-          that.bodyMassDatasets.push(response.data[idx]) // calories
+          that.bodyMassDatasets.push(response.data[idx]) 
         }
+        that.loadedBodyMass = true
       })
     },
     openEditModal (measurement) {
