@@ -23,7 +23,7 @@ export default {
               display: true
             },
           ticks: {
-           min: 0,
+           min: this.ticksAmount / 2,
            max: this.ticksAmount * Math.ceil(Math.max.apply(null, this.datasets) / this.ticksAmount)
           }
         }]
