@@ -1,8 +1,8 @@
 <script>
-import { Bar, mixins } from 'vue-chartjs'
+import { Bar, Line, mixins } from 'vue-chartjs'
 
 export default {
-  extends: Bar,
+  extends: Line,
   mixins: [mixins.reactiveProp],
   props: ['labels', 'datasets', 'loaded', 'label', 'backgroundColor', 'ticksAmount'],
   mounted () {
@@ -23,7 +23,7 @@ export default {
               display: true
             },
           ticks: {
-           min: this.ticksAmount / 2,
+           min: this.ticksAmount / 1.4, 
            max: this.ticksAmount * Math.ceil(Math.max.apply(null, this.datasets) / this.ticksAmount)
           }
         }]
