@@ -23,7 +23,7 @@ export default {
               display: true
             },
           ticks: {
-           min: this.ticksAmount / 1.4, 
+           min: this.ticksAmount * (Math.ceil(Math.min.apply(null, this.datasets) * 0.9)  / this.ticksAmount),
            max: this.ticksAmount * Math.ceil(Math.max.apply(null, this.datasets) / this.ticksAmount)
           }
         }]
