@@ -71,7 +71,7 @@
       </div>
     </div>
     <div v-if="measurements && datasets.length > 0">
-      <measurement-chart :height="300" :labels="labels" :datasets="datasets" label="Calories(kcal)" backgroundColor="#f87979" ticksAmount=500></measurement-chart>
+      <measurement-chart :height="300" :labels="labels" :datasets="datasets" label="Calories(kcal)" backgroundColor="#f87979" ticksAmount=200></measurement-chart>
     </div>
     <div v-if="measurements && bodyMassDatasets.length > 0 && loadedBodyMass">
       <measurement-chart :height="300" :labels="labels" :datasets="bodyMassDatasets" label="Weight(kg)" backgroundColor="#F6FF00" ticksAmount=100></measurement-chart>
