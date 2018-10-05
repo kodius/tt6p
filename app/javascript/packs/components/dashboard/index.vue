@@ -74,7 +74,7 @@
       <measurement-chart :height="300" :labels="labels" :datasets1="datasets" label1="Calories(kcal)" backgroundColor1="#f87979" stepSize=500 backgroundColor="#D75453" label="Target calories(kcal)" :datasets="targetCalories"></measurement-chart>
     </div>
     <div v-if="loadedBodyMass">
-      <measurement-chart :height="300" :labels="labels" :datasets="bodyMassDatasets" :datasets1="leanBodyMassDatasets" label="Weight(kg)" label1="Lean Body Mass(kg)" backgroundColor="rgba(54,73,93,0.5)" stepSize=10 backgroundColor1="rgba(71, 183,132,.5)"></measurement-chart>
+      <measurement-chart :height="300" :labels="labels" :datasets="bodyMassDatasets" :datasets1="leanBodyMassDatasets" label="Weight(kg)" label1="Lean Body Mass(kg)" backgroundColor="rgba(1, 1,112,0.6)" stepSize=10 backgroundColor1="rgba(71, 183,132,0.8)"></measurement-chart>
     </div>
     <div v-if="!isLoading">
       <br>
