@@ -5,7 +5,8 @@ var chartMixin = {
     return {
       currentDimension: 'week',
       labels: [],
-      datasets: []
+      datasets: [],
+      targetCalories: []
     }
   },
   methods: {
@@ -18,9 +19,12 @@ var chartMixin = {
         average_on: 'calories'
       })
       .then(response => {
-        for (var idx in response.data) {
-          that.labels.push(that.currentDimension + ' ' + idx) // week/month/year
-          that.datasets.push(response.data[idx]) // calories
+        for (var idx in response.data[0]) {
+          that.labels.push(that.currentDimension + ' ' + idx) 
+          that.datasets.push(response.data[0][idx]) 
+        }
+        for (var idx in response.data[1]) {
+          that.targetCalories.push(response.data[1][idx]) 
         }
       })
     }

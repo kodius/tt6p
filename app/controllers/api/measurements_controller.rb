@@ -21,7 +21,16 @@ class Api::MeasurementsController < Api::ApiController
     to = params[:to] || Time.now.strftime("%W")
     dimension = params[:dimension] + "_num"
 
-    @data = Measurement.chart_data(params[:average_on], filter: dimension, user_id: user.id, from: from, to: to)
+    if params[:average_on] == 'weight'
+      @data = []
+      @data[0] = Measurement.chart_data(params[:average_on], {filter: dimension, user_id: user.id, from: from, to: to})
+      @data[1] = Measurement.chart_data(:lean_body_mass, {filter: dimension, user_id: user.id, from: from, to: to})
+    else
+      @data = []
+      @data[0] = Measurement.chart_data(params[:average_on], {filter: dimension, user_id: user.id, from: from, to: to})
+      @data[1] = Measurement.chart_data(:target_calories, {filter: dimension, user_id: user.id, from: from, to: to})
+    end
+
     render json: @data
   end
 

@@ -71,10 +71,10 @@
       </div>
     </div>
     <div v-if="measurements && datasets.length > 0">
-      <measurement-chart :height="300" :labels="labels" :datasets="datasets" label="Calories(kcal)" backgroundColor="#f87979" stepSize=200></measurement-chart>
+      <measurement-chart :height="300" :labels="labels" :datasets1="datasets" label1="Calories(kcal)" backgroundColor1="#f87979" stepSize=500 backgroundColor="#D75453" label="Target calories(kcal)" :datasets="targetCalories"></measurement-chart>
     </div>
-    <div v-if="measurements && bodyMassDatasets.length > 0 && loadedBodyMass">
-      <measurement-chart :height="300" :labels="labels" :datasets="bodyMassDatasets" label="Weight(kg)" backgroundColor="#698E8B" stepSize=1></measurement-chart>
+    <div v-if="loadedBodyMass">
+      <measurement-chart :height="300" :labels="labels" :datasets="bodyMassDatasets" :datasets1="leanBodyMassDatasets" label="Weight(kg)" label1="Lean Body Mass(kg)" backgroundColor="#698E8B" stepSize=5 backgroundColor1="#9ED2BA"></measurement-chart>
     </div>
     <div v-if="!isLoading">
       <br>
@@ -178,6 +178,7 @@ export default {
       currentDimension: 'week',
       measurements: [],
       bodyMassDatasets: [],
+      leanBodyMassDatasets: [],
       page: 1,
       total: 0,
       loadedBodyMass: false
@@ -203,6 +204,7 @@ export default {
                 that.measurements = response.data.measurements
                 that.total = response.data.count
                 that.isLoading = false
+                that.loadedBodyMass = false
                 this.loadChartData()
                 this.loadBodyMassChartData()
           })
@@ -230,9 +232,11 @@ export default {
         average_on: 'weight'
       })
       .then(response => {
-        for (var idx in response.data) {
-          //that.labels.push(that.currentDimension + ' ' + idx) // week/month/year
-          that.bodyMassDatasets.push(response.data[idx]) 
+        for (var idx in response.data[0]) {
+          that.bodyMassDatasets.push(response.data[0][idx]) 
+        }
+        for (var idx in response.data[1]) {
+          that.leanBodyMassDatasets.push(response.data[1][idx]) 
         }
         that.loadedBodyMass = true
       })
