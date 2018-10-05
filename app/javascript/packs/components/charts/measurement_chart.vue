@@ -4,7 +4,7 @@ import { Bar, Line, mixins } from 'vue-chartjs'
 export default {
   extends: Line,
   mixins: [mixins.reactiveProp],
-  props: ['labels', 'datasets', 'loaded', 'label', 'backgroundColor', 'ticksAmount'],
+  props: ['labels', 'datasets', 'loaded', 'label', 'backgroundColor', 'stepSize'],
   mounted () {
     if (this.labels && this.datasets) {
       this.renderChart({
@@ -16,6 +16,7 @@ export default {
         }],
       }, {
         responsive: true,
+        lineTension: 1,
         maintainAspectRatio: false,
         scales: {
           yAxes: [{
@@ -23,8 +24,8 @@ export default {
               display: true
             },
           ticks: {
-           min: this.ticksAmount * (Math.ceil(Math.min.apply(null, this.datasets) * 0.95)  / this.ticksAmount),
-           max: this.ticksAmount * Math.ceil(Math.max.apply(null, this.datasets) / this.ticksAmount)
+           beginAtZero: false,
+           stepSize: this.stepSize 
           }
         }]
       }})
