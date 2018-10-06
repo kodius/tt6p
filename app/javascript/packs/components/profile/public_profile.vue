@@ -13,8 +13,8 @@
                   </div>
               </div>
           </div>
-          <div v-if="measurements">
-            <measurement-chart :height="300" :labels="labels" :datasets="datasets" label="Calories(kcal)" backgroundColor="#f87979" ticksAmount=500></measurement-chart>
+          <div v-if="loadedBodyMass">
+            <measurement-chart :height="300" :labels="labels" :datasets1="bodyMassDatasets" :datasets="leanBodyMassDatasets" label1="Weight(kg)" label="Lean Body Mass(kg)" stepSize=10></measurement-chart>
           </div>
           <div class="tile is-ancestor">
             <div class="tile is-4 is-vertical is-parent">
@@ -167,7 +167,12 @@ export default {
       plan: null,
       measurements: [],
       page: 1,
-      total: 0
+      total: 0,
+      currentDimension: 'week',
+      measurements: [],
+      bodyMassDatasets: [],
+      leanBodyMassDatasets: [],
+      loadedBodyMass: false
     }
   },
   filters: {
@@ -189,7 +194,7 @@ export default {
               self.loaded = true
         })
       })
-    this.loadChartData()
+    this.loadBodyMassChartData()
   },
   methods: {
     loadMeasurements() {
@@ -200,7 +205,25 @@ export default {
             that.measurements = response.data.measurements
             that.total = response.data.count
       }), 50);
-    }
+    },
+    loadBodyMassChartData() {
+      var that = this;
+      axios
+      .post('chart-data', {
+        dimension: that.currentDimension,
+        id: that.$route.params.id,
+        average_on: 'weight'
+      })
+      .then(response => {
+        for (var idx in response.data[0]) {
+          that.bodyMassDatasets.push(response.data[0][idx]) 
+        }
+        for (var idx in response.data[1]) {
+          that.leanBodyMassDatasets.push(response.data[1][idx]) 
+        }
+        that.loadedBodyMass = true
+      })
+    },
   }
 }
 

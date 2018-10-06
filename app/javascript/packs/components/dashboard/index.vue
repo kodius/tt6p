@@ -71,10 +71,10 @@
       </div>
     </div>
     <div v-if="measurements && datasets.length > 0">
-      <measurement-chart :height="300" :labels="labels" :datasets1="datasets" label1="Calories(kcal)" backgroundColor1="#f87979" stepSize=500 backgroundColor="#D75453" label="Target calories(kcal)" :datasets="targetCalories"></measurement-chart>
+      <measurement-chart :height="300" :labels="labels" :datasets="datasets" label="Calories(kcal)" stepSize=500 label1="TDEE calories(kcal)" :datasets1="targetCalories"></measurement-chart>
     </div>
     <div v-if="loadedBodyMass">
-      <measurement-chart :height="300" :labels="labels" :datasets="bodyMassDatasets" :datasets1="leanBodyMassDatasets" label="Weight(kg)" label1="Lean Body Mass(kg)" backgroundColor="rgba(1, 1,112,0.6)" stepSize=10 backgroundColor1="rgba(71, 183,132,0.8)"></measurement-chart>
+      <measurement-chart :height="300" :labels="labels" :datasets1="bodyMassDatasets" :datasets="leanBodyMassDatasets" label1="Weight(kg)" label="Lean Body Mass(kg)" stepSize=10></measurement-chart>
     </div>
     <div v-if="!isLoading">
       <br>
