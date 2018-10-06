@@ -10,17 +10,25 @@
                     <div class="column is-1">
                       <img :src="plan.avatar" alt="avatar" style="border-radius: 50%">
                     </div>
-                    <div class="column is-2 is-level is-centered">
-                      <span class="tag is-primary">
-                        {{ plan.email }}
-                      </span>
-                    </div>
-                    <div class="column is-7">
+                    <div class="column is-8 is-level is-centered">
                       <div class="has-text-weight-semibold tags">
+                        <span class="tag is-primary">
+                          {{ plan.email }}
+                        </span>
                         <span v-for="award in plan.awards" v-bind:key="award" class="tag is-light is-rounded">
                           {{ award }}
                         </span>
                       </div>
+                    </div>
+                    <div class="column is-3 is-level is-centered">
+                        <div class="tag has-text-weight-semibold is-rounded"
+                          :class="{'is-danger': (plan.fatLost < 0), 'is-success': (plan.fatLost >= 0)}">
+                            Fat: {{plan.fatLost > 0 ? `-${plan.fatLost}` : `+${plan.fatLost * (-1)}`}} kg
+                        </div>
+                        <span class="tag has-text-weight-semibold is-rounded"
+                          :class="{'is-danger': (plan.lbmDiff < 0), 'is-success': (plan.lbmDiff >= 0)}">
+                        Lean: {{plan.lbmDiff > 0 ? '+' : ''}}{{plan.lbmDiff}} kg
+                        </span>
                     </div>
                   </div>
                   <div class="columns">
@@ -39,18 +47,6 @@
                     </div>
                     <div class="column">
                       <span>Tracking: {{plan.daysTracked}} {{plan.daysTracked | pluralize('day')}}</span>
-                    </div>
-                    <div class="column">
-                      <div class="tag has-text-weight-semibold is-rounded"
-                        :class="{'is-danger': (plan.fatLost < 0), 'is-success': (plan.fatLost >= 0)}">
-                          Fat Mass: {{plan.fatLost > 0 ? `-${plan.fatLost}` : `+${plan.fatLost * (-1)}`}} kg
-                       </div>
-                    </div>
-                    <div class="column">
-                      <span class="tag has-text-weight-semibold is-rounded"
-                        :class="{'is-danger': (plan.lbmDiff < 0), 'is-success': (plan.lbmDiff >= 0)}">
-                      Lean Body Mass: {{plan.lbmDiff > 0 ? '+' : ''}}{{plan.lbmDiff}} kg
-                      </span>
                     </div>
                 </div>
              </b-message>
