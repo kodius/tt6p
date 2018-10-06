@@ -3,7 +3,7 @@
       <div class="tile is-ancestor">
         <div class="tile is-12 is-vertical is-parent">
           <article class="tile is-child notification is-warning box">
-            <p class="title">Leader Board...</p>
+            <p class="title">Board...</p>
             <p class="subtitle">Compare with your peers....</p>
                 <b-message v-for="plan in plans" v-bind:key="plan.id">
                   <div class="columns has-text-weight-normal is-uppercase level" @click="$router.push({ name: 'show_profile_path', params: { id: plan.id }})">
