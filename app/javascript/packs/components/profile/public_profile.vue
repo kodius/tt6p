@@ -56,7 +56,7 @@
                     <p class="subtitle">{{ plan.daysTillSixpack }} days</p>
                   </div>
                   <div class="tile is-child box is-6  notification is-success">
-                    <p class="title">Day of Sixpack</p>
+                    <p class="title">Sixpack Day</p>
                     <p class="subtitle">{{ plan.dayOfSixpack }}</p>
                   </div>
                 </div>
