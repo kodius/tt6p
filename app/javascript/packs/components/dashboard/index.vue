@@ -71,10 +71,10 @@
       </div>
     </div>
     <div v-if="loadedCalories">
-      <measurement-chart :height="300" :labels="labels" :datasets="datasets" label="Calories(kcal)" stepSize=500 label1="TDEE calories(kcal)" :datasets1="targetCalories"></measurement-chart>
+      <measurement-chart :height="300" :labels="caloriesLabels" :datasets="datasets" label="Calories(kcal)" stepSize=500 label1="TDEE calories(kcal)" :datasets1="targetCalories"></measurement-chart>
     </div>
     <div v-if="loadedBodyMass">
-      <measurement-chart :height="300" :labels="labels" :datasets1="bodyMassDatasets" :datasets="leanBodyMassDatasets" label1="Weight(kg)" label="Lean Body Mass(kg)" stepSize=10></measurement-chart>
+      <measurement-chart :height="300" :labels="bodyMasssLabels" :datasets1="bodyMassDatasets" :datasets="leanBodyMassDatasets" label1="Weight(kg)" label="Lean Body Mass(kg)" stepSize=10></measurement-chart>
     </div>
     <div v-if="!isLoading">
       <br>
@@ -179,6 +179,8 @@ export default {
       measurements: [],
       bodyMassDatasets: [],
       leanBodyMassDatasets: [],
+      bodyMasssLabels: [],
+      caloriesLabels: [],
       page: 1,
       total: 0,
       loadedBodyMass: false,
@@ -192,6 +194,7 @@ export default {
   },
   mounted () {
     this.loadedCalories = false
+    this.loadedBodyMass = false
     var that = this
     axios
       .get('my-plan')
@@ -206,7 +209,7 @@ export default {
                 that.measurements = response.data.measurements
                 that.total = response.data.count
                 that.isLoading = false
-                this.loadChartData()
+                this.loadCaloriesChartData()
                 this.loadBodyMassChartData()
           })
         }
@@ -214,7 +217,6 @@ export default {
   },
   methods: {
     loadMeasurements() {
-      this.loadedBodyMass = false
       var that = this;
       this.isLoading;
       setTimeout(() => axios
@@ -235,6 +237,7 @@ export default {
       })
       .then(response => {
         for (var idx in response.data[0]) {
+          that.bodyMasssLabels.push(that.currentDimension + ' ' + idx) 
           that.bodyMassDatasets.push(response.data[0][idx]) 
         }
         for (var idx in response.data[1]) {

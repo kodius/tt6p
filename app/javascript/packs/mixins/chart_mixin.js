@@ -10,7 +10,7 @@ var chartMixin = {
     }
   },
   methods: {
-    loadChartData() {
+    loadCaloriesChartData() {
       var that = this;
       axios
       .post('chart-data', {
@@ -20,7 +20,7 @@ var chartMixin = {
       })
       .then(response => {
         for (var idx in response.data[0]) {
-          that.labels.push(that.currentDimension + ' ' + idx) 
+          that.caloriesLabels.push(that.currentDimension + ' ' + idx) 
           that.datasets.push(response.data[0][idx]) 
         }
         for (var idx in response.data[1]) {

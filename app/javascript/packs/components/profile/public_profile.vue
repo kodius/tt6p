@@ -14,7 +14,7 @@
               </div>
           </div>
           <div v-if="loadedBodyMass">
-            <measurement-chart :height="300" :labels="labels" :datasets1="bodyMassDatasets" :datasets="leanBodyMassDatasets" label1="Weight(kg)" label="Lean Body Mass(kg)" stepSize=10></measurement-chart>
+            <measurement-chart :height="300" :labels="bodyMasssLabels" :datasets1="bodyMassDatasets" :datasets="leanBodyMassDatasets" label1="Weight(kg)" label="Lean Body Mass(kg)" stepSize=10></measurement-chart>
           </div>
           <div class="tile is-ancestor">
             <div class="tile is-4 is-vertical is-parent">
@@ -172,7 +172,8 @@ export default {
       measurements: [],
       bodyMassDatasets: [],
       leanBodyMassDatasets: [],
-      loadedBodyMass: false
+      loadedBodyMass: false,
+      bodyMasssLabels: []
     }
   },
   filters: {
@@ -217,6 +218,7 @@ export default {
       })
       .then(response => {
         for (var idx in response.data[0]) {
+          that.bodyMasssLabels.push(that.currentDimension + ' ' + idx) 
           that.bodyMassDatasets.push(response.data[0][idx]) 
         }
         for (var idx in response.data[1]) {
