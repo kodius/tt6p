@@ -22,6 +22,7 @@ json.plans @plans.each do |plan|
   json.fatLost plan.fat_lost
   json.fatMass plan.fat_mass
   json.daysStreak plan.days_streak
+  json.daysTracked plan.days_tracked
   json.email plan.user.email.split('@').first
   json.userId plan.user_id
   json.awards plan.awards

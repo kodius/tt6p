@@ -7,9 +7,16 @@
         <div v-if="!isLoading">
            <div class="tile is-ancestor">
               <div class="tile is-parent">
+                 
                   <div class="tile is-child box is-12 notification">
-                      <p class="title">{{ plan.email }} </p>
-                      <p class="subtitle">{{ plan.awards }}</p>
+                      <div class="has-text-weight-semibold tags">
+                          <span class="tag is-primary">
+                            {{ plan.email }}
+                          </span>
+                          <span v-for="award in plan.awards" v-bind:key="award" class="tag is-light is-rounded">
+                            {{ award }}
+                          </span>
+                      </div>
                   </div>
               </div>
           </div>
@@ -49,7 +56,7 @@
                   </div>
                 </div>
                 <div class="tile">
-                  <div class="tile is-child box is-6">
+                  <div class="tile is-child box is-6 is-success">
                     <p class="title">Days Till Sixpack</p>
                     <p class="subtitle">{{ plan.daysTillSixpack }} days</p>
                   </div>
@@ -58,8 +65,8 @@
                     <p class="subtitle">{{ plan.dayOfSixpack }}</p>
                   </div>
                 </div>
-                <div class="tile is-child box is-12 notification is-danger">
-                  <p class="title">Calories to Eat</p>
+                <div class="tile is-child box is-12 notification">
+                  <p class="title">Allowed Calories</p>
                   <p class="subtitle">{{ plan.totalCalories }}  kcal (cutting 20%)</p>
                 </div>
               </div>

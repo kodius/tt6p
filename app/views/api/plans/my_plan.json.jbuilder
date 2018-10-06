@@ -24,8 +24,9 @@ json.plan do
   json.fatMass @plan.fat_mass
   json.lbmDiff @plan.lbm_diff
   json.daysStreak @plan.days_streak
-  json.awards @plan.awards.join(', ')
-  json.email @plan.user.email
+  json.daysTracked @plan.days_tracked
+  json.awards @plan.awards
+  json.email @plan.user.email.split('@').first
   json.userId @plan.user_id
   json.avatar @plan.user.avatar.url
 end if @plan

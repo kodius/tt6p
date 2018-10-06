@@ -22,7 +22,7 @@ class Api::PlansController < Api::ApiController
   def active_plans
     # tko misli da je ovo elegantnije od raw SQL-a???
     # sere mi se  :)
-    active_user_ids = Measurement.select("user_id").group(:user_id).having("MAX(log_date) >= ?", DateTime.now - 1.week).pluck(:user_id)
+    active_user_ids = Measurement.select("user_id").group(:user_id).having("MAX(log_date) >= ?", DateTime.now - 1.month).pluck(:user_id)
     @plans = Plan.where("user_id in (?)", active_user_ids)
   end
 

@@ -21,6 +21,7 @@ json.plan do
   json.fatLost @plan.fat_lost
   json.fatMass @plan.fat_mass
   json.daysStreak @plan.days_streak
+  json.daysTracked @plan.days_tracked
   json.email @plan.user.email
   json.userId @plan.user_id
   json.lbmDiff @plan.lbm_diff
