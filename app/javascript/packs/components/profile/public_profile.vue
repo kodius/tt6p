@@ -181,6 +181,7 @@ export default {
     }
   },
   mounted () {
+    this.loadedBodyMass = false
     self = this
     axios
       .get('public-profile/' + this.$route.params.id)

@@ -70,7 +70,7 @@
         <br />
       </div>
     </div>
-    <div v-if="measurements && datasets.length > 0">
+    <div v-if="loadedCalories">
       <measurement-chart :height="300" :labels="labels" :datasets="datasets" label="Calories(kcal)" stepSize=500 label1="TDEE calories(kcal)" :datasets1="targetCalories"></measurement-chart>
     </div>
     <div v-if="loadedBodyMass">
@@ -181,7 +181,8 @@ export default {
       leanBodyMassDatasets: [],
       page: 1,
       total: 0,
-      loadedBodyMass: false
+      loadedBodyMass: false,
+      loadedCalories: false
     }
   },
   filters: {
@@ -190,6 +191,7 @@ export default {
     }
   },
   mounted () {
+    this.loadedCalories = false
     var that = this
     axios
       .get('my-plan')
@@ -204,7 +206,6 @@ export default {
                 that.measurements = response.data.measurements
                 that.total = response.data.count
                 that.isLoading = false
-                that.loadedBodyMass = false
                 this.loadChartData()
                 this.loadBodyMassChartData()
           })
@@ -213,6 +214,7 @@ export default {
   },
   methods: {
     loadMeasurements() {
+      this.loadedBodyMass = false
       var that = this;
       this.isLoading;
       setTimeout(() => axios

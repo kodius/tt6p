@@ -26,6 +26,7 @@ var chartMixin = {
         for (var idx in response.data[1]) {
           that.targetCalories.push(response.data[1][idx]) 
         }
+        that.loadedCalories = true
       })
     }
   }
