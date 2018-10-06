@@ -13,6 +13,9 @@
                   </div>
               </div>
           </div>
+          <div v-if="loadedBodyMass">
+            <measurement-chart :height="300" :labels="bodyMasssLabels" :datasets1="bodyMassDatasets" :datasets="leanBodyMassDatasets" label1="Weight(kg)" label="Lean Body Mass(kg)" stepSize=10></measurement-chart>
+          </div>
           <div class="tile is-ancestor">
             <div class="tile is-4 is-vertical is-parent">
               <article class="tile is-child notification is-warning box">
@@ -72,9 +75,6 @@
     </div>
     <div v-if="loadedCalories">
       <measurement-chart :height="300" :labels="caloriesLabels" :datasets="datasets" label="Calories(kcal)" stepSize=500 label1="TDEE calories(kcal)" :datasets1="targetCalories"></measurement-chart>
-    </div>
-    <div v-if="loadedBodyMass">
-      <measurement-chart :height="300" :labels="bodyMasssLabels" :datasets1="bodyMassDatasets" :datasets="leanBodyMassDatasets" label1="Weight(kg)" label="Lean Body Mass(kg)" stepSize=10></measurement-chart>
     </div>
     <div v-if="!isLoading">
       <br>
