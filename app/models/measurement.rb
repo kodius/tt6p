@@ -51,6 +51,10 @@ class Measurement < ApplicationRecord
   def set_chart_data
     if log_date.present?
       self.week_num, self.month_num, self.year_num = log_date.strftime('%W %m %Y').split(' ')
+      self.lean_body_mass = lbm
+      if user.present? && user.plan.present?
+        self.target_calories = user.plan.tdee
+      end
     end
   end
 
