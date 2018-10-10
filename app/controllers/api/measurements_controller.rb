@@ -35,21 +35,18 @@ class Api::MeasurementsController < Api::ApiController
   end
 
   def create
-    begin
-      @measurement = Measurement.find(measurement_params['id'])
-      @measurement.update(measurement_params)
-      log_date = (@measurement.log_date + 2.hours).to_date
-      @measurement.log_date = log_date
-      @measurement.user = current_user
-      @measurement.save!
-    rescue ActiveRecord::RecordNotFound
+    @measurement = Measurement.find_by_id(measurement_params['id'])
+    if @measurement.blank?
       @measurement = Measurement.new(measurement_params)
       log_date = (@measurement.log_date + 2.hours).to_date
       @measurement.log_date = log_date
       @measurement.user = current_user
+      #make sure to remove doubles - only one log date per user measurement is allowed
       Measurement.where("user_id = ? and log_date = ?", @measurement.user_id, log_date).delete_all
-      @measurement.save!
+    else
+      @measurement.update(measurement_params)
     end
+    @measurement.save!
   end
 
   def destroy
