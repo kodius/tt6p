@@ -35,14 +35,10 @@
         let form_data = new FormData();
         var that = this;
         form_data.append('image', this.file, this.file.name);
-        form_data.append('log_date', this.measurement.logDate);
+        form_data.append('measurement_id', this.measurement.id);
         this.isLoading = true;
 
-        axios.post('upload-image', form_data, {
-          headers: {
-            'Content-Type': `multipart/form-data; boundary=${this.file._boundary}`
-          }
-        }).then(response => {
+        axios.post('upload-image', form_data, {}).then(response => {
           that.$parent.close();
           that.isLoading = false;
           that.$toast.open({

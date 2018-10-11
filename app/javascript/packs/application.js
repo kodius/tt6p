@@ -11,13 +11,21 @@ import Vue2Filters from 'vue2-filters';
 Vue.component('nav-top', NavTop);
 
 axios.defaults.baseURL = process.env.API_BASE_URL;
-axios.defaults.transformRequest = [function (data, headers) {
-  headers['Authorization'] = 'Bearer ' + localStorage.auth_key_secret;
-  return JSON.stringify(data);
-}];
-axios.defaults.headers = {
-  'Content-Type': 'application/json'
-};
+
+axios.interceptors.request.use(
+  config => {
+    if (config.baseURL === process.env.API_BASE_URL && !config.headers.Authorization) {
+      const token = localStorage.auth_key_secret;
+
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    }
+
+    return config;
+  },
+  error => Promise.reject(error)
+);
 
 Vue.use(VueI18n);
 Vue.use(Buefy);

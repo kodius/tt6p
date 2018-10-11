@@ -54,10 +54,12 @@ class Api::MeasurementsController < Api::ApiController
   end
 
   def image_upload
-    @measurement = Measurement.where("user_id = ? and log_date = ?", current_user, params[:log_date].to_date).first
+    measurement = Measurement.find_by_id(params[:measurement_id])
 
-    @measurement.image = params[:image]
-    @measurement.save!
+    if measurement
+      measurement.image = params[:image]
+      measurement.save!
+    end
   end
 
   def new 
