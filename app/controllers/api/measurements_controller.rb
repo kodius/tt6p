@@ -62,6 +62,9 @@ class Api::MeasurementsController < Api::ApiController
     Measurement.delete(params[:id])
   end
 
+  #ovdje je ostao bug - kad se promijeni datum treba dohvatiti taj log ako ima ili dodati novi
+  #slicno kao i za ovaj gore create
+  #to mozemo napraviti tako da se kod logiranja vrati ID koji smo dobili i onda se on dalje salje za upload slike
   def image_upload
     measurement = Measurement.find_by_id(params[:measurement_id])
 
@@ -72,8 +75,8 @@ class Api::MeasurementsController < Api::ApiController
   end
 
   def new 
-    last_measurement = Measurement.where('user_id = ?', current_user.id).order("log_date desc").first 
-    if last_measurement && last_measurement.log_date == DateTime.now.to_date
+    last_measurement = Measurement.where('user_id = ? and log_date = ?', current_user.id, DateTime.now.to_date).first
+    if last_measurement 
       @measurement = last_measurement
     else
       @measurement = Measurement.new
