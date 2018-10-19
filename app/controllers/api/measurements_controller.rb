@@ -79,9 +79,10 @@ class Api::MeasurementsController < Api::ApiController
     if last_measurement 
       @measurement = last_measurement
     else
+      last_measurement = Measurement.where('user_id = ?', current_user.id).order("log_date desc").first
       @measurement = Measurement.new
+      @measurement.user = current_user
       if last_measurement
-        @measurement.user = current_user
         @measurement.weight = last_measurement.weight
         @measurement.body_fat = last_measurement.body_fat
       end
