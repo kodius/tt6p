@@ -7,9 +7,9 @@ class Api::AuthsController < Api::ApiController
     if token_command.success?
       user = User.find_by_email(params[:email])
 
-      render json: { token: token_command.result, user: user }, status: 200
+      render json: {token: token_command.result, user: user}, status: 200
     else
-      render json: { error: token_command.errors }, status: 401
+      render json: {error: token_command.errors}, status: 401
     end
   end
 

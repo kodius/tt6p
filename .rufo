@@ -1,0 +1,4 @@
+align_chained_calls true
+trailing_commas false
+parens_in_def :yes
+quote_style :single
