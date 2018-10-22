@@ -55,6 +55,7 @@ class Api::MeasurementsController < Api::ApiController
     measurement.update(measurement_params)
     measurement.log_date = log_date
     measurement.save!
+    render json: {id: measurement.id}
   end
 
   def destroy

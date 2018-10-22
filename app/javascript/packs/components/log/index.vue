@@ -107,6 +107,7 @@ export default {
         weight: null,
         bodyFat: null,
         calories: null,
+        id: null
       },
       errors: {
         date: null,
@@ -143,6 +144,7 @@ export default {
                     position: 'is-bottom',
                     type: 'is-success'
                 });
+          that.measurement.id = response.data['id'];
           that.step = 1;
           that.isLoading = false;
         });
