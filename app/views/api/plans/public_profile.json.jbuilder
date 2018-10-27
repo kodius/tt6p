@@ -1,4 +1,4 @@
-json.plan do 
+json.plan do
   json.id @plan.id
   json.createdAt l(@plan.created_at, format: :default)
   json.weight @plan.weight
@@ -26,4 +26,8 @@ json.plan do
   json.userId @plan.user_id
   json.lbmDiff @plan.lbm_diff
   json.awards @plan.awards.join(', ')
+  json.totalDeficit @plan.total_deficit
+  json.weeklyAverage @plan.weekly_average
+  json.weightChangeExpected @plan.weight_change_expected
+  json.weightChange @plan.weight_change
 end

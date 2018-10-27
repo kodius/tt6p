@@ -34,12 +34,22 @@
                 <strong>Gender: </strong>{{ plan.gender | humanize }}
                 <br/>
                 <strong>Activity Level:</strong> {{ plan.activityLevel | humanize }}
-              </article>
-              <article class="tile is-child notification is-info box">
-                <p class="title">Target Stats</p>
+                <br/>
+                <br/>
                 <strong>Target Body Fat: </strong>{{ plan.targetBodyFat }}%
                 <br/>
                 <strong>Target Weight: </strong>{{ plan.targetWeight }} kg
+              </article>
+              <article class="tile is-child notification is-info">
+                <p class="title">Totals</p>
+                <strong>Total Deficit:</strong> {{ plan.totalDeficit }} kcal
+                <br/>
+                <strong>Expected Change:</strong> {{ plan.weightChangeExpected }} kg
+                <br/>
+                <strong>Change:</strong> {{ plan.weightChange }} kg
+                <br/>
+                <strong>Weekly Average:</strong> {{ plan.weeklyAverage }} kg
+                <br/>
               </article>
             </div>
             <div class="tile is-parent">
@@ -72,6 +82,7 @@
               </div>
             </div>
           </div>
+
           <p><router-link :to="{ name: 'log_path' }" class="button is-large is-primary" role="button">Log data</router-link></p>
         </div>
         <div v-else>

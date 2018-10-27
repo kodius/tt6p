@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_18_182218) do
+ActiveRecord::Schema.define(version: 2018_10_27_160350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2018_10_18_182218) do
     t.decimal "lean_body_mass", precision: 15, scale: 2
     t.decimal "target_calories", precision: 15, scale: 2
     t.integer "days_till_sixpack"
+    t.decimal "allowed_calories", precision: 15, scale: 2
     t.index ["user_id", "month_num"], name: "index_measurements_on_user_id_and_month_num"
     t.index ["user_id", "week_num"], name: "index_measurements_on_user_id_and_week_num"
     t.index ["user_id", "year_num"], name: "index_measurements_on_user_id_and_year_num"

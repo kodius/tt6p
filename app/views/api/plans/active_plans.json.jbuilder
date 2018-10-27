@@ -27,4 +27,8 @@ json.plans @plans.each do |plan|
   json.userId plan.user_id
   json.awards plan.awards
   json.avatar plan.user.avatar.url
+  json.totalDeficit plan.total_deficit
+  json.weeklyAverage plan.weekly_average
+  json.weightChangeExpected plan.weight_change_expected
+  json.weightChange plan.weight_change
 end

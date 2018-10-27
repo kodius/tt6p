@@ -6,36 +6,36 @@ class Measurement < ApplicationRecord
 
   before_save :set_success, :set_chart_data
 
-  def self.chart_data(average_item, args={})
+  def self.chart_data(average_item, args = {})
     set_query_filters(args)
     base_query(average_item)
   end
 
   def lbm
     if body_fat.present? && weight.present?
-      (weight * (1 - body_fat/100.0)).round(1)
+      (weight * (1 - body_fat / 100.0)).round(1)
     else
       nil
     end
   end
 
   def set_success
-    plan = Plan.where("user_id = ?", user_id).first
+    plan = Plan.where('user_id = ?', user_id).first
     if calories.present?
       if calories <= plan.total_calories
         self.success = true
       else
-        #check last week if we are still below calorie wise 
+        #check last week if we are still below calorie wise
         #make it success
         measurement_date = self.log_date
-        last_week = Measurement.where("user_id = ? and log_date < ?", user_id, measurement_date).
+        last_week = Measurement.where('user_id = ? and log_date < ?', user_id, measurement_date).
           where.not(calories: nil).
-          order("log_date desc").
+          order('log_date desc').
           limit(7).
           pluck(:calories) || []
         last_week = last_week << calories
         if last_week.count > 0
-          average = last_week.reduce(:+)/last_week.count.to_f
+          average = last_week.reduce(:+) / last_week.count.to_f
           if average < plan.total_calories
             self.success = true
           else
@@ -54,6 +54,7 @@ class Measurement < ApplicationRecord
       self.lean_body_mass ||= lbm
       if user.present? && user.plan.present?
         self.target_calories ||= user.plan.tdee
+        self.allowed_calories ||= user.plan.total_calories
         self.days_till_sixpack ||= user.plan.days_till_sixpack
       end
     end
@@ -73,11 +74,9 @@ class Measurement < ApplicationRecord
     result.each_pair do |key, value|
       result[key] = value&.round(1) || 0
     end
-
   end
 
-  def self.set_query_filters opts
-    opts.each { |k,v| instance_variable_set("@#{k}", v) }
+  def self.set_query_filters(opts)
+    opts.each { |k, v| instance_variable_set("@#{k}", v) }
   end
-
 end

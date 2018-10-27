@@ -1,4 +1,4 @@
-json.plan do 
+json.plan do
   json.id @plan.id
   json.createdAt l(@plan.created_at, format: :default)
   json.weight @plan.weight
@@ -29,6 +29,10 @@ json.plan do
   json.email @plan.user.email.split('@').first
   json.userId @plan.user_id
   json.avatar @plan.user.avatar.url
+  json.totalDeficit @plan.total_deficit
+  json.weeklyAverage @plan.weekly_average
+  json.weightChangeExpected @plan.weight_change_expected
+  json.weightChange @plan.weight_change
 end if @plan
 json.noplan false if @plan
 json.noplan true unless @plan
