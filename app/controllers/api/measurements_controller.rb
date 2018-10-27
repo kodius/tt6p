@@ -75,6 +75,7 @@ class Api::MeasurementsController < Api::ApiController
   end
 
   def new
+    # popraviti da koristi vremensku zonu klijenta
     last_measurement = Measurement.where('user_id = ? and log_date = ?', current_user.id, DateTime.now.to_date).first
     if last_measurement
       @measurement = last_measurement
