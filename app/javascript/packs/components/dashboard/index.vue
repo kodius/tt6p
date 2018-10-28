@@ -211,7 +211,7 @@ export default {
   },
   mounted () {
     this.$store.dispatch('currentUser/loadPlan')
-    this.$store.dispatch('currentUser/loadBodyMassData', { dimension: 'week' })
+    this.$store.dispatch('currentUser/loadBodyMassData', { dimension: this.currentDimension })
     this.loadedCalories = false
     var that = this
     axios.get('measurements?page=' + this.page)
