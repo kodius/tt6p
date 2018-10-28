@@ -151,12 +151,10 @@ import Layout from '../shared/layout';
 import Vue from 'vue/dist/vue.esm';
 import humanizeString from 'humanize-string';
 import MeasurementChart from '../charts/measurement_chart';
-import chartMixin from '../../mixins/chart_mixin';
 
 Vue.component('measurement-chart', MeasurementChart);
 
 export default {
-  mixins: [chartMixin],
   components: {
     Layout,
     MeasurementChart

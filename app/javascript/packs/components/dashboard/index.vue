@@ -87,8 +87,8 @@
         <br />
       </div>
     </div>
-    <div v-if="loadedCalories">
-      <measurement-chart :height="300" :labels="caloriesLabels" :datasets="datasets" label="Calories(kcal)" stepSize=500 label1="TDEE calories(kcal)" :datasets1="targetCalories"></measurement-chart>
+    <div v-if="calories.loaded">
+      <measurement-chart :height="300" :labels="calories.labels" :datasets="calories.totalCalories" :datasets1="calories.allowedCalories" label="Calories(kcal)" stepSize=500 label1="TDEE calories(kcal)" ></measurement-chart>
     </div>
     <div v-if="!isLoading">
       <br>
@@ -174,13 +174,11 @@ import MeasurementChart from '../charts/measurement_chart';
 import Vue from 'vue/dist/vue.esm';
 import humanizeString from 'humanize-string';
 import editLogModal from '../modals/edit_log_modal';
-import chartMixin from '../../mixins/chart_mixin';
 
 Vue.component('measurement-chart', MeasurementChart);
 Vue.use(Buefy)
 
 export default {
-  mixins: [chartMixin],
   components: {
     Layout,
     MeasurementChart
@@ -190,10 +188,8 @@ export default {
       isLoading: true,
       currentDimension: 'week',
       measurements: [],
-      caloriesLabels: [],
       page: 1,
       total: 0,
-      loadedCalories: false
     }
   },
   computed: {
@@ -202,6 +198,9 @@ export default {
     },
     bodyMass() {
       return this.$store.state.currentUser.bodyMass
+    },
+    calories() {
+      return this.$store.state.currentUser.calories
     }
   },
   filters: {
@@ -211,15 +210,14 @@ export default {
   },
   mounted () {
     this.$store.dispatch('currentUser/loadPlan')
-    this.$store.dispatch('currentUser/loadBodyMassData', { dimension: this.currentDimension })
-    this.loadedCalories = false
+    this.$store.dispatch('currentUser/loadBodyMass', { dimension: this.currentDimension })
+    this.$store.dispatch('currentUser/loadCalories', { dimension: this.currentDimension })
     var that = this
     axios.get('measurements?page=' + this.page)
             .then(response => {
                 that.measurements = response.data.measurements
                 that.total = response.data.count
                 that.isLoading = false
-                this.loadCaloriesChartData()
           }
       )
   },
