@@ -1,8 +1,6 @@
 <template>
   <layout>
-
     <div class="container">
-
       <div class="notification">
         <div v-if="initialLoad">
           <div> 
@@ -82,7 +80,6 @@
                 </div>
               </div>
             </div>
-
             <p><router-link :to="{ name: 'log_path' }" class="button is-large is-primary" role="button">Log data</router-link></p>
           </div>
         </div>
@@ -95,7 +92,7 @@
     <div v-if="calories.loaded">
       <measurement-chart :height="300" :labels="calories.labels" :datasets="calories.totalCalories" :datasets1="calories.allowedCalories" label="Calories(kcal)" stepSize=500 label1="TDEE calories(kcal)" ></measurement-chart>
     </div>
-    <div v-if="!isLoading">
+    <div v-if="measurements.loaded">
       <br>
       <table class="table is-bordered is-striped is-fullwidth">
         <thead>
@@ -110,7 +107,7 @@
           </tr>
         </thead>
         <tbody>
-        <tr v-for="measurement in measurements" 
+        <tr v-for="measurement in measurements.data" 
             v-bind:key="measurement.id">
           <td>{{ measurement.logDate }} </td>
           <td>{{ measurement.weight }} kg</td>
@@ -154,17 +151,15 @@
         </tr>
         </tbody>
       </table>
-      <div v-if="total > 20"> 
+      <div v-if="measurements.count > 20"> 
         <b-pagination
-          :total="total"
-          :current.sync="page"
+          :total="measurements.count"
+          :current.sync="currentPage"
           :per-page="20"
-          order="is-centered"
-          @change="loadMeasurements">
+          order="is-centered">
         </b-pagination>
       </div>
     </div>
-    <b-loading :is-full-page="true" :active.sync="isLoading" :can-cancel="false"></b-loading>
     <section class="section">
        Powered by Kodius 
     </section>
@@ -190,11 +185,8 @@ export default {
   },
   data () {
     return {
-      isLoading: true,
       currentDimension: 'week',
-      measurements: [],
-      page: 1,
-      total: 0,
+      currentPage: 1
     }
   },
   computed: {
@@ -209,6 +201,9 @@ export default {
     },
     calories() {
       return this.$store.state.currentUser.calories
+    },
+    measurements() {
+      return this.$store.state.currentUser.measurements
     }
   },
   filters: {
@@ -220,26 +215,11 @@ export default {
     this.$store.dispatch('currentUser/loadPlan')
     this.$store.dispatch('currentUser/loadBodyMass', { dimension: this.currentDimension })
     this.$store.dispatch('currentUser/loadCalories', { dimension: this.currentDimension })
-    var that = this
-    axios.get('measurements?page=' + this.page)
-            .then(response => {
-                that.measurements = response.data.measurements
-                that.total = response.data.count
-                that.isLoading = false
-          }
-      )
+    this.$store.dispatch('currentUser/loadMeasurements', { page: this.currentPage })
   },
   methods: {
     loadMeasurements() {
-      var that = this;
-      this.isLoading;
-      setTimeout(() => axios
-        .get('measurements?page=' + this.page)
-        .then(response => {
-            that.measurements = response.data.measurements
-            that.total = response.data.count
-            that.isLoading = false
-      }), 50);
+      this.$store.dispatch('currentUser/loadMeasurements', { page: this.currentPage })
     },
     openEditModal (measurement) {
       this.$modal.open({
@@ -280,7 +260,12 @@ export default {
         </p>`
       )
     }
-  }
+  }, 
+  watch: {
+    currentPage: function (newCurrentPage, oldCurrentPage) {
+      this.$store.dispatch('currentUser/loadMeasurements', { page: newCurrentPage })
+    }
+  },
 }
 
 </script>

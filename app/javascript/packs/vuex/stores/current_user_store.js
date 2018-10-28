@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { stat } from 'fs';
 
 const CurrentUserStore = {
   namespaced: true,
@@ -15,6 +16,11 @@ const CurrentUserStore = {
       labels: [],
       allowedCalories: [],
       totalCalories: [],
+      loaded: false
+    },
+    measurements: {
+      data: [],
+      count: 0,
       loaded: false
     }
   },
@@ -37,6 +43,11 @@ const CurrentUserStore = {
       state.calories.totalCalories = data.totalCalories
       state.calories.loaded = true
       return state
+    },
+    setMeasurements(state, data){
+      state.measurements.data = data.measurements
+      state.measurements.count = data.count
+      state.measurements.loaded = true
     }
   },
   actions: {
@@ -46,6 +57,15 @@ const CurrentUserStore = {
          .then(response => {
            commit('setPlan', response.data.plan)
          })
+    },
+    loadMeasurements({ commit }, query) {
+      axios.get('measurements?page=' + query.page)
+       .then(response => {
+         commit('setMeasurements', {
+           measurements: response.data.measurements,
+           count: response.data.count
+         })
+       })
     },
     loadBodyMass({ commit }, query) {
       axios.post('chart-data', {
