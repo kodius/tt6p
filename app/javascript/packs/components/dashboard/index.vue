@@ -19,8 +19,8 @@
                   </div>
               </div>
           </div>
-          <div v-if="loadedBodyMass">
-            <measurement-chart :height="300" :labels="bodyMasssLabels" :datasets1="bodyMassDatasets" :datasets="leanBodyMassDatasets" label1="Weight(kg)" label="Lean Body Mass(kg)" stepSize=10></measurement-chart>
+          <div v-if="bodyMass.loaded">
+            <measurement-chart :height="300" :labels="bodyMass.labels" :datasets1="bodyMass.totalBodyMass" :datasets="bodyMass.leanBodyMass" label1="Weight(kg)" label="Lean Body Mass(kg)" stepSize=10></measurement-chart>
           </div>
           <div class="tile is-ancestor">
             <div class="tile is-4 is-vertical is-parent">
@@ -190,19 +190,18 @@ export default {
       isLoading: true,
       currentDimension: 'week',
       measurements: [],
-      bodyMassDatasets: [],
-      leanBodyMassDatasets: [],
-      bodyMasssLabels: [],
       caloriesLabels: [],
       page: 1,
       total: 0,
-      loadedBodyMass: false,
       loadedCalories: false
     }
   },
   computed: {
     plan() {
       return this.$store.state.currentUser.plan
+    },
+    bodyMass() {
+      return this.$store.state.currentUser.bodyMass
     }
   },
   filters: {
@@ -211,9 +210,9 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('currentUser/getPlan')
+    this.$store.dispatch('currentUser/loadPlan')
+    this.$store.dispatch('currentUser/loadBodyMassData', { dimension: 'week' })
     this.loadedCalories = false
-    this.loadedBodyMass = false
     var that = this
     axios.get('measurements?page=' + this.page)
             .then(response => {
@@ -221,7 +220,6 @@ export default {
                 that.total = response.data.count
                 that.isLoading = false
                 this.loadCaloriesChartData()
-                this.loadBodyMassChartData()
           }
       )
   },
@@ -236,25 +234,6 @@ export default {
             that.total = response.data.count
             that.isLoading = false
       }), 50);
-    },
-    loadBodyMassChartData() {
-      var that = this;
-      axios
-      .post('chart-data', {
-        dimension: that.currentDimension,
-        id: that.$route.params.id,
-        average_on: 'weight'
-      })
-      .then(response => {
-        for (var idx in response.data[0]) {
-          that.bodyMasssLabels.push(that.currentDimension + ' ' + idx) 
-          that.bodyMassDatasets.push(response.data[0][idx]) 
-        }
-        for (var idx in response.data[1]) {
-          that.leanBodyMassDatasets.push(response.data[1][idx]) 
-        }
-        that.loadedBodyMass = true
-      })
     },
     openEditModal (measurement) {
       this.$modal.open({
