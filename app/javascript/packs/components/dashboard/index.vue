@@ -4,85 +4,90 @@
     <div class="container">
 
       <div class="notification">
-        <div> 
-           <div class="tile is-ancestor">
+        <div v-if="initialLoad">
+          <div> 
+            <div class="tile is-ancestor">
+                <div class="tile is-parent">
+                    <div class="tile is-child box is-12 notification">
+                        <div class="has-text-weight-semibold tags">
+                            <span class="tag is-primary">
+                              {{ plan.email }}
+                            </span>
+                            <span v-for="award in plan.awards" v-bind:key="award" class="tag is-light is-rounded">
+                              {{ award }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-if="bodyMass.loaded">
+              <measurement-chart :height="300" :labels="bodyMass.labels" :datasets1="bodyMass.totalBodyMass" :datasets="bodyMass.leanBodyMass" label1="Weight(kg)" label="Lean Body Mass(kg)" stepSize=10></measurement-chart>
+            </div>
+            <div class="tile is-ancestor">
+              <div class="tile is-4 is-vertical is-parent">
+                <article class="tile is-child notification is-warning box">
+                  <p class="title">Body Stats</p>
+                  <strong>Weight:</strong> {{ plan.lastWeight }} kg
+                  <br/>
+                  <strong>Body Fat:</strong> {{ plan.lastBodyFat }}%
+                  <br/>
+                  <strong>Gender: </strong>{{ plan.gender | humanize }}
+                  <br/>
+                  <strong>Activity Level:</strong> {{ plan.activityLevel | humanize }}
+                  <br/>
+                  <br/>
+                  <strong>Target Body Fat: </strong>{{ plan.targetBodyFat }}%
+                  <br/>
+                  <strong>Target Weight: </strong>{{ plan.targetWeight }} kg
+                </article>
+                <article class="tile is-child notification is-info">
+                  <p class="title">Totals</p>
+                  <strong>Total Deficit:</strong> {{ plan.totalDeficit }} kcal
+                  <br/>
+                  <strong>Expected Change:</strong> {{ plan.weightChangeExpected }} kg
+                  <br/>
+                  <strong>Change:</strong> {{ plan.weightChange }} kg
+                  <br/>
+                  <strong>Weekly Average:</strong> {{ plan.weeklyAverage }} kg
+                  <br/>
+                </article>
+              </div>
               <div class="tile is-parent">
+                <div class="tile is-child box">
+                  <p class="title">Lean Mass & Calories</p>
+                  <div class="tile">
+                    <div class="tile is-child box is-6">
+                      <p class="title">LBM</p>
+                      <p class="subtitle">{{ plan.lastLbm }} kg</p>
+                    </div>
+                    <div class="tile is-child box is-6">
+                      <p class="title">TDEE</p>
+                      <p class="subtitle">{{ plan.tdee }} kcal</p>
+                    </div>
+                  </div>
+                  <div class="tile">
+                    <div class="tile is-child box is-6 is-success">
+                      <p class="title">Days Till Sixpack</p>
+                      <p class="subtitle">{{ plan.daysTillSixpack }} days</p>
+                    </div>
+                    <div class="tile is-child box is-6  notification is-success">
+                      <p class="title">Sixpack Day</p>
+                      <p class="subtitle">{{ plan.dayOfSixpack }}</p>
+                    </div>
+                  </div>
                   <div class="tile is-child box is-12 notification">
-                      <div class="has-text-weight-semibold tags">
-                          <span class="tag is-primary">
-                            {{ plan.email }}
-                          </span>
-                          <span v-for="award in plan.awards" v-bind:key="award" class="tag is-light is-rounded">
-                            {{ award }}
-                          </span>
-                      </div>
+                    <p class="title">Allowed Calories</p>
+                    <p class="subtitle">{{ plan.totalCalories }}  kcal (cutting 20%)</p>
                   </div>
-              </div>
-          </div>
-          <div v-if="bodyMass.loaded">
-            <measurement-chart :height="300" :labels="bodyMass.labels" :datasets1="bodyMass.totalBodyMass" :datasets="bodyMass.leanBodyMass" label1="Weight(kg)" label="Lean Body Mass(kg)" stepSize=10></measurement-chart>
-          </div>
-          <div class="tile is-ancestor">
-            <div class="tile is-4 is-vertical is-parent">
-              <article class="tile is-child notification is-warning box">
-                <p class="title">Body Stats</p>
-                <strong>Weight:</strong> {{ plan.lastWeight }} kg
-                <br/>
-                <strong>Body Fat:</strong> {{ plan.lastBodyFat }}%
-                <br/>
-                <strong>Gender: </strong>{{ plan.gender | humanize }}
-                <br/>
-                <strong>Activity Level:</strong> {{ plan.activityLevel | humanize }}
-                <br/>
-                <br/>
-                <strong>Target Body Fat: </strong>{{ plan.targetBodyFat }}%
-                <br/>
-                <strong>Target Weight: </strong>{{ plan.targetWeight }} kg
-              </article>
-              <article class="tile is-child notification is-info">
-                <p class="title">Totals</p>
-                <strong>Total Deficit:</strong> {{ plan.totalDeficit }} kcal
-                <br/>
-                <strong>Expected Change:</strong> {{ plan.weightChangeExpected }} kg
-                <br/>
-                <strong>Change:</strong> {{ plan.weightChange }} kg
-                <br/>
-                <strong>Weekly Average:</strong> {{ plan.weeklyAverage }} kg
-                <br/>
-              </article>
-            </div>
-            <div class="tile is-parent">
-              <div class="tile is-child box">
-                <p class="title">Lean Mass & Calories</p>
-                <div class="tile">
-                  <div class="tile is-child box is-6">
-                    <p class="title">LBM</p>
-                    <p class="subtitle">{{ plan.lastLbm }} kg</p>
-                  </div>
-                  <div class="tile is-child box is-6">
-                    <p class="title">TDEE</p>
-                    <p class="subtitle">{{ plan.tdee }} kcal</p>
-                  </div>
-                </div>
-                <div class="tile">
-                  <div class="tile is-child box is-6 is-success">
-                    <p class="title">Days Till Sixpack</p>
-                    <p class="subtitle">{{ plan.daysTillSixpack }} days</p>
-                  </div>
-                  <div class="tile is-child box is-6  notification is-success">
-                    <p class="title">Sixpack Day</p>
-                    <p class="subtitle">{{ plan.dayOfSixpack }}</p>
-                  </div>
-                </div>
-                <div class="tile is-child box is-12 notification">
-                  <p class="title">Allowed Calories</p>
-                  <p class="subtitle">{{ plan.totalCalories }}  kcal (cutting 20%)</p>
                 </div>
               </div>
             </div>
-          </div>
 
-          <p><router-link :to="{ name: 'log_path' }" class="button is-large is-primary" role="button">Log data</router-link></p>
+            <p><router-link :to="{ name: 'log_path' }" class="button is-large is-primary" role="button">Log data</router-link></p>
+          </div>
+        </div>
+        <div v-else>
+          Loading...
         </div>
         <br />
       </div>
@@ -193,6 +198,9 @@ export default {
     }
   },
   computed: {
+    initialLoad() {
+      return this.$store.state.currentUser.initialLoad
+    },
     plan() {
       return this.$store.state.currentUser.plan
     },

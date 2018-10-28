@@ -4,6 +4,7 @@ const CurrentUserStore = {
   namespaced: true,
   state: {
     plan: {},
+    initialLoad: false,
     bodyMass: {
       labels: [],
       totalBodyMass: [],
@@ -20,6 +21,7 @@ const CurrentUserStore = {
   mutations: {
     setPlan(state, plan) {
       state.plan = plan
+      state.initialLoad = true
       return state
     },
     setBodyMass(state, data) {

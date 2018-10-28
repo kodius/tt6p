@@ -4,7 +4,7 @@ import { Bar, Line, mixins } from 'vue-chartjs'
 export default {
   extends: Line,
   mixins: [mixins.reactiveProp],
-  props: ['labels', 'datasets', 'loaded', 'label','stepSize', 'label1', 'datasets1'],
+  props: ['chartData', 'labels', 'datasets', 'loaded', 'label','stepSize', 'label1', 'datasets1'],
   mounted () {
     this.gradient = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450)
     this.gradient2 = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450)
