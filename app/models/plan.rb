@@ -40,11 +40,11 @@ class Plan < ApplicationRecord
   end
 
   def total_deficit
-    Measurement.where('user_id =?', user_id).order('log_date desc').sum('target_calories - calories').floor
+    Measurement.where('user_id =?', user_id).order('log_date desc').sum('target_calories - coalesce(calories, target_calories)').floor
   end
 
   def weight_change_expected
-    (total_deficit / 7500).round(1)
+    (total_deficit / 7700.0).round(1)
   end
 
   def weekly_average
