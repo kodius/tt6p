@@ -4,10 +4,9 @@
     <div class="container">
 
       <div class="notification">
-        <div v-if="!isLoading">
+        <div> 
            <div class="tile is-ancestor">
               <div class="tile is-parent">
-                 
                   <div class="tile is-child box is-12 notification">
                       <div class="has-text-weight-semibold tags">
                           <span class="tag is-primary">
@@ -84,9 +83,6 @@
           </div>
 
           <p><router-link :to="{ name: 'log_path' }" class="button is-large is-primary" role="button">Log data</router-link></p>
-        </div>
-        <div v-else>
-          Loading...
         </div>
         <br />
       </div>
@@ -192,7 +188,6 @@ export default {
   data () {
     return {
       isLoading: true,
-      plan: null,
       currentDimension: 'week',
       measurements: [],
       bodyMassDatasets: [],
@@ -205,33 +200,30 @@ export default {
       loadedCalories: false
     }
   },
+  computed: {
+    plan() {
+      return this.$store.state.currentUser.plan
+    }
+  },
   filters: {
     humanize(text) {
       return humanizeString(text);
     }
   },
   mounted () {
+    this.$store.dispatch('currentUser/getPlan')
     this.loadedCalories = false
     this.loadedBodyMass = false
     var that = this
-    axios
-      .get('my-plan')
-      .then(response => {
-        if (response.data.noplan) {
-          that.$router.push({ name: 'my_profile_path' })
-        } else {
-          that.plan = response.data.plan
-          axios
-            .get('measurements?page=' + this.page)
+    axios.get('measurements?page=' + this.page)
             .then(response => {
                 that.measurements = response.data.measurements
                 that.total = response.data.count
                 that.isLoading = false
                 this.loadCaloriesChartData()
                 this.loadBodyMassChartData()
-          })
-        }
-      })
+          }
+      )
   },
   methods: {
     loadMeasurements() {

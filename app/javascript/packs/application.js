@@ -72,5 +72,3 @@ const app = new Vue({
     }
   }
 }).$mount('#app')
-
-window.kurac = app;
