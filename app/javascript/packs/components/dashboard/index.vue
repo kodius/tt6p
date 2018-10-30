@@ -3,85 +3,14 @@
     <div class="container">
       <div class="notification">
         <div v-if="initialLoad">
-          <div> 
-            <div class="tile is-ancestor">
-                <div class="tile is-parent">
-                    <div class="tile is-child box is-12 notification">
-                        <div class="has-text-weight-semibold tags">
-                            <span class="tag is-primary">
-                              {{ plan.email }}
-                            </span>
-                            <span v-for="award in plan.awards" v-bind:key="award" class="tag is-light is-rounded">
-                              {{ award }}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div v-if="bodyMass.loaded">
-              <measurement-chart :height="300" :labels="bodyMass.labels" :datasets1="bodyMass.totalBodyMass" :datasets="bodyMass.leanBodyMass" label1="Weight(kg)" label="Lean Body Mass(kg)" stepSize=10></measurement-chart>
-            </div>
-            <div class="tile is-ancestor">
-              <div class="tile is-4 is-vertical is-parent">
-                <article class="tile is-child notification is-warning box">
-                  <p class="title">Body Stats</p>
-                  <strong>Weight:</strong> {{ plan.lastWeight }} kg
-                  <br/>
-                  <strong>Body Fat:</strong> {{ plan.lastBodyFat }}%
-                  <br/>
-                  <strong>Gender: </strong>{{ plan.gender | humanize }}
-                  <br/>
-                  <strong>Activity Level:</strong> {{ plan.activityLevel | humanize }}
-                  <br/>
-                  <br/>
-                  <strong>Target Body Fat: </strong>{{ plan.targetBodyFat }}%
-                  <br/>
-                  <strong>Target Weight: </strong>{{ plan.targetWeight }} kg
-                </article>
-                <article class="tile is-child notification is-info">
-                  <p class="title">Totals</p>
-                  <strong>Total Deficit:</strong> {{ plan.totalDeficit }} kcal
-                  <br/>
-                  <strong>Expected Change:</strong> {{ plan.weightChangeExpected }} kg
-                  <br/>
-                  <strong>Change:</strong> {{ plan.weightChange }} kg
-                  <br/>
-                  <strong>Weekly Average:</strong> {{ plan.weeklyAverage }} kg
-                  <br/>
-                </article>
-              </div>
-              <div class="tile is-parent">
-                <div class="tile is-child box">
-                  <p class="title">Lean Mass & Calories</p>
-                  <div class="tile">
-                    <div class="tile is-child box is-6">
-                      <p class="title">LBM</p>
-                      <p class="subtitle">{{ plan.lastLbm }} kg</p>
-                    </div>
-                    <div class="tile is-child box is-6">
-                      <p class="title">TDEE</p>
-                      <p class="subtitle">{{ plan.tdee }} kcal</p>
-                    </div>
-                  </div>
-                  <div class="tile">
-                    <div class="tile is-child box is-6 is-success">
-                      <p class="title">Days Till Sixpack</p>
-                      <p class="subtitle">{{ plan.daysTillSixpack }} days</p>
-                    </div>
-                    <div class="tile is-child box is-6  notification is-success">
-                      <p class="title">Sixpack Day</p>
-                      <p class="subtitle">{{ plan.dayOfSixpack }}</p>
-                    </div>
-                  </div>
-                  <div class="tile is-child box is-12 notification">
-                    <p class="title">Allowed Calories</p>
-                    <p class="subtitle">{{ plan.totalCalories }}  kcal (cutting 20%)</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p><router-link :to="{ name: 'log_path' }" class="button is-large is-primary" role="button">Log data</router-link></p>
+          <awards :plan="plan"/>
+          <div v-if="bodyMass.loaded">
+            <measurement-chart :height="300" :labels="bodyMass.labels" :datasets1="bodyMass.totalBodyMass" :datasets="bodyMass.leanBodyMass" label1="Weight(kg)" label="Lean Body Mass(kg)" stepSize=10></measurement-chart>
           </div>
+          <stats :plan="plan"/>
+          <p>
+            <router-link :to="{ name: 'log_path' }" class="button is-large is-primary" role="button">Log data</router-link>
+          </p>
         </div>
         <div v-else>
           Loading...
@@ -92,77 +21,9 @@
     <div v-if="calories.loaded">
       <measurement-chart :height="300" :labels="calories.labels" :datasets="calories.totalCalories" :datasets1="calories.allowedCalories" label="Calories(kcal)" stepSize=500 label1="TDEE calories(kcal)" ></measurement-chart>
     </div>
-    <div v-if="measurements.loaded">
-      <br>
-      <table class="table is-bordered is-striped is-fullwidth">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Weight</th>
-            <th>Calories</th>
-            <th>BF%</th>
-            <th>LBM</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-        <tr v-for="measurement in measurements.data" 
-            v-bind:key="measurement.id">
-          <td>{{ measurement.logDate }} </td>
-          <td>{{ measurement.weight }} kg</td>
-          <td>
-            <span v-if="measurement.calories">
-              {{ measurement.calories }} kcal
-            </span>
-            <span v-else>
-              -
-            </span>
-          </td>
-          <td>
-            <span v-if="measurement.bodyFat">
-              {{ measurement.bodyFat }}%
-            </span>
-            <span v-else>
-              -
-            </span>
-          </td>
-          <td>
-            <span v-if="measurement.lbm">
-              {{ measurement.lbm }} kg
-            </span>
-            <span v-else>
-              -
-            </span>
-          </td>
-          <td>
-            <span v-if="measurement.success != false" class="icon has-text-success">
-              <i class="fas fa-check-square"></i>
-            </span>
-            <span v-if="measurement.success == false" class="icon has-text-danger">
-              <i class="fas fa-minus-square"></i>
-            </span>
-          </td>
-          <td class="has-text-right">
-            <a class="has-text-white" @click="imageModal(measurement.image)" v-if="measurement.image" href="javascript:void();"><i class="far fa-image"></i></a>
-            <a class="has-text-white" @click="openEditModal(measurement)" href="javascript:void();">Edit</a>
-            <a class="has-text-danger" @click="confirmDelete(measurement)" href="javascript:void();">Delete</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      <div v-if="measurements.count > 20"> 
-        <b-pagination
-          :total="measurements.count"
-          :current.sync="currentPage"
-          :per-page="20"
-          order="is-centered">
-        </b-pagination>
-      </div>
-    </div>
-    <section class="section">
-       Powered by Kodius 
-    </section>
+    <measurements-table/>
+    <section class="section"/>
+    <kodius-footer/>
   </layout>
 </template>
 
@@ -172,10 +33,16 @@ import Buefy from 'buefy'
 import Layout from '../shared/layout';
 import MeasurementChart from '../charts/measurement_chart';
 import Vue from 'vue/dist/vue.esm';
-import humanizeString from 'humanize-string';
-import editLogModal from '../modals/edit_log_modal';
+import Awards from '../dashboard/awards'
+import Stats from '../dashboard/stats'
+import Footer from '../shared/footer'
+import MeasurementsTable from '../dashboard/measurements_table'
 
 Vue.component('measurement-chart', MeasurementChart);
+Vue.component('measurements-table', MeasurementsTable);
+Vue.component('awards', Awards);
+Vue.component('stats', Stats);
+Vue.component('kodius-footer', Footer);
 Vue.use(Buefy)
 
 export default {
@@ -185,8 +52,7 @@ export default {
   },
   data () {
     return {
-      currentDimension: 'week',
-      currentPage: 1
+      currentDimension: 'week'
     }
   },
   computed: {
@@ -201,71 +67,14 @@ export default {
     },
     calories() {
       return this.$store.state.currentUser.calories
-    },
-    measurements() {
-      return this.$store.state.currentUser.measurements
-    }
-  },
-  filters: {
-    humanize(text) {
-      return humanizeString(text);
     }
   },
   mounted () {
     this.$store.dispatch('currentUser/loadPlan')
     this.$store.dispatch('currentUser/loadBodyMass', { dimension: this.currentDimension })
     this.$store.dispatch('currentUser/loadCalories', { dimension: this.currentDimension })
-    this.$store.dispatch('currentUser/loadMeasurements', { page: this.currentPage })
   },
-  methods: {
-    loadMeasurements() {
-      this.$store.dispatch('currentUser/loadMeasurements', { page: this.currentPage })
-    },
-    openEditModal (measurement) {
-      this.$modal.open({
-        parent: this,
-        component: editLogModal,
-        hasModalCard: true,
-        props: {
-          originalMeasurement: measurement
-        }
-      })
-    },
-    confirmDelete(measurement) {
-      this.$dialog.confirm({
-        title: 'Confirm',
-        message: `Are you sure you want to <strong>delete</strong> ${measurement.logDate} log? This action can't be undone!`,
-        confirmText: `Delete`,
-        type: 'is-danger',
-        hasIcon: true,
-        onConfirm: () => this.performDelete(measurement.id)
-      })
-    },
-    performDelete(id) {
-      var that = this;
-      axios
-        .delete('measurements/' + id)
-        .then(response => {
-            this.loadMeasurements();
-            that.$toast.open({
-              message: 'Log successfuly deleted',
-              duration: 5000
-            })
-      })
-    },
-    imageModal(url) {
-      this.$modal.open(
-        `<p class="image">
-            <img src="${url}">
-        </p>`
-      )
-    }
-  }, 
-  watch: {
-    currentPage: function (newCurrentPage, oldCurrentPage) {
-      this.$store.dispatch('currentUser/loadMeasurements', { page: newCurrentPage })
-    }
-  },
+ 
 }
 
 </script>
