@@ -71,6 +71,9 @@
         return this.$store.state.currentUser.calories
       }
     },
+    beforeMount(){
+      this.$store.dispatch('currentUser/reloadUser')
+    },
     mounted() {
       this.$store.dispatch('currentUser/loadPlan')
       this.$store.dispatch('currentUser/loadBodyMass', {

@@ -25,6 +25,12 @@ const CurrentUserStore = {
     }
   },
   mutations: {
+     reloadUser(state) {
+       state.bodyMass.loaded = false
+       state.calories.loaded = false
+       state.measurements.loaded = false
+       return state
+    },
     setPlan(state, plan) {
       state.plan = plan
       state.initialLoad = true
@@ -51,6 +57,11 @@ const CurrentUserStore = {
     }
   },
   actions: {
+    reloadUser({
+       commit
+    }) {
+       commit('reloadUser')
+    },
     loadPlan({ commit }) {
        axios
          .get(`my-plan`)

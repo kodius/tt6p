@@ -12,8 +12,8 @@ Rails.application.routes.draw do
     post "update-plan", to: 'plans#update_plan'
     resources :measurements
     get 'public-profile/:id', to: 'plans#public_profile'
-    get 'my-profile', to: 'profile#my_profile'
     get 'public-measurements/:id/:page', to: 'measurements#public_measurements'
+    get 'my-profile', to: 'profile#my_profile'
     post 'upload-image', to: 'measurements#image_upload'
     post 'change-avatar', to: 'profile#change_avatar'
     get 'active-plans', to: 'plans#active_plans'

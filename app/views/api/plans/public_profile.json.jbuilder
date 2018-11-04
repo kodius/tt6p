@@ -25,7 +25,7 @@ json.plan do
   json.email @plan.user.email
   json.userId @plan.user_id
   json.lbmDiff @plan.lbm_diff
-  json.awards @plan.awards.join(', ')
+  json.awards @plan.awards
   json.totalDeficit @plan.total_deficit
   json.weeklyAverage @plan.weekly_average
   json.weightChangeExpected @plan.weight_change_expected

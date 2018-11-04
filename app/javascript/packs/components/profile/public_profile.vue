@@ -9,19 +9,12 @@
               label1="Weight(kg)" label="Lean Body Mass(kg)" stepSize=10></measurement-chart>
           </div>
           <stats :plan="plan" />
-          <p>
-            <router-link :to="{ name: 'log_path' }" class="button is-large is-primary" role="button">Log data</router-link>
-          </p>
         </div>
         <div v-else>
           Loading...
         </div>
         <br />
       </div>
-    </div>
-    <div v-if="calories.loaded">
-      <measurement-chart :height="300" :labels="calories.labels" :datasets="calories.totalCalories" :datasets1="calories.allowedCalories"
-        label="Calories(kcal)" stepSize=500 label1="TDEE calories(kcal)"></measurement-chart>
     </div>
     <section class="section" />
     <kodius-footer />
@@ -58,25 +51,23 @@
     },
     computed: {
       initialLoad() {
-        return this.$store.state.currentUser.initialLoad
+        return this.$store.state.selectedUser.initialLoad
       },
       plan() {
-        return this.$store.state.currentUser.plan
+        return this.$store.state.selectedUser.plan
       },
       bodyMass() {
-        return this.$store.state.currentUser.bodyMass
+        return this.$store.state.selectedUser.bodyMass
       },
-      calories() {
-        return this.$store.state.currentUser.calories
-      }
     },
     mounted() {
-      this.$store.dispatch('currentUser/loadPlan')
-      this.$store.dispatch('currentUser/loadBodyMass', {
-        dimension: this.currentDimension
+      this.$store.dispatch('selectedUser/reloadUser')
+      this.$store.dispatch('selectedUser/loadPlan', {
+        id: this.$route.params.id
       })
-      this.$store.dispatch('currentUser/loadCalories', {
-        dimension: this.currentDimension
+      this.$store.dispatch('selectedUser/loadBodyMass', {
+        dimension: this.currentDimension,
+        id: this.$route.params.id
       })
     },
 
