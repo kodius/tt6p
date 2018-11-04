@@ -61,30 +61,6 @@
               Getting it for real
             </h2> 
           </div>
-          <div v-if="hasPlan" class="has-text-centered columns">
-            <div class="is-one-fitfth column">
-              <p>Fat</p>
-              <div class="button is-large is-rounded" 
-                :class="{'is-danger': (plan.fatLost < 0), 'is-success': (plan.fatLost >= 0)}">
-                  {{plan.fatLost > 0 ? `-${plan.fatLost}` : `+${plan.fatLost * (-1)}`}} kg
-            </div>
-            </div>
-            <div class="is-one-fitfth column">
-              <p>LBM</p>
-              <a class="button is-large is-rounded" 
-                :class="{'is-danger': (plan.lbmDiff < 0), 'is-success': (plan.lbmDiff >= 0)}">
-                  {{plan.lbmDiff > 0 ? '+' : ''}}{{plan.lbmDiff}} kg
-              </a>
-            </div>
-            <div class="is-one-fitfth column">
-              <p>Streak</p>
-              <a class="button is-success is-large is-rounded">{{plan.daysStreak}} {{plan.daysStreak | pluralize('day')}}</a>
-            </div>
-            <div class="is-one-fitfth column">
-              <p>Tracking</p>
-              <a class="button is-success is-large is-rounded">{{plan.daysTracked}} {{plan.daysTracked | pluralize('day')}}</a>
-            </div>
-          </div>
         </div>
       </div>
     </section>

@@ -60,8 +60,10 @@
         return this.$store.state.selectedUser.bodyMass
       },
     },
-    mounted() {
+    beforeMount(){
       this.$store.dispatch('selectedUser/reloadUser')
+    },
+    mounted() {
       this.$store.dispatch('selectedUser/loadPlan', {
         id: this.$route.params.id
       })

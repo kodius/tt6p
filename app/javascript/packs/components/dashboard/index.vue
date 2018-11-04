@@ -9,9 +9,6 @@
               label1="Weight(kg)" label="Lean Body Mass(kg)" stepSize=10></measurement-chart>
           </div>
           <stats :plan="plan" />
-          <p>
-            <router-link :to="{ name: 'log_path' }" class="button is-large is-primary" role="button">Log data</router-link>
-          </p>
         </div>
         <div v-else>
           Loading...
